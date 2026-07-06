@@ -10,8 +10,8 @@ const pinnedRepos = [
       "A premium SaaS Prompt Marketplace platform with credit transactions, OpenAI previews playground, and fine-tuned model sharing.",
     language: "Javascipt",
     langColor: "bg-blue-400",
-    stars: 84,
-    forks: 18,
+    stars: "",
+    forks: "",
     //  link: 'https://github.com/abhishekh-developer/ai-marketplace'
   },
   {
@@ -20,12 +20,12 @@ const pinnedRepos = [
       "SmartTech is a full-stack e-commerce platform built with the MERN stack, designed to provide a seamless online shopping experience for electronics and gadgets. It features secure authentication, product browsing, shopping cart, wishlist, order management, and a responsive, user-friendly interface.",
     language: "Javascipt",
     langColor: "bg-blue-400",
-    stars: 84,
-    forks: 18,
+    stars: "",
+    forks: "",
     link: "https://github.com/code-with-avii/SmartTech",
   },
   //  {
-  //  name: 'hospital-suite',
+  //  name: 'Hostel help',
   //  description: ' HIPAA-aligned EHR patient scheduling and doctor communication microservice portal featuring calendar dragging slots.',
   //  language: 'React',
   //  langColor: 'bg-sky-400',
@@ -115,11 +115,11 @@ export default function GitHubSection() {
               className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/5"
             >
               <h3 className="font-heading font-bold text-sm text-white mb-4 flex items-center gap-2">
-                <FaGithub size={15} /> @abhishekh-developer contributions in the
+                <FaGithub size={15} /> @code-with-avii contributions in the
                 last year
               </h3>
 
-              <div className="overflow-x-auto no-scrollbar pb-2">
+              {/* <div className="overflow-x-auto no-scrollbar pb-2">
                 <div className="flex gap-0.75 w-162.5 flex-wrap h-22.5 overflow-hidden select-none">
                   {contributionDots.map((dot) => (
                     <div
@@ -129,7 +129,7 @@ export default function GitHubSection() {
                     />
                   ))}
                 </div>
-              </div>
+              </div> */}
 
               {/* Grid Legend */}
               <div className="flex items-center justify-between text-[10px] text-zinc-500 font-semibold font-code mt-4">

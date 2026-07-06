@@ -13,7 +13,7 @@ const stats = [
   {
     icon: <Briefcase className="text-purple-400" size={20} />,
     label: "Projects Completed",
-    value: "15+",
+    value: "10+",
   },
   {
     icon: <Code className="text-cyan-400" size={20} />,
@@ -37,7 +37,7 @@ const timelineMilestones = [
     year: "2024",
     title: "Started Programming",
     description:
-      "Began with C/C++, HTML/CSS and basic algorithmic problem solving. Discovered a deep passion for computing systems and software building.",
+      "Began with C/C++, HTML/CSS, Javascipt and basic algorithmic problem solving. Discovered a deep passion for computing systems and software building.",
     detail:
       "Learned memory structures, pointers, and basic computer science topics.",
   },
@@ -58,7 +58,7 @@ const timelineMilestones = [
       "Created complete CRUD portals, including hospital registries and real-time chat APIs.",
   },
   {
-    year: "2025",
+    year: "2026",
     title: "Advanced Backend Development",
     description:
       "Focused on microservices, performance caching via Redis, rate limiters, session protection, JWT security, and file-upload pipelines.",
@@ -67,19 +67,11 @@ const timelineMilestones = [
   },
   {
     year: "2026",
-    title: "AI Integrations & LangChain",
-    description:
-      "Explored generative AI pipelines. Integrated OpenAI/Gemini APIs, model completion streams, custom embeddings, and vector databases.",
-    detail:
-      "Built custom playground interfaces for SaaS marketplaces and text analysis bots.",
-  },
-  {
-    year: "2026",
     title: "Open Source Contributor",
     description:
       "Actively contributing to UI component packs and developer tools. Writing accessible, clean code tested extensively under continuous integration.",
     detail:
-      "Merged 100+ pull requests and won national-level hackathons like SIH 2025.",
+      "Merged 100+ pull requests",
   },
 ];
 

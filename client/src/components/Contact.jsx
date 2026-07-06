@@ -151,7 +151,7 @@ export default function Contact() {
                   Let's build together
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-400 font-body leading-relaxed">
-                  I am available for freelance contracts, full-time intern
+                  I am available for freelance contracts, intern
                   positions, or code consulting. Shoot me a message!
                 </p>
               </div>
@@ -270,7 +270,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      placeholder="Jane Doe"
+                      placeholder="Jack Reacher"
                       disabled={loading || status === "success"}
                       className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                     />
@@ -289,7 +289,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      placeholder="jane.doe@example.com"
+                      placeholder="reacher@example.com"
                       disabled={loading || status === "success"}
                       className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                     />
@@ -310,7 +310,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleInputChange}
                     required
-                    placeholder="Project Inquiry / Job opening..."
+                    placeholder="Project Inquiry / Intern opening..."
                     disabled={loading || status === "success"}
                     className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                   />

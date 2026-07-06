@@ -113,19 +113,19 @@ export default function Hero() {
             </motion.h1>
 
             {/* Roles Cycler */}
-            <div className="h-12 sm:h-16 mb-4 flex items-center">
-              <span className="text-xl sm:text-3xl font-heading text-zinc-400 mr-2 font-medium">
+            <div className="h-12 sm:h-16 mb-4 flex items-center flex-wrap">
+              <span className="text-xl sm:text-3xl font-heading text-zinc-400 mr-2 font-medium whitespace-nowrap">
                 I am a
               </span>
-              <div className="relative overflow-hidden h-full grow">
+              <div className="relative overflow-hidden h-12.5 w-112.5">
                 <AnimatePresence mode="wait">
                   <motion.span
                     key={roleIndex}
-                    initial={{ y: 25, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    exit={{ y: -25, opacity: 0 }}
-                    transition={{ duration: 0.4, ease: "easeInOut" }}
-                    className="absolute text-xl sm:text-3xl font-heading font-bold bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent"
+                    initial={{ y: 20, opacity: 0,filter:"blur(8px)" }}
+                    animate={{ y: 0, opacity: 1,filter:"blur(0px)" }}
+                    exit={{ y: -20, opacity: 0,filter:"blur(8px)"}}
+                    transition={{ duration: 0.4, ease:[0.22,1,0.36,1] }}
+                    className="absolute left-0 text-3xl sm:text-3xl font-heading font-bold bg-linear-to-r from-violet-400 via-fuchsia-400 to-cyan-400 bg-clip-text text-transparent whitespace-nowrap"
                   >
                     {roles[roleIndex]}
                   </motion.span>
@@ -187,16 +187,16 @@ export default function Hero() {
               {[
                 {
                   icon: <FaGithub size={20} />,
-                  href: "https://github.com/abhishekh-developer",
+                  href: "https://github.com/code-with-avii",
                 },
                 {
                   icon: <FaLinkedin size={20} />,
-                  href: "https://linkedin.com",
+                  href: "https://www.linkedin.com/in/abhishekh07/",
                 },
                 { icon: <FaXTwitter size={20} />, href: "https://twitter.com" },
                 {
                   icon: <Mail size={20} />,
-                  href: "mailto:abhishekh@example.com",
+                  href: "mailto:aviimondal689@gmail.com",
                 },
               ].map((social, idx) => (
                 <a
