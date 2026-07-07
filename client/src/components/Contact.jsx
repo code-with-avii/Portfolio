@@ -201,7 +201,7 @@ export default function Contact() {
                   {
                     icon: <FaXTwitter size={18} />,
                     label: "Twitter",
-                    href: "https://twitter.com",
+                    href: "https://x.com/MondalAvii94420",
                   },
                 ].map((item, idx) => (
                   <a

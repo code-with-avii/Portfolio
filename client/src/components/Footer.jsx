@@ -67,7 +67,7 @@ export default function Footer() {
               <FaLinkedin size={18} />
             </a>
             <a
-              href="https://twitter.com"
+              href="https://x.com/MondalAvii94420"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white transition-colors"
@@ -88,7 +88,7 @@ export default function Footer() {
           <div className="text-[10px] sm:text-xs text-zinc-500 font-semibold font-code text-center sm:text-left">
             Built with <span className="text-purple-400">React 19</span>,{" "}
             <span className="text-cyan-400">Tailwind CSS</span>,{" "}
-            <span className="text-emerald-400">Node.js</span>, &{" "}
+            <span className="text-emerald-400">Express.js</span>, &{" "}
             <span className="text-white">MongoDB</span>.
           </div>
           <div className="text-[10px] sm:text-xs text-zinc-500 font-body text-center sm:text-right">

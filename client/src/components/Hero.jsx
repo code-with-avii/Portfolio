@@ -193,7 +193,7 @@ export default function Hero() {
                   icon: <FaLinkedin size={20} />,
                   href: "https://www.linkedin.com/in/abhishekh07/",
                 },
-                { icon: <FaXTwitter size={20} />, href: "https://twitter.com" },
+                { icon: <FaXTwitter size={20} />, href: "https://x.com/MondalAvii94420" },
                 {
                   icon: <Mail size={20} />,
                   href: "mailto:aviimondal689@gmail.com",
