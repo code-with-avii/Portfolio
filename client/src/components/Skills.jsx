@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
+import { useGetSkillsQuery } from "../store/apiSlice.js";
 import {
   Sparkles,
   Brain,
@@ -149,13 +150,13 @@ const categoryIcons = {
   Backend: <Terminal className="text-cyan-400" size={16} />,
   Databases: <Database className="text-emerald-400" size={16} />,
   //  'DevOps': <Cloud className="text-blue-400" size={16} />,
-  Tools: <Settings className="text-zinc-400" size={16} />,
+  Tools: <Settings className="text-mutedText" size={16} />,
   AI: <Brain className="text-pink-400" size={16} />,
 };
 
 export default function Skills() {
-  const reduxSkills = useAppSelector((state) => state.portfolio.skills);
-  const skills = reduxSkills.length > 0 ? reduxSkills : fallbackSkills;
+  const { data: reduxSkills } = useGetSkillsQuery();
+  const skills = reduxSkills && reduxSkills.length > 0 ? reduxSkills : fallbackSkills;
 
   // Group skills by category (exclude currently learning from main grid)
   const categories = ["Frontend", "Backend", "Databases", "Tools", "AI"];
@@ -203,7 +204,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             My Tech Stack & Tools
           </motion.h2>
@@ -228,13 +229,13 @@ export default function Skills() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="glass-panel p-6 rounded-2xl border border-white/5 flex flex-col justify-between"
+                className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between"
               >
                 <div>
                   {/* Category Header */}
-                  <div className="flex items-center gap-2 mb-5 pb-3 border-b border-white/5">
+                  <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
                     {categoryIcons[category]}
-                    <h3 className="font-heading font-bold text-base text-white">
+                    <h3 className="font-heading font-bold text-base text-text">
                       {category}
                     </h3>
                   </div>
@@ -251,7 +252,7 @@ export default function Skills() {
                       <motion.div
                         key={skill.name}
                         variants={itemVariants}
-                        className="inline-flex items-center px-3 py-1.5 rounded-xl bg-surface/85 border border-white/5 text-xs text-zinc-300 font-code transition-all hover:text-white hover:border-zinc-700 cursor-default"
+                        className="inline-flex items-center px-3 py-1.5 rounded-xl bg-surface/85 border border-border text-xs text-mutedText font-code transition-all hover:text-text hover:border-zinc-700 cursor-default"
                         whileHover={{ scale: 1.05 }}
                       >
                         <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
@@ -271,7 +272,7 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 max-w-4xl mx-auto card-glow-border"
+            className="glass-panel p-6 sm:p-8 rounded-2xl border border-border max-w-4xl mx-auto card-glow-border"
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -279,7 +280,7 @@ export default function Skills() {
                   <Sparkles className="text-primary" size={20} />
                 </div>
                 <div>
-                  <h3 className="font-heading font-bold text-base text-white">
+                  <h3 className="font-heading font-bold text-base text-text">
                     Currently Deep Diving
                   </h3>
                   <p className="text-xs text-mutedText mt-0.5">

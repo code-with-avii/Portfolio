@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
+import { useGetExperiencesQuery } from "../store/apiSlice.js";
 import { Briefcase, Calendar, Star, Milestone } from "lucide-react";
 
 const fallbackExperiences = [
@@ -51,8 +52,8 @@ const fallbackExperiences = [
 ];
 
 export default function Experience() {
-  const reduxExps = useAppSelector((state) => state.portfolio.experiences);
-  const experiences = reduxExps.length > 0 ? reduxExps : fallbackExperiences;
+  const { data: reduxExps } = useGetExperiencesQuery();
+  const experiences = reduxExps && reduxExps.length > 0 ? reduxExps : fallbackExperiences;
 
   return (
     <section
@@ -77,7 +78,7 @@ export default function Experience() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             Professional & Project Timeline
           </motion.h2>
@@ -93,7 +94,7 @@ export default function Experience() {
         </div>
 
         {/* Vertical Timeline Tree */}
-        <div className="relative border-l border-zinc-800 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-0.5 md:before:bg-zinc-800 max-w-5xl mx-auto space-y-12">
+        <div className="relative border-l border-zinc-800 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-0.5 md:before:bg-surface-hover max-w-5xl mx-auto space-y-12">
           {experiences.map((exp, idx) => {
             const isLeft = idx % 2 === 0;
 
@@ -109,7 +110,7 @@ export default function Experience() {
                 }`}
               >
                 {/* Desktop Center Timeline Node Icon */}
-                <span className="absolute -left-4.25 md:left-1/2 md:-translate-x-1/2 top-4 w-9 h-9 rounded-full bg-surface border-2 border-zinc-700 flex items-center justify-center text-zinc-400 z-20 shadow-md group-hover:border-primary transition-all">
+                <span className="absolute -left-4.25 md:left-1/2 md:-translate-x-1/2 top-4 w-9 h-9 rounded-full bg-surface border-2 border-zinc-700 flex items-center justify-center text-mutedText z-20 shadow-md group-hover:border-primary transition-all">
                   <Briefcase size={14} className="text-cyan-400" />
                 </span>
 
@@ -117,11 +118,11 @@ export default function Experience() {
                 <div
                   className={`w-full md:w-1/2 pl-6 md:pl-0 ${isLeft ? "md:pr-10" : "md:pl-10"}`}
                 >
-                  <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 hover:border-white/10 transition-all card-glow-border cursor-default h-full flex flex-col justify-between">
+                  <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-border hover:border-border-hover transition-all card-glow-border cursor-default h-full flex flex-col justify-between">
                     <div>
                       {/* Header metadata */}
                       <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-white/5 border border-white/10 rounded-full text-cyan-400">
+                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-border border border-border-hover rounded-full text-cyan-400">
                           {exp.type}
                         </span>
                         <div className="flex items-center text-xs text-mutedText font-code">
@@ -131,15 +132,15 @@ export default function Experience() {
                       </div>
 
                       {/* Role & Company */}
-                      <h3 className="text-lg font-heading font-bold text-white leading-snug">
+                      <h3 className="text-lg font-heading font-bold text-text leading-snug">
                         {exp.role}
                       </h3>
-                      <h4 className="text-sm font-body text-zinc-400 font-semibold mb-5">
+                      <h4 className="text-sm font-body text-mutedText font-semibold mb-5">
                         {exp.company}
                       </h4>
 
                       {/* Achievements bullets */}
-                      <ul className="space-y-2.5 text-zinc-300 text-xs sm:text-sm font-body mb-6">
+                      <ul className="space-y-2.5 text-mutedText text-xs sm:text-sm font-body mb-6">
                         {exp.achievements.map((bullet, bIdx) => (
                           <li
                             key={bIdx}
@@ -154,11 +155,11 @@ export default function Experience() {
 
                     {/* Tech list tag array */}
                     {exp.technologies && exp.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-white/5">
+                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border">
                         {exp.technologies.map((tech, tIdx) => (
                           <span
                             key={tIdx}
-                            className="px-2.5 py-0.5 rounded-md bg-zinc-900 border border-white/5 text-[10px] sm:text-xs font-code text-zinc-400"
+                            className="px-2.5 py-0.5 rounded-md bg-surface border border-border text-[10px] sm:text-xs font-code text-mutedText"
                           >
                             {tech}
                           </span>

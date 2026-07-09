@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import {
@@ -57,16 +58,16 @@ export default function ProjectDetail() {
   if (!project) {
     return (
       <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4 text-center px-4">
-        <h2 className="text-2xl font-bold font-heading text-white">
+        <h2 className="text-2xl font-bold font-heading text-text">
           Project Not Found
         </h2>
-        <p className="text-zinc-400 text-sm max-w-sm">
+        <p className="text-mutedText text-sm max-w-sm">
           The case study you are trying to view does not exist or has been
           removed.
         </p>
         <button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-surface text-white border border-white/10 rounded-xl text-sm hover:bg-zinc-800"
+          className="inline-flex items-center gap-2 px-5 py-2.5 bg-surface text-text border border-border-hover rounded-xl text-sm hover:bg-surface-hover"
         >
           <ArrowLeft size={16} /> Back to Home
         </button>
@@ -76,6 +77,10 @@ export default function ProjectDetail() {
 
   return (
     <div className="min-h-screen bg-background pb-24 pt-24 font-body relative overflow-hidden">
+      <Helmet>
+        <title>{project.title} — Case Study</title>
+        <meta name="description" content={project.subtitle} />
+      </Helmet>
       {/* Background blurs */}
       <div className="absolute top-0 right-0 w-125 h-125 rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-125 h-125 rounded-full bg-secondary/5 blur-[150px] pointer-events-none" />
@@ -84,7 +89,7 @@ export default function ProjectDetail() {
         {/* Back Link */}
         <button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors mb-8 text-sm font-semibold"
+          className="inline-flex items-center gap-2 text-mutedText hover:text-text transition-colors mb-8 text-sm font-semibold"
         >
           <ArrowLeft size={16} /> Back to Portfolio
         </button>
@@ -93,7 +98,7 @@ export default function ProjectDetail() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative rounded-3xl overflow-hidden mb-12 bg-zinc-950 border border-white/5 shadow-2xl h-70 sm:h-100"
+          className="relative rounded-3xl overflow-hidden mb-12 bg-surface border border-border shadow-2xl h-70 sm:h-100"
         >
           <img
             src={project.image}
@@ -105,10 +110,10 @@ export default function ProjectDetail() {
             <span className="px-2.5 py-0.5 rounded-md bg-cyan-400/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
               Case Study
             </span>
-            <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-white mt-3 leading-tight">
+            <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-text mt-3 leading-tight">
               {project.title}
             </h1>
-            <p className="text-zinc-300 text-sm sm:text-base mt-2 font-medium max-w-2xl leading-relaxed">
+            <p className="text-mutedText text-sm sm:text-base mt-2 font-medium max-w-2xl leading-relaxed">
               {project.subtitle}
             </p>
           </div>
@@ -140,16 +145,16 @@ export default function ProjectDetail() {
           ].map((item, idx) => (
             <div
               key={idx}
-              className="glass-panel p-4 rounded-xl border border-white/5 flex items-center gap-3"
+              className="glass-panel p-4 rounded-xl border border-border flex items-center gap-3"
             >
-              <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-border flex items-center justify-center shrink-0">
                 {item.icon}
               </div>
               <div>
-                <div className="text-[10px] uppercase font-bold text-zinc-500">
+                <div className="text-[10px] uppercase font-bold text-mutedText">
                   {item.label}
                 </div>
-                <div className="text-xs sm:text-sm font-semibold text-white mt-0.5">
+                <div className="text-xs sm:text-sm font-semibold text-text mt-0.5">
                   {item.val}
                 </div>
               </div>
@@ -165,12 +170,12 @@ export default function ProjectDetail() {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
             >
-              <h2 className="text-xl font-heading font-bold text-white mb-4">
+              <h2 className="text-xl font-heading font-bold text-text mb-4">
                 Project Overview
               </h2>
-              <p className="text-zinc-400 text-sm sm:text-base leading-relaxed font-body">
+              <p className="text-mutedText text-sm sm:text-base leading-relaxed font-body">
                 {project.longDescription || project.description}
               </p>
             </motion.div>
@@ -180,12 +185,12 @@ export default function ProjectDetail() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
               >
-                <h2 className="text-xl font-heading font-bold text-white mb-4">
+                <h2 className="text-xl font-heading font-bold text-text mb-4">
                   System Architecture
                 </h2>
-                <div className="bg-zinc-950/60 border border-white/5 rounded-xl p-4 font-code text-xs text-zinc-300 leading-relaxed overflow-x-auto">
+                <div className="bg-surface/60 border border-border rounded-xl p-4 font-code text-xs text-mutedText leading-relaxed overflow-x-auto">
                   {project.architectureDiagram}
                 </div>
               </motion.div>
@@ -196,21 +201,21 @@ export default function ProjectDetail() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
               >
-                <h2 className="text-xl font-heading font-bold text-white mb-4">
+                <h2 className="text-xl font-heading font-bold text-text mb-4">
                   API Route Blueprint
                 </h2>
                 <div className="space-y-3 font-code text-xs sm:text-sm">
                   {project.apiFlow.map((flow, idx) => (
                     <div
                       key={idx}
-                      className="flex gap-3 bg-zinc-950/60 border border-white/5 rounded-lg p-3"
+                      className="flex gap-3 bg-surface/60 border border-border rounded-lg p-3"
                     >
                       <span className="text-cyan-400 font-bold shrink-0">
                         {flow.split(" ")[0]}
                       </span>
-                      <span className="text-zinc-300">
+                      <span className="text-mutedText">
                         {flow.substring(flow.split(" ")[0].length)}
                       </span>
                     </div>
@@ -224,13 +229,13 @@ export default function ProjectDetail() {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
               >
-                <h2 className="text-xl font-heading font-bold text-white mb-4 flex items-center gap-2">
+                <h2 className="text-xl font-heading font-bold text-text mb-4 flex items-center gap-2">
                   <Database size={18} className="text-pink-400" /> Database
                   Design & Schemas
                 </h2>
-                <p className="text-zinc-400 text-sm leading-relaxed font-body">
+                <p className="text-mutedText text-sm leading-relaxed font-body">
                   {project.databaseDesign}
                 </p>
               </motion.div>
@@ -245,7 +250,7 @@ export default function ProjectDetail() {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-surface hover:bg-zinc-800 border border-white/10 rounded-xl text-sm text-white font-semibold transition-colors shadow-md"
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-surface hover:bg-surface-hover border border-border-hover rounded-xl text-sm text-text font-semibold transition-colors shadow-md"
               >
                 <FaGithub size={16} />
                 <span>GitHub Source</span>
@@ -262,11 +267,11 @@ export default function ProjectDetail() {
             </div>
 
             {/* Core Features */}
-            <div className="glass-panel p-6 rounded-2xl border border-white/5">
-              <h2 className="text-lg font-heading font-bold text-white mb-4">
+            <div className="glass-panel p-6 rounded-2xl border border-border">
+              <h2 className="text-lg font-heading font-bold text-text mb-4">
                 Core Specifications
               </h2>
-              <ul className="space-y-3 text-zinc-300 text-xs sm:text-sm font-body">
+              <ul className="space-y-3 text-mutedText text-xs sm:text-sm font-body">
                 {project.features.map((feature, idx) => (
                   <li
                     key={idx}
@@ -281,12 +286,12 @@ export default function ProjectDetail() {
 
             {/* Challenges solved */}
             {project.challengesSolved && (
-              <div className="glass-panel p-6 rounded-2xl border border-white/5">
-                <h2 className="text-lg font-heading font-bold text-white mb-3 flex items-center gap-2">
+              <div className="glass-panel p-6 rounded-2xl border border-border">
+                <h2 className="text-lg font-heading font-bold text-text mb-3 flex items-center gap-2">
                   <ShieldCheck size={18} className="text-emerald-400" />{" "}
                   Engineering Obstacles
                 </h2>
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed font-body">
+                <p className="text-mutedText text-xs sm:text-sm leading-relaxed font-body">
                   {project.challengesSolved}
                 </p>
               </div>
@@ -294,12 +299,12 @@ export default function ProjectDetail() {
 
             {/* Performance Optimizations */}
             {project.performanceOptimizations && (
-              <div className="glass-panel p-6 rounded-2xl border border-white/5">
-                <h2 className="text-lg font-heading font-bold text-white mb-3 flex items-center gap-2">
+              <div className="glass-panel p-6 rounded-2xl border border-border">
+                <h2 className="text-lg font-heading font-bold text-text mb-3 flex items-center gap-2">
                   <Zap size={18} className="text-yellow-400" /> Performance
                   Tuning
                 </h2>
-                <p className="text-zinc-400 text-xs sm:text-sm leading-relaxed font-body">
+                <p className="text-mutedText text-xs sm:text-sm leading-relaxed font-body">
                   {project.performanceOptimizations}
                 </p>
               </div>
@@ -308,14 +313,14 @@ export default function ProjectDetail() {
             {/* Future Improvements Roadmap */}
             {project.futureImprovements &&
               project.futureImprovements.length > 0 && (
-                <div className="glass-panel p-6 rounded-2xl border border-white/5">
-                  <h2 className="text-lg font-heading font-bold text-white mb-4">
+                <div className="glass-panel p-6 rounded-2xl border border-border">
+                  <h2 className="text-lg font-heading font-bold text-text mb-4">
                     Developer Roadmap
                   </h2>
-                  <div className="space-y-2 text-xs sm:text-sm text-zinc-400 font-body">
+                  <div className="space-y-2 text-xs sm:text-sm text-mutedText font-body">
                     {project.futureImprovements.map((roadmap, idx) => (
                       <div key={idx} className="flex items-center gap-2.5">
-                        <span className="font-code font-bold text-[10px] px-1.5 py-0.5 bg-zinc-900 border border-white/5 rounded text-cyan-400">
+                        <span className="font-code font-bold text-[10px] px-1.5 py-0.5 bg-surface border border-border rounded text-cyan-400">
                           Roadmap #{idx + 1}
                         </span>
                         <span>{roadmap}</span>

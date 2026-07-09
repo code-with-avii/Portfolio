@@ -48,7 +48,7 @@ const pinnedRepos = [
 const contributionDots = Array.from({ length: 371 }, (_, idx) => {
   // Randomise density for realistic commit calendar simulation
   const rand = Math.random();
-  let color = "bg-zinc-900"; // 0 commits
+  let color = "bg-surface"; // 0 commits
   let commits = "No";
 
   if (rand > 0.85) {
@@ -89,7 +89,7 @@ export default function GitHubSection() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             Open Source Contribution Activity
           </motion.h2>
@@ -112,9 +112,9 @@ export default function GitHubSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-5 sm:p-6 rounded-2xl border border-white/5"
+              className="glass-panel p-5 sm:p-6 rounded-2xl border border-border"
             >
-              <h3 className="font-heading font-bold text-sm text-white mb-4 flex items-center gap-2">
+              <h3 className="font-heading font-bold text-sm text-text mb-4 flex items-center gap-2">
                 <FaGithub size={15} /> @code-with-avii contributions in the
                 last year
               </h3>
@@ -132,11 +132,11 @@ export default function GitHubSection() {
               </div> */}
 
               {/* Grid Legend */}
-              <div className="flex items-center justify-between text-[10px] text-zinc-500 font-semibold font-code mt-4">
+              <div className="flex items-center justify-between text-[10px] text-mutedText font-semibold font-code mt-4">
                 <span>Jan 2025</span>
                 <div className="flex items-center gap-1.5">
                   <span>Less</span>
-                  <div className="w-2.5 h-2.5 rounded-xs bg-zinc-900" />
+                  <div className="w-2.5 h-2.5 rounded-xs bg-surface" />
                   <div className="w-2.5 h-2.5 rounded-xs bg-purple-900" />
                   <div className="w-2.5 h-2.5 rounded-xs bg-purple-700" />
                   <div className="w-2.5 h-2.5 rounded-xs bg-cyan-500" />
@@ -155,20 +155,20 @@ export default function GitHubSection() {
                   href={repo.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-panel p-5 rounded-2xl border border-white/5 hover:border-white/10 transition-all card-glow-border cursor-pointer flex flex-col justify-between"
+                  className="glass-panel p-5 rounded-2xl border border-border hover:border-border-hover transition-all card-glow-border cursor-pointer flex flex-col justify-between"
                   whileHover={{ y: -4 }}
                 >
                   <div>
-                    <div className="flex items-center gap-2 text-white font-heading font-bold text-sm">
+                    <div className="flex items-center gap-2 text-text font-heading font-bold text-sm">
                       <BookMarked size={14} className="text-purple-400" />
                       {repo.name}
                     </div>
-                    <p className="text-xs text-zinc-400 mt-3 font-body leading-relaxed line-clamp-3">
+                    <p className="text-xs text-mutedText mt-3 font-body leading-relaxed line-clamp-3">
                       {repo.description}
                     </p>
                   </div>
 
-                  <div className="flex items-center justify-between mt-6 text-xs text-zinc-500 font-semibold font-code">
+                  <div className="flex items-center justify-between mt-6 text-xs text-mutedText font-semibold font-code">
                     <div className="flex items-center gap-1">
                       <span
                         className={`w-2.5 h-2.5 rounded-full ${repo.langColor} mr-1`}
@@ -195,9 +195,9 @@ export default function GitHubSection() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-6 rounded-2xl border border-white/5"
+              className="glass-panel p-6 rounded-2xl border border-border"
             >
-              <h3 className="font-heading font-bold text-sm text-white mb-6 flex items-center gap-2">
+              <h3 className="font-heading font-bold text-sm text-text mb-6 flex items-center gap-2">
                 <Code size={15} /> Code Base Metrics
               </h3>
 
@@ -210,12 +210,12 @@ export default function GitHubSection() {
                 ].map((stat, idx) => (
                   <div
                     key={idx}
-                    className="flex justify-between border-b border-white/5 pb-2.5"
+                    className="flex justify-between border-b border-border pb-2.5"
                   >
                     <span className="text-xs text-mutedText font-body">
                       {stat.label}
                     </span>
-                    <span className="text-xs text-white font-bold font-code">
+                    <span className="text-xs text-text font-bold font-code">
                       {stat.val}
                     </span>
                   </div>
@@ -224,7 +224,7 @@ export default function GitHubSection() {
 
               {/* Language Distribution chart */}
               <div className="mt-8">
-                <h4 className="text-xs text-white font-heading font-bold mb-3">
+                <h4 className="text-xs text-text font-heading font-bold mb-3">
                   Top Languages Used
                 </h4>
                 <div className="h-2 rounded-full overflow-hidden flex w-full">
@@ -250,7 +250,7 @@ export default function GitHubSection() {
                   />
                 </div>
 
-                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-[10px] font-code text-zinc-500">
+                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-[10px] font-code text-mutedText">
                   <span className="flex items-center gap-1.5">
                     <span className="w-2 h-2 rounded-full bg-blue-400" /> TS
                     (0%)

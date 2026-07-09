@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks.js";
 import {
@@ -60,28 +61,32 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen bg-background flex flex-col items-center justify-center px-4 relative overflow-hidden font-body">
+      <Helmet>
+        <title>Admin Login — Security Gateway</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       {/* Background blurs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 h-87.5 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
       {/* Back button */}
       <button
         onClick={() => navigate("/")}
-        className="absolute top-8 left-8 inline-flex items-center gap-2 text-zinc-400 hover:text-white transition-colors text-sm font-semibold"
+        className="absolute top-8 left-8 inline-flex items-center gap-2 text-mutedText hover:text-text transition-colors text-sm font-semibold"
       >
         <ArrowLeft size={16} /> Home
       </button>
 
       {/* Main card */}
-      <div className="w-full max-w-md glass-panel p-8 rounded-2xl border border-white/5 shadow-2xl relative z-10">
+      <div className="w-full max-w-md glass-panel p-8 rounded-2xl border border-border shadow-2xl relative z-10">
         {/* Title */}
         <div className="text-center mb-8">
           <div className="w-12 h-12 rounded-2xl bg-primary/15 border border-primary/25 flex items-center justify-center mx-auto mb-4 text-primary">
             <Lock size={20} />
           </div>
-          <h2 className="text-xl sm:text-2xl font-bold font-heading text-white">
+          <h2 className="text-xl sm:text-2xl font-bold font-heading text-text">
             Security Gateway
           </h2>
-          <p className="text-xs text-zinc-500 font-semibold mt-1">
+          <p className="text-xs text-mutedText font-semibold mt-1">
             Admin access authorization panel
           </p>
         </div>
@@ -99,12 +104,12 @@ export default function AdminLogin() {
           <div className="space-y-1.5">
             <label
               htmlFor="username"
-              className="text-xs font-semibold text-zinc-400"
+              className="text-xs font-semibold text-mutedText"
             >
               Username
             </label>
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-mutedText">
                 <User size={16} />
               </span>
               <input
@@ -114,7 +119,7 @@ export default function AdminLogin() {
                 onChange={(e) => setUsername(e.target.value)}
                 required
                 placeholder="Enter admin username"
-                className="w-full pl-10 pr-4 py-3 bg-zinc-950/60 border border-white/5 rounded-xl text-xs sm:text-sm text-white placeholder-zinc-650 focus:outline-none focus:border-primary/50 transition-all"
+                className="w-full pl-10 pr-4 py-3 bg-surface/60 border border-border rounded-xl text-xs sm:text-sm text-text placeholder-zinc-650 focus:outline-none focus:border-primary/50 transition-all"
               />
             </div>
           </div>
@@ -123,12 +128,12 @@ export default function AdminLogin() {
           <div className="space-y-1.5">
             <label
               htmlFor="password"
-              className="text-xs font-semibold text-zinc-400"
+              className="text-xs font-semibold text-mutedText"
             >
               Password
             </label>
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-mutedText">
                 <KeyRound size={16} />
               </span>
               <input
@@ -138,7 +143,7 @@ export default function AdminLogin() {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Enter admin password"
-                className="w-full pl-10 pr-4 py-3 bg-zinc-950/60 border border-white/5 rounded-xl text-xs sm:text-sm text-white placeholder-zinc-650 focus:outline-none focus:border-primary/50 transition-all"
+                className="w-full pl-10 pr-4 py-3 bg-surface/60 border border-border rounded-xl text-xs sm:text-sm text-text placeholder-zinc-650 focus:outline-none focus:border-primary/50 transition-all"
               />
             </div>
           </div>

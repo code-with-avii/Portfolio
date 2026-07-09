@@ -15,9 +15,24 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    return saved ? saved === "dark" : true; // Default to dark mode
+  });
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Sync theme with HTML document
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDark]);
 
   // Scrollspy & Glassmorphism triggers
   useEffect(() => {
@@ -68,7 +83,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "glass-panel py-3 shadow-lg border-b border-white/5"
+          ? "glass-panel py-3 shadow-lg border-b border-border"
           : "bg-transparent py-5"
       }`}
     >
@@ -82,7 +97,7 @@ export default function Navbar() {
             <div className="w-10 h-10 rounded-xl bg-gradient-purple-cyan flex items-center justify-between p-2 text-white font-bold text-lg mr-2 shadow-glow-primary">
               <Code size={22} className="mx-auto" />
             </div>
-            <span className="font-heading font-bold text-lg tracking-tight text-white hover:text-cyan-400 transition-colors">
+            <span className="font-heading font-bold text-lg tracking-tight text-text hover:text-cyan-400 transition-colors">
               Abhishekh
               <span className="text-secondary text-xs ml-1 bg-white/10 px-1.5 py-0.5 rounded font-code">
                 DEV
@@ -100,8 +115,8 @@ export default function Navbar() {
                 className={`relative font-body font-medium text-sm transition-colors py-2 ${
                   activeSection === link.href.substring(1) &&
                   location.pathname === "/"
-                    ? "text-white"
-                    : "text-mutedText hover:text-white"
+                    ? "text-text"
+                    : "text-mutedText hover:text-text"
                 }`}
               >
                 {link.name}
@@ -117,7 +132,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-white/10 bg-surface/50 text-mutedText hover:text-white hover:border-white/20 transition-all"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text hover:border-white/20 transition-all"
               aria-label="Toggle Theme"
             >
               {isDark ? <Sun size={18} /> : <Moon size={18} />}
@@ -129,7 +144,7 @@ export default function Navbar() {
                 e.preventDefault();
                 alert("Resume download triggered (Mock PDF)");
               }}
-              className="inline-flex items-center px-4 py-2 text-xs font-semibold text-white bg-surface hover:bg-zinc-800 border border-white/10 rounded-lg transition-all shadow-md group gap-1.5"
+              className="inline-flex items-center px-4 py-2 text-xs font-semibold text-text bg-surface hover:bg-surface-hover border border-border-hover rounded-lg transition-all shadow-md group gap-1.5"
             >
               <FileText
                 size={14}
@@ -143,13 +158,13 @@ export default function Navbar() {
           <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-white/10 bg-surface/50 text-mutedText hover:text-white transition-all"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all"
             >
               {isDark ? <Sun size={16} /> : <Moon size={16} />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg border border-white/10 bg-surface/50 text-mutedText hover:text-white transition-all"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all"
               aria-label="Toggle Menu"
             >
               {isOpen ? <X size={20} /> : <Menu size={20} />}
@@ -172,12 +187,12 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-4 py-3 rounded-lg bg-surface/40 border border-white/5 text-base font-medium text-mutedText hover:text-white hover:bg-surface/80 transition-all"
+              className="block px-4 py-3 rounded-lg bg-surface/40 border border-border text-base font-medium text-mutedText hover:text-text hover:bg-surface/80 transition-all"
             >
               {link.name}
             </a>
           ))}
-          <div className="pt-4 border-t border-white/5">
+          <div className="pt-4 border-t border-border">
             <button
               onClick={() => alert("Resume download triggered (Mock PDF)")}
               className="w-full flex items-center justify-center py-3 bg-gradient-purple-cyan text-white font-medium rounded-lg text-sm transition-all"

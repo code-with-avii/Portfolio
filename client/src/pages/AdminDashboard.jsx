@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks.js";
 import { logout } from "../store/slices/authSlice.js";
@@ -62,27 +63,31 @@ export default function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-background text-text font-body pb-24 relative overflow-hidden">
+      <Helmet>
+        <title>Admin Dashboard — Core</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       {/* Background radial spotlight */}
       <div className="absolute top-0 right-0 w-100 h-100 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
 
       {/* Header bar */}
-      <nav className="glass-panel py-4 shadow-lg border-b border-white/5 sticky top-0 z-30">
+      <nav className="glass-panel py-4 shadow-lg border-b border-border sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           <div
             className="flex items-center gap-3 cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <button className="text-zinc-400 hover:text-white transition-colors">
+            <button className="text-mutedText hover:text-text transition-colors">
               <ArrowLeft size={18} />
             </button>
-            <span className="font-heading font-bold text-base text-white flex items-center gap-2">
+            <span className="font-heading font-bold text-base text-text flex items-center gap-2">
               <ShieldCheck className="text-cyan-400" size={18} /> Core Dashboard
             </span>
           </div>
 
           <button
             onClick={handleLogout}
-            className="inline-flex items-center gap-2 px-4 py-2 border border-white/10 bg-surface/50 hover:bg-zinc-800 rounded-lg text-xs font-semibold text-zinc-300 hover:text-white transition-all"
+            className="inline-flex items-center gap-2 px-4 py-2 border border-border-hover bg-surface/50 hover:bg-surface-hover rounded-lg text-xs font-semibold text-mutedText hover:text-text transition-all"
           >
             <LogOut size={14} />
             <span>Sign Out</span>
@@ -94,38 +99,38 @@ export default function AdminDashboard() {
         {/* Dashboard Title & Stats Overview */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center mb-10">
           <div className="md:col-span-1">
-            <h1 className="text-2xl font-bold font-heading text-white">
+            <h1 className="text-2xl font-bold font-heading text-text">
               Inbound Messages
             </h1>
-            <p className="text-xs text-zinc-500 font-semibold mt-1">
+            <p className="text-xs text-mutedText font-semibold mt-1">
               Review contact inquiries left by recruiters.
             </p>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-white/5 flex items-center justify-between">
+          <div className="glass-panel p-4 rounded-xl border border-border flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-lg bg-cyan-500/10 flex items-center justify-center text-cyan-400">
                 <Inbox size={18} />
               </div>
-              <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-mutedText uppercase tracking-wider">
                 Total Mail
               </span>
             </div>
-            <div className="text-xl font-bold font-heading text-white">
+            <div className="text-xl font-bold font-heading text-text">
               {messages.length}
             </div>
           </div>
 
-          <div className="glass-panel p-4 rounded-xl border border-white/5 flex items-center justify-between">
+          <div className="glass-panel p-4 rounded-xl border border-border flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="w-9 h-9 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400">
                 <Mail size={18} />
               </div>
-              <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">
+              <span className="text-xs font-semibold text-mutedText uppercase tracking-wider">
                 Unread Mail
               </span>
             </div>
-            <div className="text-xl font-bold font-heading text-white">
+            <div className="text-xl font-bold font-heading text-text">
               {unreadCount}
             </div>
           </div>
@@ -140,7 +145,7 @@ export default function AdminDashboard() {
                 <div className="w-8 h-8 rounded-full border-2 border-primary/20 border-t-primary animate-spin mx-auto" />
               </div>
             ) : messages.length === 0 ? (
-              <div className="text-center py-12 text-zinc-500 text-sm border border-white/5 rounded-2xl bg-surface/20">
+              <div className="text-center py-12 text-mutedText text-sm border border-border rounded-2xl bg-surface/20">
                 No inquiries logged.
               </div>
             ) : (
@@ -150,27 +155,27 @@ export default function AdminDashboard() {
                   onClick={() => setSelectedMessage(msg)}
                   className={`p-4 rounded-xl border cursor-pointer transition-all ${
                     selectedMessage?._id === msg._id
-                      ? "bg-zinc-800 border-primary shadow-md"
+                      ? "bg-surface-hover border-primary shadow-md"
                       : msg.isRead
-                        ? "bg-surface/30 border-white/5 hover:border-white/10"
+                        ? "bg-surface/30 border-border hover:border-border-hover"
                         : "bg-surface/80 border-cyan-500/30 hover:border-cyan-500/50 shadow-sm"
                   }`}
                 >
                   <div className="flex items-center justify-between gap-2">
-                    <span className="font-heading font-bold text-xs text-white truncate max-w-37.5">
+                    <span className="font-heading font-bold text-xs text-text truncate max-w-37.5">
                       {msg.name}
                     </span>
-                    <span className="text-[9px] text-zinc-500 font-code font-bold flex items-center gap-1">
+                    <span className="text-[9px] text-mutedText font-code font-bold flex items-center gap-1">
                       <Clock size={10} />
                       {new Date(msg.createdAt).toLocaleDateString()}
                     </span>
                   </div>
                   <h4
-                    className={`text-xs mt-2 truncate ${msg.isRead ? "text-zinc-400 font-semibold" : "text-cyan-400 font-bold"}`}
+                    className={`text-xs mt-2 truncate ${msg.isRead ? "text-mutedText font-semibold" : "text-cyan-400 font-bold"}`}
                   >
                     {msg.subject}
                   </h4>
-                  <p className="text-[11px] text-zinc-500 line-clamp-2 mt-1.5 leading-relaxed font-body">
+                  <p className="text-[11px] text-mutedText line-clamp-2 mt-1.5 leading-relaxed font-body">
                     {msg.message}
                   </p>
                 </div>
@@ -181,12 +186,12 @@ export default function AdminDashboard() {
           {/* Message view console - Right */}
           <div className="lg:col-span-7">
             {selectedMessage ? (
-              <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5 flex flex-col justify-between min-h-100">
+              <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-border flex flex-col justify-between min-h-100">
                 <div>
                   {/* Sender title */}
-                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/5 pb-4 mb-6">
+                  <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border pb-4 mb-6">
                     <div>
-                      <h2 className="text-lg font-heading font-bold text-white leading-snug">
+                      <h2 className="text-lg font-heading font-bold text-text leading-snug">
                         {selectedMessage.name}
                       </h2>
                       <span className="text-xs text-cyan-400 font-code font-semibold">
@@ -197,9 +202,9 @@ export default function AdminDashboard() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => handleToggleRead(selectedMessage)}
-                        className={`p-2 rounded-lg border text-zinc-400 hover:text-white transition-colors ${
+                        className={`p-2 rounded-lg border text-mutedText hover:text-text transition-colors ${
                           selectedMessage.isRead
-                            ? "border-zinc-800 bg-zinc-900/50"
+                            ? "border-zinc-800 bg-surface/50"
                             : "border-cyan-500/20 bg-cyan-500/5 text-cyan-400"
                         }`}
                         title={
@@ -217,7 +222,7 @@ export default function AdminDashboard() {
 
                       <button
                         onClick={() => handleDelete(selectedMessage._id)}
-                        className="p-2 rounded-lg border border-red-500/20 bg-red-500/5 text-red-400 hover:text-white hover:bg-red-500/20 transition-all"
+                        className="p-2 rounded-lg border border-red-500/20 bg-red-500/5 text-red-400 hover:text-text hover:bg-red-500/20 transition-all"
                         title="Delete Message"
                       >
                         <Trash2 size={15} />
@@ -228,26 +233,26 @@ export default function AdminDashboard() {
                   {/* Subject and Message Details */}
                   <div className="space-y-4 font-body">
                     <div>
-                      <div className="text-[10px] uppercase font-bold text-zinc-500 mb-1">
+                      <div className="text-[10px] uppercase font-bold text-mutedText mb-1">
                         Subject
                       </div>
-                      <h3 className="text-sm font-bold text-white leading-normal">
+                      <h3 className="text-sm font-bold text-text leading-normal">
                         {selectedMessage.subject}
                       </h3>
                     </div>
 
                     <div>
-                      <div className="text-[10px] uppercase font-bold text-zinc-500 mb-1.5">
+                      <div className="text-[10px] uppercase font-bold text-mutedText mb-1.5">
                         Message Content
                       </div>
-                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed bg-zinc-950/60 border border-white/5 rounded-xl p-4 font-body whitespace-pre-wrap">
+                      <p className="text-xs sm:text-sm text-mutedText leading-relaxed bg-surface/60 border border-border rounded-xl p-4 font-body whitespace-pre-wrap">
                         {selectedMessage.message}
                       </p>
                     </div>
                   </div>
                 </div>
 
-                <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-[10px] text-zinc-500 font-semibold font-code">
+                <div className="mt-8 pt-4 border-t border-border flex items-center justify-between text-[10px] text-mutedText font-semibold font-code">
                   <span>ID: {selectedMessage._id}</span>
                   <span className="flex items-center gap-1">
                     {selectedMessage.isRead ? (
@@ -262,7 +267,7 @@ export default function AdminDashboard() {
                 </div>
               </div>
             ) : (
-              <div className="glass-panel p-12 rounded-2xl border border-white/5 text-center text-zinc-500 text-sm flex items-center justify-center min-h-100 font-body select-none">
+              <div className="glass-panel p-12 rounded-2xl border border-border text-center text-mutedText text-sm flex items-center justify-center min-h-100 font-body select-none">
                 Select a message from the list to view its contents.
               </div>
             )}

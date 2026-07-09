@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import Navbar from "../components/Navbar.jsx";
 import Hero from "../components/Hero.jsx";
 import About from "../components/About.jsx";
@@ -9,27 +10,15 @@ import Achievements from "../components/Achievements.jsx";
 import GitHubSection from "../components/GitHubSection.jsx";
 import Contact from "../components/Contact.jsx";
 import Footer from "../components/Footer.jsx";
-import { useAppDispatch } from "../store/hooks.js";
-import {
-  fetchProjects,
-  fetchSkills,
-  fetchExperiences,
-  fetchAchievements,
-} from "../store/slices/portfolioSlice.js";
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-
-  // Load portfolio telemetry from API on mount
-  useEffect(() => {
-    dispatch(fetchProjects());
-    dispatch(fetchSkills());
-    dispatch(fetchExperiences());
-    dispatch(fetchAchievements());
-  }, [dispatch]);
 
   return (
-    <div className="min-h-screen bg-background text-text selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-background text-text selection:bg-primary/30 selection:text-text">
+      <Helmet>
+        <title>Abhishekh Kumar — Full Stack Developer & MERN Engineer</title>
+        <meta name="description" content="Portfolio of Abhishekh Kumar, Full Stack Developer specializing in MERN stack, backend engineering, and AI-powered web applications." />
+      </Helmet>
       <Navbar />
       <Hero />
       <About />

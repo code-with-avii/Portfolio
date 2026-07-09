@@ -112,7 +112,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             Start a Conversation
           </motion.h2>
@@ -135,7 +135,7 @@ export default function Contact() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-6 rounded-2xl border border-white/5 flex flex-col justify-between"
+              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between"
             >
               <div>
                 <div className="flex items-center gap-2 mb-4">
@@ -147,24 +147,24 @@ export default function Contact() {
                     Open to Opportunities
                   </span>
                 </div>
-                <h3 className="text-lg font-heading font-bold text-white mb-2">
+                <h3 className="text-lg font-heading font-bold text-text mb-2">
                   Let's build together
                 </h3>
-                <p className="text-xs sm:text-sm text-zinc-400 font-body leading-relaxed">
+                <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed">
                   I am available for freelance contracts, intern
                   positions, or code consulting. Shoot me a message!
                 </p>
               </div>
 
               {/* Direct email display */}
-              <div className="flex items-center justify-between bg-zinc-950/60 border border-white/5 rounded-xl p-3 mt-6">
-                <div className="flex items-center gap-2 font-code text-xs text-zinc-300">
+              <div className="flex items-center justify-between bg-surface/60 border border-border rounded-xl p-3 mt-6">
+                <div className="flex items-center gap-2 font-code text-xs text-mutedText">
                   <Mail size={14} className="text-cyan-400" />
                   <span>aviimondal689@gmail.com</span>
                 </div>
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 bg-surface hover:bg-zinc-800 rounded-lg text-zinc-400 hover:text-white transition-colors"
+                  className="p-2 bg-surface hover:bg-surface-hover rounded-lg text-mutedText hover:text-text transition-colors"
                   title="Copy email to clipboard"
                 >
                   {copied ? (
@@ -182,12 +182,12 @@ export default function Contact() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="glass-panel p-6 rounded-2xl border border-white/5"
+              className="glass-panel p-6 rounded-2xl border border-border relative z-20"
             >
-              <h4 className="text-xs text-white font-heading font-bold uppercase tracking-wider mb-4">
+              <h4 className="text-xs text-text font-heading font-bold uppercase tracking-wider mb-4">
                 Networks
               </h4>
-              <div className="flex gap-4">
+              <div className="flex flex-wrap gap-4">
                 {[
                   {
                     icon: <FaGithub size={18} />,
@@ -209,7 +209,7 @@ export default function Contact() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grow flex items-center justify-center gap-2 py-2.5 bg-surface hover:bg-zinc-800 border border-white/5 hover:border-white/10 rounded-xl text-xs text-mutedText hover:text-white font-semibold transition-all"
+                    className="grow flex items-center justify-center gap-2 py-2.5 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover rounded-xl text-xs text-mutedText hover:text-text font-semibold transition-all"
                   >
                     {item.icon}
                     <span>{item.label}</span>
@@ -225,7 +225,7 @@ export default function Contact() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
             >
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Status messages */}
@@ -259,7 +259,7 @@ export default function Contact() {
                   <div className="space-y-1.5">
                     <label
                       htmlFor="name"
-                      className="text-xs font-semibold text-zinc-400 font-body"
+                      className="text-xs font-semibold text-mutedText font-body"
                     >
                       Name
                     </label>
@@ -272,13 +272,13 @@ export default function Contact() {
                       required
                       placeholder="Jack Reacher"
                       disabled={loading || status === "success"}
-                      className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
+                      className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                     />
                   </div>
                   <div className="space-y-1.5">
                     <label
                       htmlFor="email"
-                      className="text-xs font-semibold text-zinc-400 font-body"
+                      className="text-xs font-semibold text-mutedText font-body"
                     >
                       Email
                     </label>
@@ -291,7 +291,7 @@ export default function Contact() {
                       required
                       placeholder="reacher@example.com"
                       disabled={loading || status === "success"}
-                      className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
+                      className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                     />
                   </div>
                 </div>
@@ -299,7 +299,7 @@ export default function Contact() {
                 <div className="space-y-1.5">
                   <label
                     htmlFor="subject"
-                    className="text-xs font-semibold text-zinc-400 font-body"
+                    className="text-xs font-semibold text-mutedText font-body"
                   >
                     Subject
                   </label>
@@ -312,14 +312,14 @@ export default function Contact() {
                     required
                     placeholder="Project Inquiry / Intern opening..."
                     disabled={loading || status === "success"}
-                    className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
+                    className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
                   />
                 </div>
 
                 <div className="space-y-1.5">
                   <label
                     htmlFor="message"
-                    className="text-xs font-semibold text-zinc-400 font-body"
+                    className="text-xs font-semibold text-mutedText font-body"
                   >
                     Message
                   </label>
@@ -332,7 +332,7 @@ export default function Contact() {
                     required
                     placeholder="Provide details about your project or role proposal..."
                     disabled={loading || status === "success"}
-                    className="w-full bg-zinc-950/60 border border-white/5 rounded-xl px-4 py-3 text-xs sm:text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body resize-none"
+                    className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body resize-none"
                   />
                 </div>
 

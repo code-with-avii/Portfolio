@@ -90,7 +90,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center space-x-2 border border-white/10 bg-white/5 backdrop-blur-md px-3.5 py-1.5 rounded-full w-fit mb-6 text-sm text-cyan-400 font-semibold"
+              className="inline-flex items-center space-x-2 border border-border-hover bg-border backdrop-blur-md px-3.5 py-1.5 rounded-full w-fit mb-6 text-sm text-cyan-400 font-semibold"
             >
               <span className="flex h-2 w-2 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
@@ -104,7 +104,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-6xl font-extrabold font-heading text-white leading-tight mb-4"
+              className="text-4xl sm:text-6xl font-extrabold font-heading text-text leading-tight mb-4"
             >
               Hi, I'm{" "}
               <span className="text-gradient-purple-cyan font-extrabold block sm:inline">
@@ -114,7 +114,7 @@ export default function Hero() {
 
             {/* Roles Cycler */}
             <div className="h-12 sm:h-16 mb-4 flex items-center flex-wrap">
-              <span className="text-xl sm:text-3xl font-heading text-zinc-400 mr-2 font-medium whitespace-nowrap">
+              <span className="text-xl sm:text-3xl font-heading text-mutedText mr-2 font-medium whitespace-nowrap">
                 I am a
               </span>
               <div className="relative overflow-hidden h-12.5 w-112.5">
@@ -164,14 +164,14 @@ export default function Hero() {
 
               <button
                 onClick={() => handleScrollTo("contact")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface text-white font-semibold rounded-xl text-sm transition-all border border-white/10 hover:bg-zinc-800 hover:border-white/20"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface text-text font-semibold rounded-xl text-sm transition-all border border-border-hover hover:bg-surface-hover hover:border-white/20"
               >
                 Contact Me
               </button>
 
               <button
                 onClick={() => alert("Resume download triggered (Mock PDF)")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface/50 text-mutedText hover:text-white font-semibold rounded-xl text-sm transition-all border border-white/5 hover:border-white/10 gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface/50 text-mutedText hover:text-text font-semibold rounded-xl text-sm transition-all border border-border hover:border-border-hover gap-2"
               >
                 <Download size={15} /> Resume
               </button>
@@ -204,7 +204,7 @@ export default function Hero() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-surface/50 hover:bg-zinc-800 border border-white/5 hover:border-white/10 text-mutedText hover:text-white flex items-center justify-center transition-all"
+                  className="w-10 h-10 rounded-lg bg-surface/50 hover:bg-surface-hover border border-border hover:border-border-hover text-mutedText hover:text-text flex items-center justify-center transition-all"
                 >
                   {social.icon}
                 </a>
@@ -215,13 +215,13 @@ export default function Hero() {
           {/* Interactive Floating Tech Stack visual */}
           <div className="lg:col-span-5 relative h-95 sm:h-112.5 w-full flex items-center justify-center select-none">
             {/* Visual Canvas Orbit circle */}
-            <div className="absolute w-70 h-70 sm:w-87.5 sm:h-87.5 rounded-full border border-white/5 border-dashed animate-[spin_60s_linear_infinite]" />
+            <div className="absolute w-70 h-70 sm:w-87.5 sm:h-87.5 rounded-full border border-border border-dashed animate-[spin_60s_linear_infinite]" />
 
             {/* Center Core node */}
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="absolute w-24 h-24 rounded-3xl bg-surface/85 border border-white/10 flex items-center justify-center shadow-glow-primary z-20"
+              className="absolute w-24 h-24 rounded-3xl bg-surface/85 border border-border-hover flex items-center justify-center shadow-glow-primary z-20"
             >
               <div className="w-12 h-12 rounded-2xl bg-gradient-purple-cyan flex items-center justify-center text-white font-bold text-xl">
                 AK
@@ -267,7 +267,7 @@ export default function Hero() {
               },
               {
                 name: "Express",
-                color: "text-zinc-300",
+                color: "text-mutedText",
                 delay: 5,
                 x: 0,
                 y: 130,
@@ -285,7 +285,7 @@ export default function Hero() {
                   ease: "easeInOut",
                   delay: tech.delay * 0.8,
                 }}
-                className={`absolute w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-surface/90 border border-white/10 hover:border-white/20 flex items-center justify-center text-sm font-semibold shadow-md ${tech.color} z-10 cursor-pointer`}
+                className={`absolute w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-surface/90 border border-border-hover hover:border-white/20 flex items-center justify-center text-sm font-semibold shadow-md ${tech.color} z-10 cursor-pointer`}
                 whileHover={{ scale: 1.15, rotate: 10 }}
               >
                 <span className="text-[10px] sm:text-xs font-code font-bold uppercase">

@@ -101,7 +101,7 @@ export default function About() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             A Visual Journey of Engineering
           </motion.h2>
@@ -124,14 +124,14 @@ export default function About() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
             >
-              <h3 className="text-xl font-heading font-bold text-white mb-4 flex items-center gap-2">
+              <h3 className="text-xl font-heading font-bold text-text mb-4 flex items-center gap-2">
                 <BookOpen className="text-primary" size={18} /> Who I Am
               </h3>
               <div className="space-y-4 font-body text-mutedText text-sm sm:text-base leading-relaxed">
                 <p>
-                  I'm <strong className="text-white">Abhishekh Kumar</strong>, a
+                  I'm <strong className="text-text">Abhishekh Kumar</strong>, a
                   full-stack engineer specializing in the MERN ecosystem. My
                   coding journey is fueled by a desire to bridge technical
                   complexity with sleek, intuitive design.
@@ -160,13 +160,13 @@ export default function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
-                  className="glass-panel p-5 rounded-xl border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all card-glow-border cursor-default"
+                  className="glass-panel p-5 rounded-xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default"
                 >
-                  <div className="w-9 h-9 rounded-lg bg-white/5 flex items-center justify-center mb-3">
+                  <div className="w-9 h-9 rounded-lg bg-border flex items-center justify-center mb-3">
                     {stat.icon}
                   </div>
                   <div>
-                    <div className="text-2xl font-bold font-heading text-white">
+                    <div className="text-2xl font-bold font-heading text-text">
                       {stat.value}
                     </div>
                     <div className="text-xs text-mutedText mt-0.5">
@@ -184,13 +184,13 @@ export default function About() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-white/5"
+              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
             >
-              <h3 className="text-xl font-heading font-bold text-white mb-6">
+              <h3 className="text-xl font-heading font-bold text-text mb-6">
                 Interactive Timeline
               </h3>
 
-              <div className="relative border-l border-white/10 pl-6 space-y-8 pb-4">
+              <div className="relative border-l border-border-hover pl-6 space-y-8 pb-4">
                 {timelineMilestones.map((milestone, idx) => {
                   const isActive = activeMilestone === idx;
                   return (
@@ -204,7 +204,7 @@ export default function About() {
                         className={`absolute -left-7.75 top-1 w-4 h-4 rounded-full border-2 transition-all duration-300 ${
                           isActive
                             ? "bg-primary border-primary scale-125 shadow-glow-primary"
-                            : "bg-zinc-900 border-zinc-700 group-hover:border-zinc-500"
+                            : "bg-surface border-zinc-700 group-hover:border-zinc-500"
                         }`}
                       />
 
@@ -215,7 +215,7 @@ export default function About() {
                             className={`text-xs font-code font-bold px-2 py-0.5 rounded ${
                               isActive
                                 ? "bg-primary/20 text-primary"
-                                : "bg-white/5 text-mutedText"
+                                : "bg-border text-mutedText"
                             }`}
                           >
                             {milestone.year}
@@ -223,8 +223,8 @@ export default function About() {
                           <h4
                             className={`font-heading font-bold text-sm sm:text-base transition-colors ${
                               isActive
-                                ? "text-white"
-                                : "text-zinc-400 group-hover:text-white"
+                                ? "text-text"
+                                : "text-mutedText group-hover:text-text"
                             }`}
                           >
                             {milestone.title}

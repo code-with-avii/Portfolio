@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
+import { useGetProjectsQuery } from "../store/apiSlice.js";
 import {
   ExternalLink,
   BookOpen,
@@ -86,8 +87,8 @@ const filterTags = [
 ];
 
 export default function Projects() {
-  const reduxProjects = useAppSelector((state) => state.portfolio.projects);
-  const projects = reduxProjects.length > 0 ? reduxProjects : fallbackProjects;
+  const { data: reduxProjects } = useGetProjectsQuery();
+  const projects = reduxProjects && reduxProjects.length > 0 ? reduxProjects : fallbackProjects;
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -132,7 +133,7 @@ export default function Projects() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             Featured Engineering Projects
           </motion.h2>
@@ -151,7 +152,7 @@ export default function Projects() {
         <div className="flex flex-col md:flex-row gap-5 items-stretch justify-between mb-12 max-w-5xl mx-auto">
           {/* Search bar */}
           <div className="relative grow max-w-md">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-500">
+            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-mutedText">
               <Search size={16} />
             </span>
             <input
@@ -159,7 +160,7 @@ export default function Projects() {
               placeholder="Search projects by name or technology..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 bg-surface/50 border border-white/10 rounded-xl text-sm text-white placeholder-zinc-500 focus:outline-none focus:border-primary/50 transition-all font-body"
+              className="w-full pl-10 pr-4 py-3 bg-surface/50 border border-border-hover rounded-xl text-sm text-text placeholder-zinc-500 focus:outline-none focus:border-primary/50 transition-all font-body"
             />
           </div>
 
@@ -175,7 +176,7 @@ export default function Projects() {
                 className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body border transition-all ${
                   selectedTag === tag
                     ? "bg-gradient-purple-cyan text-white border-transparent shadow-glow-primary"
-                    : "bg-surface/50 text-mutedText border-white/5 hover:border-white/10 hover:text-white"
+                    : "bg-surface/50 text-mutedText border-border hover:border-border-hover hover:text-text"
                 }`}
               >
                 {tag}
@@ -199,11 +200,11 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 whileHover={{ y: -6 }}
-                className="glass-panel rounded-2xl border border-white/5 overflow-hidden flex flex-col justify-between hover:border-white/10 transition-all card-glow-border group cursor-default"
+                className="glass-panel rounded-2xl border border-border overflow-hidden flex flex-col justify-between hover:border-border-hover transition-all card-glow-border group cursor-default"
               >
                 <div>
                   {/* Preview Image zoom wrapper */}
-                  <div className="relative h-48 w-full overflow-hidden border-b border-white/5 bg-zinc-950">
+                  <div className="relative h-48 w-full overflow-hidden border-b border-border bg-surface">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -221,13 +222,13 @@ export default function Projects() {
 
                   {/* Body Content */}
                   <div className="p-6">
-                    <h3 className="text-lg font-heading font-bold text-white group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-lg font-heading font-bold text-text group-hover:text-cyan-400 transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-xs text-mutedText font-semibold mt-1 font-body leading-relaxed mb-4">
                       {project.subtitle}
                     </p>
-                    <p className="text-xs sm:text-sm text-zinc-400 font-body leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed line-clamp-3">
                       {project.description}
                     </p>
                   </div>
@@ -240,20 +241,20 @@ export default function Projects() {
                     {project.tags.slice(0, 4).map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="px-2 py-0.5 rounded-md bg-zinc-900 border border-white/5 text-[10px] font-code text-zinc-400"
+                        className="px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-code text-mutedText"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="px-2 py-0.5 rounded-md bg-zinc-900 border border-white/5 text-[10px] font-code text-zinc-400">
+                      <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-code text-mutedText">
                         +{project.tags.length - 4} more
                       </span>
                     )}
                   </div>
 
                   {/* Actions buttons */}
-                  <div className="grid grid-cols-3 gap-2 border-t border-white/5 pt-4">
+                  <div className="grid grid-cols-3 gap-2 border-t border-border pt-4">
                     <button
                       onClick={() => navigate(`/project/${project._id}`)}
                       className="inline-flex items-center justify-center py-2 bg-primary/10 border border-primary/20 text-xs font-semibold text-purple-300 rounded-lg hover:bg-primary/20 transition-all gap-1"
@@ -266,7 +267,7 @@ export default function Projects() {
                       href={project.githubUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center py-2 bg-surface hover:bg-zinc-800 border border-white/5 hover:border-white/10 text-xs font-semibold text-zinc-300 hover:text-white rounded-lg transition-all gap-1"
+                      className="inline-flex items-center justify-center py-2 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover text-xs font-semibold text-mutedText hover:text-text rounded-lg transition-all gap-1"
                     >
                       <FaGithub size={13} />
                       Code
@@ -276,7 +277,7 @@ export default function Projects() {
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center py-2 bg-surface hover:bg-zinc-800 border border-white/5 hover:border-white/10 text-xs font-semibold text-zinc-300 hover:text-white rounded-lg transition-all gap-1"
+                      className="inline-flex items-center justify-center py-2 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover text-xs font-semibold text-mutedText hover:text-text rounded-lg transition-all gap-1"
                     >
                       <ExternalLink size={13} />
                       Live Demo
@@ -289,7 +290,7 @@ export default function Projects() {
         </motion.div>
 
         {filteredProjects.length === 0 && (
-          <div className="text-center py-16 text-zinc-500 font-body text-sm">
+          <div className="text-center py-16 text-mutedText font-body text-sm">
             No projects found matching the criteria. Try adjusting your query or
             filters.
           </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
+import { useGetAchievementsQuery } from "../store/apiSlice.js";
 import { Trophy, Code, Award, Flame, ExternalLink } from "lucide-react";
 
 const fallbackAchievements = [
@@ -84,7 +85,7 @@ const AnimatedCounter = ({ value, label, duration = 2 }) => {
   }, [value, duration]);
 
   return (
-    <div className="text-center p-6 bg-surface/50 border border-white/5 rounded-2xl">
+    <div className="text-center p-6 bg-surface/50 border border-border rounded-2xl">
       <div className="text-3xl sm:text-4xl font-extrabold font-heading bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
         {count}+
       </div>
@@ -113,8 +114,8 @@ const categoryIcons = {
 };
 
 export default function Achievements() {
-  const reduxAchs = useAppSelector((state) => state.portfolio.achievements);
-  const achievements = reduxAchs.length > 0 ? reduxAchs : fallbackAchievements;
+  const { data: reduxAchs } = useGetAchievementsQuery();
+  const achievements = reduxAchs && reduxAchs.length > 0 ? reduxAchs : fallbackAchievements;
 
   return (
     <section
@@ -139,7 +140,7 @@ export default function Achievements() {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-white"
+            className="text-3xl sm:text-4xl font-bold font-heading text-text"
           >
             Recognition & Achievements
           </motion.h2>
@@ -171,7 +172,7 @@ export default function Achievements() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               whileHover={{ y: -5 }}
-              className="glass-panel p-6 rounded-2xl border border-white/5 flex flex-col justify-between hover:border-white/10 transition-all card-glow-border cursor-default"
+              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default"
             >
               <div>
                 {/* Header Category and Date */}
@@ -179,7 +180,7 @@ export default function Achievements() {
                   <span
                     className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-semibold ${
                       categoryColors[ach.category] ||
-                      "border-zinc-800 text-zinc-400 bg-zinc-800/10"
+                      "border-zinc-800 text-mutedText bg-surface-hover/10"
                     }`}
                   >
                     {categoryIcons[ach.category]}
@@ -191,7 +192,7 @@ export default function Achievements() {
                 </div>
 
                 {/* Title & Badge Value */}
-                <h3 className="text-base sm:text-lg font-heading font-bold text-white leading-snug">
+                <h3 className="text-base sm:text-lg font-heading font-bold text-text leading-snug">
                   {ach.title}
                 </h3>
                 <div className="text-cyan-400 text-xs font-semibold font-code mt-1">
@@ -199,14 +200,14 @@ export default function Achievements() {
                 </div>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-zinc-400 font-body leading-relaxed mt-4">
+                <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed mt-4">
                   {ach.description}
                 </p>
               </div>
 
               {/* Footer link */}
               {ach.link && (
-                <div className="mt-6 pt-4 border-t border-white/5">
+                <div className="mt-6 pt-4 border-t border-border">
                   <a
                     href={ach.link}
                     target="_blank"
