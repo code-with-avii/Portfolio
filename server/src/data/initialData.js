@@ -209,7 +209,7 @@ export const initialExperiences = [
       "Socket.io",
     ],
     achievements: [
-      "Won First Place in SIH (Smart India Hackathon) 2025 for building a real-time disaster resource dispatcher.",
+      "Participated in SIH (Smart India Hackathon) 2025 for building a real-time disaster resource dispatcher.",
       "Mentored a team of 4 junior developers, enforcing clean git practices, unit tests, and continuous delivery.",
       "Implemented full authentication flows using httpOnly secure cookies and JSON Web Tokens.",
     ],
@@ -392,46 +392,6 @@ export const initialProjects = [
     duration: "4 Months",
   },
   {
-    title: "Real-Time Analytics Dashboard",
-    subtitle: "High-performance tracker for user telemetry & heatmaps",
-    description:
-      "A developer tool collecting and visualizing website performance, clicks, geographic telemetry, and performance bottlenecks.",
-    longDescription:
-      "A premium dashboard that ingests tracking scripts telemetry and presents it via interactive charts. It handles real-time WebSockets to update visitor counters live and tracks historical traffic drops.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Framer Motion", "Node.js", "Redis", "MongoDB", "ChartJS"],
-    features: [
-      "Real-time visitors count and live click logging using Socket.io",
-      "Comprehensive geographic maps mapping inbound click metrics",
-      "Page-load speed analysis breakdown (DNS, TTFB, DOM Paint)",
-      "Exportable reporting utilities (PDF, JSON, CSV)",
-    ],
-    architectureDiagram:
-      "Telemetry SDK -> Express Ingestion Endpoint -> Redis Pub/Sub -> MongoDB Persister -> WebSocket Server -> Analytics Client UI",
-    apiFlow: [
-      "POST /api/telemetry/ingest - Endpoint designed to receive web events under 20ms",
-      "GET /api/dashboard/stats - Aggregate metrics across customized dates",
-      "GET /api/dashboard/realtime - Open persistent socket connection for live updates",
-    ],
-    databaseDesign:
-      "Sites (id, ownerId, domains), Events (id, siteId, eventType, path, speedMetric, countryCode, timestamp)",
-    challengesSolved:
-      "Ingesting millions of events threatened database capacity. Addressed this by implementing a Redis stream buffer to batch write database updates every 10 seconds, maintaining server speed.",
-    performanceOptimizations:
-      "SVG layouts are heavily optimized. Telemetry scripts are asynchronous and under 4KB to maintain zero host page impact.",
-    futureImprovements: [
-      "Implement page heatmap recording",
-      "User retention cohort analysis matrix",
-      "Slack alert webhooks integration",
-    ],
-    githubUrl: "https://github.com/abhishekh-developer/analytics-telemetry",
-    liveUrl: "https://analytics-telemetry-abhishekh.vercel.app",
-    featured: true,
-    role: "Lead Backend Developer",
-    duration: "2.5 Months",
-  },
-  {
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
     description:
@@ -470,54 +430,6 @@ export const initialProjects = [
     featured: false,
     role: "Security Engineer",
     duration: "2 Months",
-  },
-  {
-    title: "Real-Time Chat Application",
-    subtitle:
-      "Secure chat portal supporting channels, rich text, & read checks",
-    description:
-      "An interactive messaging application offering channel creation, instant communication, read receipts, and online status indicators.",
-    longDescription:
-      "Built with Socket.io, this chat portal replicates slack-like workflows. It processes active indicators, stores chat messages, and features full media sharing options.",
-    image:
-      "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=800&auto=format&fit=crop",
-    tags: [
-      "React",
-      "TypeScript",
-      "Node.js",
-      "Socket.io",
-      "MongoDB",
-      "Framer Motion",
-    ],
-    features: [
-      "Instant delivery of messages in private channels and general chat rooms",
-      "Active status tracking showing users online/typing markers in real time",
-      "Encrypted persistent chat histories containing rich links previews",
-      "Custom animations using Framer Motion on chat drawers and notifications",
-    ],
-    architectureDiagram:
-      "React UI (Socket Client) -> Socket.io Broker -> Node.js Cluster -> MongoDB Message Store",
-    apiFlow: [
-      "GET /api/channels - Retrieve channel listings for registered accounts",
-      "GET /api/messages/:channelId - Load paginated past text records",
-      "POST /api/channels/create - Initialize new chat rooms with permissions",
-    ],
-    databaseDesign:
-      "Channel (id, name, isPrivate), Message (id, senderId, channelId, body, timestamp, readByUsers), UserPresence (userId, status, lastSeen)",
-    challengesSolved:
-      "Reduced chat sync overhead by designing lightweight payload footprints and writing a virtualized scrolling viewport that only renders visible message nodes, maintaining 60fps scrolling.",
-    performanceOptimizations:
-      "Chat logs are loaded dynamically in batches of 30 items. Media uploads are compressed directly within the client prior to database delivery.",
-    futureImprovements: [
-      "Implement WebRTC voice calls",
-      "Thread replies and reactions mapping",
-      "Message self-destruct timers",
-    ],
-    githubUrl: "https://github.com/abhishekh-developer/chat-app",
-    liveUrl: "https://chat-app-abhishekh.vercel.app",
-    featured: false,
-    role: "Full Stack Engineer",
-    duration: "3.5 Months",
   },
   {
     title: "Weather Dashboard",
