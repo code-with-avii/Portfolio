@@ -33,11 +33,10 @@ app.use(
 );
 
 // CORS Configuration
-const clientUrl = process.env.CLIENT_URL || "http://localhost:5173";
 app.use(
   cors({
     origin:[
-      clientUrl,"https://portfolio-cl81.onrender.com"
+      process.env.CLIENT_URL,"https://portfolio-cl81.onrender.com"
    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
