@@ -210,7 +210,7 @@ export const initialExperiences = [
     ],
     achievements: [
       "Participated in SIH (Smart India Hackathon) 2025 for building a real-time disaster resource dispatcher.",
-      "Mentored a team of 4 junior developers, enforcing clean git practices, unit tests, and continuous delivery.",
+      "Led a team of 4 developers, planned project milestones, delegated tasks, conducted code reviews, managed Git workflows, and ensured successful delivery of scalable full-stack features",
       "Implemented full authentication flows using httpOnly secure cookies and JSON Web Tokens.",
     ],
   },
@@ -232,7 +232,7 @@ export const initialExperiences = [
     type: "College Projects",
     technologies: ["JavaScript", "HTML5", "CSS3", "Node.js", "PostgreSQL"],
     achievements: [
-      "Developed and deployed the official college portal managing registrations for over 1500+ participants.",
+      "Developed and deployed Hostel Help, a full-stack hostel management platform streamlining room allocation, complaints, notices, and student-hostel administration for 1,500+ students..",
       "Designed highly responsive layouts supporting desktop, mobile, and display panels, with 100% lighthouse compliance.",
     ],
   },
@@ -352,46 +352,6 @@ export const initialProjects = [
     duration: "3 Months",
   },
   {
-    title: "Hospital Management Suite",
-    subtitle: "Enterprise patient records, scheduling, & doctor portal",
-    description:
-      "A secure healthcare management tool optimizing outpatient registration, scheduling, record tracking, and secure doctor-to-doctor messaging.",
-    longDescription:
-      "This application addresses hospital bottlenecks by centralizing electronic health records (EHR). Doctors log logs, consult histories, and write digital prescriptions, while patients book appointments via a clean calendar widget.",
-    image:
-      "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "MUI"],
-    features: [
-      "Interactive appointment scheduling calendar with drag-and-drop slots",
-      "Strict HIPAA-aligned data structure with encryption on patient metrics",
-      "Automated email/SMS appointment confirmations via cron triggers",
-      "Comprehensive doctor dashboard tracking prescriptions and vitals data charts",
-    ],
-    architectureDiagram:
-      "Vite Frontend -> Express Middleware (Validators) -> Knex Query Builder -> PostgreSQL Database Cluster",
-    apiFlow: [
-      "GET /api/appointments - Fetch patient appointments filterable by date and doctor",
-      "POST /api/records - Encrypt and insert medical history notes",
-      "PUT /api/appointments/:id/reschedule - Update scheduling slot with conflict verification",
-    ],
-    databaseDesign:
-      "Patients (id, name, encryptedSSN), Doctors (id, specialty), Appointments (id, patientId, doctorId, timeSlot), Records (id, patientId, diagnosis, prescriptions)",
-    challengesSolved:
-      "Prevented overlapping doctor schedules by wrapping slot creation queries inside strict PostgreSQL serializable transactions. Solved slow history lookups by creating combined database indexes on patient search fields.",
-    performanceOptimizations:
-      "Paginated queries on EHR lists reduced payload sizes by 85%. Images are lazy loaded via custom IntersectionObservers.",
-    futureImprovements: [
-      "Video teleconsultation integration via WebRTC",
-      "AI patient symptom pre-check bots",
-      "Mobile companion app",
-    ],
-    githubUrl: "https://github.com/abhishekh-developer/hospital-suite",
-    liveUrl: "https://hospital-suite-abhishekh.vercel.app",
-    featured: true,
-    role: "Full Stack Engineer",
-    duration: "4 Months",
-  },
-  {
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
     description:
@@ -428,7 +388,7 @@ export const initialProjects = [
     githubUrl: "https://github.com/abhishekh-developer/auth-service",
     liveUrl: "https://auth-service-abhishekh.vercel.app",
     featured: false,
-    role: "Security Engineer",
+    role: "Backend Engineer",
     duration: "2 Months",
   },
   {

@@ -84,7 +84,7 @@ export default function Hero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Main Hero Typography */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left">
+          <div className="lg:col-span-7 flex flex-col justify-center text-left ">
             {/* Animated Greeting Label */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
