@@ -44,49 +44,8 @@ export const initialProjectsData = [
     githubUrl: "https://github.com/abhishekh-developer/ai-marketplace",
     liveUrl: "https://ai-marketplace-abhishekh.vercel.app",
     featured: true,
-    role: "Lead Architect",
+    role: "Developer",
     duration: "3 Months",
-  },
-  {
-    _id: "mem-project-2",
-    title: "Real-Time Analytics Dashboard",
-    subtitle: "High-performance tracker for user telemetry & heatmaps",
-    description:
-      "A developer tool collecting and visualizing website performance, clicks, geographic telemetry, and performance bottlenecks.",
-    longDescription:
-      "A premium dashboard that ingests tracking scripts telemetry and presents it via interactive charts. It handles real-time WebSockets to update visitor counters live and tracks historical traffic drops.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Framer Motion", "Node.js", "Redis", "MongoDB"],
-    features: [
-      "Real-time visitors count and live click logging using Socket.io",
-      "Comprehensive geographic maps mapping inbound click metrics",
-      "Page-load speed analysis breakdown (DNS, TTFB, DOM Paint)",
-      "Exportable reporting utilities (PDF, JSON, CSV)",
-    ],
-    architectureDiagram:
-      "Telemetry SDK -> Express Ingestion Endpoint -> Redis Pub/Sub -> MongoDB Persister -> WebSocket Server -> Analytics Client UI",
-    apiFlow: [
-      "POST /api/telemetry/ingest - Endpoint designed to receive web events under 20ms",
-      "GET /api/dashboard/stats - Aggregate metrics across customized dates",
-      "GET /api/dashboard/realtime - Open persistent socket connection for live updates",
-    ],
-    databaseDesign:
-      "Sites (id, ownerId, domains), Events (id, siteId, eventType, path, speedMetric, countryCode, timestamp)",
-    challengesSolved:
-      "Ingesting millions of events threatened database capacity. Addressed this by implementing a Redis stream buffer to batch write database updates every 10 seconds, maintaining server speed.",
-    performanceOptimizations:
-      "SVG layouts are heavily optimized. Telemetry scripts are asynchronous and under 4KB to maintain zero host page impact.",
-    futureImprovements: [
-      "Implement page heatmap recording",
-      "User retention cohort analysis matrix",
-      "Slack alert webhooks integration",
-    ],
-    githubUrl: "https://github.com/abhishekh-developer/analytics-telemetry",
-    liveUrl: "https://analytics-telemetry-abhishekh.vercel.app",
-    featured: true,
-    role: "Lead Backend Developer",
-    duration: "2.5 Months",
   },
   {
     _id: "mem-project-1",
@@ -126,7 +85,7 @@ export const initialProjectsData = [
     githubUrl: "https://github.com/abhishekh-developer/auth-service",
     liveUrl: "https://auth-service-abhishekh.vercel.app",
     featured: false,
-    role: "Security Engineer",
+    role: "Developer",
     duration: "2 Months",
   },
 //   {
@@ -208,7 +167,7 @@ export const initialProjectsData = [
     githubUrl: "https://github.com/abhishekh-developer/weather-tracker",
     liveUrl: "https://weather-tracker-abhishekh.vercel.app",
     featured: false,
-    role: "Frontend Developer",
+    role: "Full Stack Developer",
     duration: "1.5 Months",
   },
   {
