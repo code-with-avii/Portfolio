@@ -13,17 +13,17 @@ export default defineConfig({
       },
     },
   },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-router': ['react-router-dom'],
-          'vendor-motion': ['framer-motion'],
-          'vendor-redux': ['@reduxjs/toolkit', 'react-redux'],
-          'vendor-icons': ['lucide-react', 'react-icons'],
-        }
-      }
-    }
-  }
+  // build: {
+  //   rollupOptions: {
+  //     output: {
+  //       manualChunks: {
+  //         'vendor-react': ['react', 'react-dom'],
+  //         'vendor-router': ['react-router-dom'],
+  //         'vendor-motion': ['framer-motion'],
+  //         'vendor-redux': ['@reduxjs/toolkit', 'react-redux'],
+  //         'vendor-icons': ['lucide-react', 'react-icons'],
+  //       }
+  //     }
+  //   }
+  // }
 })
