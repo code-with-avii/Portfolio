@@ -36,7 +36,9 @@ app.use(
 app.use(
   cors({
     origin:[
-      process.env.CLIENT_URL,"https://portfolio-cl81.onrender.com"
+      process.env.CLIENT_URL,
+      "http://localhost:5173",
+      "https://portfolio-cl81.onrender.com"
    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
