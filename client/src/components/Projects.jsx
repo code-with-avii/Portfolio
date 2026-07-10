@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
 import { useGetProjectsQuery } from "../store/apiSlice.js";
+
 import {
   ExternalLink,
   BookOpen,

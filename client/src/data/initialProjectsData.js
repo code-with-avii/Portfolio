@@ -1,6 +1,6 @@
 export const initialProjectsData = [
   {
-    _id: "mem-project-0",
+    _id: "mem-project-3",
     title: "AI Prompt Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
     description:
@@ -89,7 +89,7 @@ export const initialProjectsData = [
     duration: "2.5 Months",
   },
   {
-    _id: "mem-project-3",
+    _id: "mem-project-1",
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
     description:
@@ -172,7 +172,7 @@ export const initialProjectsData = [
 //     duration: "3.5 Months",
 //   },
   {
-    _id: "mem-project-5",
+    _id: "mem-project-0",
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
     description:
@@ -211,4 +211,51 @@ export const initialProjectsData = [
     role: "Frontend Developer",
     duration: "1.5 Months",
   },
+  {
+   _id: "mem-project-4",
+  "title": "Hostel Help",
+  "subtitle": "Smart Hostel Management & Student Assistance Platform",
+  "description": "A full-stack MERN application that simplifies hostel management, complaint tracking, and communication between students and administrators.",
+  "longDescription": "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
+  "image": "https://your-image-url.com/hostel-help.png",
+  "tags": [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "JWT",
+    "Tailwind CSS"
+  ],
+  "features": [
+    "JWT Authentication",
+    "Role-based Access Control",
+    "Complaint Management",
+    "Issue Status Tracking",
+    "Responsive Dashboard",
+    "REST API"
+  ],
+  "architectureDiagram": "Client React App → Express API → JWT Authentication → MongoDB Database",
+  "apiFlow": [
+    "User Login",
+    "JWT Authentication",
+    "Protected Routes",
+    "Complaint CRUD Operations",
+    "Response to Client"
+  ],
+  "databaseDesign": "Collections: Users, Complaints, Admins, Hostels, Rooms. Relationships maintained using ObjectId references.",
+  "challengesSolved": "Implemented secure authentication, complaint lifecycle management, protected APIs, and efficient MongoDB schema design.",
+  "performanceOptimizations": "Optimized database queries, lazy-loaded React components, minimized API calls, and optimized images.",
+  "futureImprovements": [
+    "Socket.io Real-time Notifications",
+    "Room Allocation",
+    "Mess Management",
+    "Visitor Management",
+    "Online Fee Payment"
+  ],
+  "githubUrl": "https://github.com/code-with-avii/Hostel-Help",
+  "liveUrl": "https://hostel-help-pi.vercel.app/",
+  "featured": true,
+  "role": "Full Stack Developer",
+  "duration": "2 Months"
+}
 ];
