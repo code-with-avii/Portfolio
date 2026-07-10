@@ -35,15 +35,13 @@ app.use(
 // CORS Configuration
 app.use(
   cors({
-    origin:[
-      process.env.CLIENT_URL,
+    origin: [
       "http://localhost:5173",
-      "https://portfolio-cl81.onrender.com"
-   ],
+      "https://portfolio-black-one-25.vercel.app",
+      "https://portfolio-n88yhwyf9-code-with-aviis-projects.vercel.app",
+    ],
     credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  }),
+  })
 );
 
 // Request Parsers
