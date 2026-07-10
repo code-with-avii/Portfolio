@@ -47,21 +47,7 @@ const fallbackProjects = [
     liveUrl: "https://auth-service-abhishekh.vercel.app",
     featured: false,
   },
-  {
-    _id: "mem-project-2",
-    title: "Real-Time Chat Application",
-    subtitle:
-      "Secure chat portal supporting channels, rich text, & read checks",
-    description:
-      "An interactive messaging application offering channel creation, instant communication, read receipts, and online status indicators.",
-    image:
-      "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "TypeScript", "Node.js", "Socket.io", "MongoDB"],
-    githubUrl: "https://github.com/abhishekh-developer/chat-app",
-    liveUrl: "https://chat-app-abhishekh.vercel.app",
-    featured: false,
-  },
-  {
+    {
     _id: "mem-project-3",
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
