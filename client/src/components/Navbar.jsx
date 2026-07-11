@@ -34,6 +34,18 @@ export default function Navbar() {
     }
   }, [isDark]);
 
+  // Prevent background scrolling when mobile menu is open
+useEffect(() => {
+  if (isOpen) {
+    document.body.classList.add("overflow-hidden");
+  } else {
+    document.body.classList.remove("overflow-hidden");
+  }
+
+  return () => {
+    document.body.classList.remove("overflow-hidden");
+  };
+}, [isOpen]);
   // Scrollspy & Glassmorphism triggers
   useEffect(() => {
     const handleScroll = () => {
@@ -84,7 +96,7 @@ export default function Navbar() {
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
           ? "glass-panel py-3 shadow-lg border-b border-border"
-          : "bg-transparent py-5"
+          : "bg-transparent py-3 sm:py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,7 +106,7 @@ export default function Navbar() {
             className="shrink-0 flex items-center cursor-pointer"
             onClick={() => navigate("/")}
           >
-            <div className="w-10 h-10 rounded-xl bg-gradient-purple-cyan flex items-center justify-between p-2 text-white font-bold text-lg mr-2 shadow-glow-primary">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-purple-cyan flex items-center justify-between p-2 text-white font-bold text-base sm:text-lg mr-2 shadow-glow-primary">
               <Code size={22} className="mx-auto" />
             </div>
             <span className="font-heading font-bold text-lg tracking-tight text-text hover:text-cyan-400 transition-colors">
@@ -175,7 +187,7 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-0 top-15 w-full bg-background/95 backdrop-blur-xl z-40 transition-all duration-300 ${
+        className={`md:hidden fixed left-0 right-0 top-16 bg-background overflow-y-auto z-40 transition-all duration-300 ${
           isOpen
             ? "opacity-100 pointer-events-auto"
             : "opacity-0 pointer-events-none"
@@ -194,8 +206,8 @@ export default function Navbar() {
           ))}
           <div className="pt-4 border-t border-border">
             <button
-              onClick={() => alert("Resume download triggered (Mock PDF)")}
-              className="w-full flex items-center justify-center py-3 bg-gradient-purple-cyan text-white font-medium rounded-lg text-sm transition-all"
+              onClick={() => target = "_blank"}
+              className="w-full flex items-center justify-center py-4 bg-gradient-purple-cyan text-white font-medium rounded-lg text-sm transition-all"
             >
               <FileText size={16} className="mr-2" /> Download Resume
             </button>
