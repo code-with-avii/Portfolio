@@ -252,7 +252,7 @@ export default function GitHubSection() {
 
                 <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-[10px] font-code text-mutedText">
                   <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-blue-400" /> TS
+                    <span className="w-2 h-2 rounded-full bg-blue-100" /> TS
                     (0%)
                   </span>
                   <span className="flex items-center gap-1.5">
