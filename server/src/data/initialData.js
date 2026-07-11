@@ -356,7 +356,7 @@ export const initialProjects = [
       "PWA Support",
     ],
     githubUrl: "https://github.com/code-with-avii/SmartTech",
-    liveUrl: "smart-tech-gold.vercel.app",
+    liveUrl: "https://smart-tech-gold.vercel.app",
     featured: true,
     role: "Full Stack Developer",
     duration: "3 Months",

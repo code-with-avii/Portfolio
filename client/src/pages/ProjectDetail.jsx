@@ -89,9 +89,10 @@ export default function ProjectDetail() {
         {/* Back Link */}
         <button
           onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 text-mutedText hover:text-text transition-colors mb-8 text-sm font-semibold"
+          aria-label="Back to Portfolio Home Page"
+          className="inline-flex items-center gap-2 text-mutedText hover:text-text transition-colors mb-8 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded-lg px-2 py-1"
         >
-          <ArrowLeft size={16} /> Back to Portfolio
+          <ArrowLeft size={16} aria-hidden="true" /> Back to Portfolio
         </button>
 
         {/* Hero Header Banner */}
@@ -101,8 +102,11 @@ export default function ProjectDetail() {
           className="relative rounded-3xl overflow-hidden mb-12 bg-surface border border-border shadow-2xl h-70 sm:h-100"
         >
           <img
-            src={project.image}
+            src={project.image.includes("unsplash.com") ? project.image.replace(/w=\d+/, "w=1200").replace(/q=\d+/, "q=85") + "&fm=webp" : project.image}
             alt={project.title}
+            width="1200"
+            height="500"
+            loading="eager"
             className="w-full h-full object-cover opacity-50"
           />
           <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
@@ -250,18 +254,20 @@ export default function ProjectDetail() {
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-surface hover:bg-surface-hover border border-border-hover rounded-xl text-sm text-text font-semibold transition-colors shadow-md"
+                aria-label={`View GitHub source code for ${project.title}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-surface hover:bg-surface-hover border border-border-hover rounded-xl text-sm text-text font-semibold transition-colors shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
-                <FaGithub size={16} />
+                <FaGithub size={16} aria-hidden="true" />
                 <span>GitHub Source</span>
               </a>
               <a
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm hover:opacity-95 transition-all shadow-glow-primary"
+                aria-label={`Launch live web application for ${project.title}`}
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm hover:opacity-95 transition-all shadow-glow-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
               >
-                <ExternalLink size={16} />
+                <ExternalLink size={16} aria-hidden="true" />
                 <span>Launch Live App</span>
               </a>
             </div>

@@ -1,26 +1,41 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./store/index.js";
 import { AnimatePresence } from "framer-motion";
-import Home from "./pages/Home.jsx";
-import ProjectDetail from "./pages/ProjectDetail.jsx";
-import AdminLogin from "./pages/AdminLogin.jsx";
-import AdminDashboard from "./pages/AdminDashboard.jsx";
 import PageTransition from "./components/PageTransition.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
+
+// Lazy loaded page components
+const Home = lazy(() => import("./pages/Home.jsx"));
+const ProjectDetail = lazy(() => import("./pages/ProjectDetail.jsx"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"));
+
+function RouteLoader() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background text-text" aria-live="polite" aria-busy="true">
+      <div className="relative flex items-center justify-center">
+        <div className="w-12 h-12 rounded-full border-2 border-primary/20 border-t-primary animate-spin" />
+        <div className="absolute w-8 h-8 rounded-full border-2 border-secondary/20 border-b-secondary animate-spin" style={{ animationDirection: 'reverse', animationDuration: '1s' }} />
+      </div>
+    </div>
+  );
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<PageTransition><Home /></PageTransition>} />
-        <Route path="/project/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
-        <Route path="/admin/login" element={<PageTransition><AdminLogin /></PageTransition>} />
-        <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
-      </Routes>
-    </AnimatePresence>
+    <Suspense fallback={<RouteLoader />}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/" element={<PageTransition><Home /></PageTransition>} />
+          <Route path="/project/:id" element={<PageTransition><ProjectDetail /></PageTransition>} />
+          <Route path="/admin/login" element={<PageTransition><AdminLogin /></PageTransition>} />
+          <Route path="/admin" element={<PageTransition><AdminDashboard /></PageTransition>} />
+        </Routes>
+      </AnimatePresence>
+    </Suspense>
   );
 }
 

@@ -65,7 +65,7 @@ export const initialProjectsData = [
 
     githubUrl: "https://github.com/code-with-avii/SmartTech",
 
-    liveUrl: "smart-tech-gold.vercel.app",
+    liveUrl: "https://smart-tech-gold.vercel.app",
 
     featured: true,
 

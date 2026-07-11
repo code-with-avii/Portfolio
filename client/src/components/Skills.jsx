@@ -293,7 +293,7 @@ export default function Skills() {
 
               {/* Grid of Skill Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <AnimatePresence mode="wait">
+                <AnimatePresence>
                   {activeSkillsList.map((skill) => {
                     const prof = getSkillProficiency(skill.name);
                     return (

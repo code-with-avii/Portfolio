@@ -4,8 +4,8 @@ import { Mail, ArrowRight, Download, Zap, GitPullRequest, Briefcase, Layers } fr
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const roles = [
-  "Full Stack Developer",
-  "MERN Stack Specialist",
+  "Full Stack MERN Developer",
+  "Frontend Specialist",
   "GSSoC Contributor",
   "Backend Engineer",
 ];
