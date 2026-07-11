@@ -230,12 +230,12 @@ export default function GitHubSection() {
                 <div className="h-2 rounded-full overflow-hidden flex w-full">
                   <div
                     className="bg-blue-100 h-full"
-                    style={{ width: "45%" }}
+                    style={{ width: "0%" }}
                     title="TypeScript (0%)"
                   />
                   <div
                     className="bg-sky-400 h-full"
-                    style={{ width: "35%" }}
+                    style={{ width: "55%" }}
                     title="JavaScript (55%)"
                   />
                   <div
@@ -245,7 +245,7 @@ export default function GitHubSection() {
                   />
                   <div
                     className="bg-yellow-500 h-full"
-                    style={{ width: "5%" }}
+                    style={{ width: "30%" }}
                     title="Others (30%)"
                   />
                 </div>
