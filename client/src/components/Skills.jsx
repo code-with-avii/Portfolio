@@ -1,5 +1,5 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { useAppSelector } from "../store/hooks.js";
 import { useGetSkillsQuery } from "../store/apiSlice.js";
 import {
@@ -11,6 +11,7 @@ import {
   Settings,
   Terminal,
   Layers,
+  ChevronRight,
 } from "lucide-react";
 
 // Hardcoded fallback list in case Redux is not populated yet
@@ -88,23 +89,21 @@ const fallbackSkills = [
     icon: "Postgres",
     currentlyLearning: false,
   },
-  //  { name: 'Redis', category: 'Databases', icon: 'Redis', currentlyLearning: false },
-  //  { name: 'Docker', category: 'DevOps', icon: 'Docker', currentlyLearning: false },
   {
     name: "GitHub Actions",
-    category: "DevOps",
+    category: "Tools",
     icon: "GithubActions",
     currentlyLearning: false,
   },
   {
     name: "Vercel",
-    category: "DevOps",
+    category: "Tools",
     icon: "Vercel",
     currentlyLearning: false,
   },
   {
     name: "Render",
-    category: "DevOps",
+    category: "Tools",
     icon: "Render",
     currentlyLearning: false,
   },
@@ -139,47 +138,67 @@ const fallbackSkills = [
     icon: "Gemini",
     currentlyLearning: false,
   },
-  //  { name: 'LangChain', category: 'AI', icon: 'Langchain', currentlyLearning: false },
-  //  { name: 'GraphQL', category: 'Backend', icon: 'Graphql', currentlyLearning: true },
-  //  { name: 'Kubernetes', category: 'DevOps', icon: 'Kubernetes', currentlyLearning: true },
-  //  { name: 'Rust', category: 'Backend', icon: 'Rust', currentlyLearning: true }
 ];
 
 const categoryIcons = {
-  Frontend: <Layers className="text-purple-400" size={16} />,
-  Backend: <Terminal className="text-cyan-400" size={16} />,
-  Databases: <Database className="text-emerald-400" size={16} />,
-  //  'DevOps': <Cloud className="text-blue-400" size={16} />,
-  Tools: <Settings className="text-mutedText" size={16} />,
-  AI: <Brain className="text-pink-400" size={16} />,
+  Frontend: <Layers size={18} />,
+  Backend: <Terminal size={18} />,
+  Databases: <Database size={18} />,
+  Tools: <Settings size={18} />,
+  AI: <Brain size={18} />,
+};
+
+const categoryDescriptions = {
+  Frontend: "Building interactive, accessible, and fast user interfaces.",
+  Backend: "Designing robust APIs, server microservices, and logic pipelines.",
+  Databases: "Structuring schema mappings, indexes, and fast caching layers.",
+  Tools: "Workflow instruments, code management, and sandbox testers.",
+  AI: "Integrating custom models, agent pipelines, and language wrappers.",
+};
+
+const getSkillProficiency = (name) => {
+  const ratings = {
+    "React": { percent: 92, label: "Expert" },
+    "Next.js": { percent: 80, label: "Advanced" },
+    "Tailwind CSS": { percent: 95, label: "Expert" },
+    "Redux Toolkit": { percent: 85, label: "Advanced" },
+    "JavaScript": { percent: 90, label: "Expert" },
+    "TypeScript": { percent: 78, label: "Advanced" },
+    "Framer Motion": { percent: 82, label: "Advanced" },
+    "Node.js": { percent: 88, label: "Advanced" },
+    "Express": { percent: 90, label: "Expert" },
+    "REST APIs": { percent: 92, label: "Expert" },
+    "JWT": { percent: 88, label: "Advanced" },
+    "MongoDB": { percent: 85, label: "Advanced" },
+    "PostgreSQL": { percent: 75, label: "Advanced" },
+    "GitHub Actions": { percent: 80, label: "Advanced" },
+    "Vercel": { percent: 85, label: "Advanced" },
+    "Render": { percent: 80, label: "Advanced" },
+    "Git": { percent: 90, label: "Expert" },
+    "GitHub": { percent: 90, label: "Expert" },
+    "VS Code": { percent: 95, label: "Expert" },
+    "Postman": { percent: 88, label: "Advanced" },
+    "OpenAI API": { percent: 82, label: "Advanced" },
+    "Gemini API": { percent: 85, label: "Advanced" },
+  };
+  return ratings[name] || { percent: 80, label: "Advanced" };
 };
 
 export default function Skills() {
   const { data: reduxSkills } = useGetSkillsQuery();
   const skills = reduxSkills && reduxSkills.length > 0 ? reduxSkills : fallbackSkills;
 
-  // Group skills by category (exclude currently learning from main grid)
   const categories = ["Frontend", "Backend", "Databases", "Tools", "AI"];
+  const [activeCategory, setActiveCategory] = useState("Frontend");
 
+  // Group skills by category (exclude currently learning from main grid)
   const groupedSkills = categories.reduce((acc, cat) => {
     acc[cat] = skills.filter((s) => s.category === cat && !s.currentlyLearning);
     return acc;
   }, {});
 
   const currentlyLearningSkills = skills.filter((s) => s.currentlyLearning);
-
-  // Animation variants
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: { staggerChildren: 0.05 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 12 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-  };
+  const activeSkillsList = groupedSkills[activeCategory] || [];
 
   return (
     <section
@@ -214,56 +233,107 @@ export default function Skills() {
             viewport={{ once: true }}
             className="text-mutedText mt-4 font-body text-base"
           >
-            A curated list of frameworks, database management engines, and cloud
-            development practices I leverage.
+            An interactive breakdown of frameworks, databases, and environments I use to build scalable products.
           </motion.p>
         </div>
 
-        {/* Categories Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {categories.map((category) => {
-            const list = groupedSkills[category] || [];
-            return (
-              <motion.div
-                key={category}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between"
-              >
-                <div>
-                  {/* Category Header */}
-                  <div className="flex items-center gap-2 mb-5 pb-3 border-b border-border">
-                    {categoryIcons[category]}
-                    <h3 className="font-heading font-bold text-base text-text">
-                      {category}
-                    </h3>
-                  </div>
-
-                  {/* Skills Grid */}
-                  <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                    className="flex flex-wrap gap-2.5"
+        {/* Tabbed Layout Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 max-w-6xl mx-auto">
+          {/* Category Navigation Panel */}
+          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2.5 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
+            {categories.map((category) => {
+              const isActive = activeCategory === category;
+              return (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`relative flex items-center gap-3.5 px-5 py-4 rounded-xl text-sm font-semibold transition-all duration-300 w-full text-left whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? "text-text bg-surface border border-border shadow-md"
+                      : "text-mutedText hover:text-text hover:bg-surface/50 border border-transparent"
+                  }`}
+                >
+                  <span
+                    className={`p-2 rounded-lg transition-colors ${
+                      isActive
+                        ? "bg-gradient-purple-cyan text-white"
+                        : "bg-surface text-mutedText"
+                    }`}
                   >
-                    {list.map((skill) => (
+                    {categoryIcons[category]}
+                  </span>
+                  <div className="flex flex-col text-left">
+                    <span className="font-heading font-bold">{category}</span>
+                    <span className="text-[10px] text-mutedText font-normal hidden lg:block">
+                      {activeCategory === category ? "Viewing Active Stack" : "Click to view"}
+                    </span>
+                  </div>
+                  {isActive && (
+                    <span className="ml-auto hidden lg:block text-cyan-400">
+                      <ChevronRight size={16} />
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Active Skills Display Grid */}
+          <div className="lg:col-span-8 glass-panel p-6 sm:p-8 rounded-2xl border border-border min-h-[400px] flex flex-col justify-between">
+            <div>
+              {/* Active Category Header */}
+              <div className="mb-6">
+                <h3 className="font-heading font-extrabold text-xl text-text flex items-center gap-2">
+                  <span className="text-gradient-purple-cyan font-bold">{activeCategory}</span> Development
+                </h3>
+                <p className="text-xs text-mutedText mt-1 font-body">
+                  {categoryDescriptions[activeCategory]}
+                </p>
+              </div>
+
+              {/* Grid of Skill Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <AnimatePresence mode="wait">
+                  {activeSkillsList.map((skill) => {
+                    const prof = getSkillProficiency(skill.name);
+                    return (
                       <motion.div
                         key={skill.name}
-                        variants={itemVariants}
-                        className="inline-flex items-center px-3 py-1.5 rounded-xl bg-surface/85 border border-border text-xs text-mutedText font-code transition-all hover:text-text hover:border-zinc-700 cursor-default"
-                        whileHover={{ scale: 1.05 }}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="p-4 rounded-xl bg-surface/60 border border-border/80 hover:border-zinc-700 transition-all flex flex-col justify-between"
                       >
-                        <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2" />
-                        {skill.name}
+                        <div className="flex items-center justify-between mb-3">
+                          <span className="font-code font-bold text-xs text-text flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
+                            {skill.name}
+                          </span>
+                          <span className="text-[10px] font-semibold text-mutedText font-code bg-border/40 px-2 py-0.5 rounded">
+                            {prof.label}
+                          </span>
+                        </div>
+
+                        {/* Progress bar */}
+                        <div className="w-full bg-border/40 h-1.5 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: `${prof.percent}%` }}
+                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            className="bg-gradient-purple-cyan h-full rounded-full"
+                          />
+                        </div>
+                        <span className="text-[9px] font-code text-mutedText mt-1.5 text-right block font-bold">
+                          {prof.percent}% Confidence
+                        </span>
                       </motion.div>
-                    ))}
-                  </motion.div>
-                </div>
-              </motion.div>
-            );
-          })}
+                    );
+                  })}
+                </AnimatePresence>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Currently Learning Section */}
@@ -284,8 +354,7 @@ export default function Skills() {
                     Currently Deep Diving
                   </h3>
                   <p className="text-xs text-mutedText mt-0.5">
-                    Exploring next-gen technologies to expand portfolio
-                    capabilities.
+                    Exploring next-gen technologies to expand portfolio capabilities.
                   </p>
                 </div>
               </div>

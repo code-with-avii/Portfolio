@@ -15,6 +15,36 @@ import { useNavigate } from "react-router-dom";
 
 const fallbackProjects = [
   {
+    _id: "mem-project-5",
+    title: "SmartTech",
+    subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
+    description:
+      "A full-stack MERN e-commerce application that provides a seamless online shopping experience with secure authentication, product management, and online payments.",
+    image:
+      "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
+    tags: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redux Toolkit",
+      "JWT",
+      "Tailwind CSS",
+      "Razorpay",
+      "Google OAuth",
+    ],
+    features: [
+      "25+ Reusable React components & global styles",
+      "JWT Cookie Authentication & Google OAuth login flow",
+      "Razorpay Payment Gateway with custom billing pipelines",
+      "15+ secure REST API endpoints with Mongo relation maps",
+      "Interactive role-based dashboards (Admin & Customer profiles)",
+    ],
+    githubUrl: "https://github.com/code-with-avii/SmartTech",
+    liveUrl: "https://smart-tech-gold.vercel.app",
+    featured: true,
+  },
+  {
     _id: "mem-project-0",
     title: "AI Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
@@ -30,9 +60,16 @@ const fallbackProjects = [
       "MongoDB",
       "OpenAI API",
     ],
+    features: [
+      "30+ Reusable React & Next.js layout modules",
+      "OpenAI & Gemini API integrations with sandbox playground",
+      "Wallet credit deduction system and transaction logs",
+      "10+ secure REST API routes for model uploads & audits",
+      "Framer Motion layout transitions & custom animations",
+    ],
     githubUrl: "https://github.com/abhishekh-developer/ai-marketplace",
     liveUrl: "https://ai-marketplace-abhishekh.vercel.app",
-    featured: true,
+    featured: false,
   },
   {
     _id: "mem-project-1",
@@ -43,11 +80,18 @@ const fallbackProjects = [
     image:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Node.js", "Express", "MongoDB"],
+    features: [
+      "HTTPOnly secure cookies storing double-hashed refresh tokens",
+      "8+ secure API endpoints shielded via CORS and Helmet",
+      "Active session manager tracking browser, OS, and location IP",
+      "Multi-Factor Authentication (MFA) via Google Authenticator TOTP",
+      "Role-Based Access Control (RBAC) hierarchical authorization middleware",
+    ],
     githubUrl: "https://github.com/code-with-avii/Authentication",
     liveUrl: "https://auth-service-abhishekh.vercel.app",
     featured: false,
   },
-    {
+  {
     _id: "mem-project-3",
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
@@ -56,6 +100,12 @@ const fallbackProjects = [
     image:
       "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Tailwind CSS", "ChartJS", "OpenWeather API"],
+    features: [
+      "12+ reusable UI graphing and meteorological metric panels",
+      "Geocoding locator tracking global coordinates in real time",
+      "In-browser localStorage cache reducing API calls by 50%",
+      "Interactive Chart.js visualizations plotting historical climate shifts",
+    ],
     githubUrl: "https://github.com/code-with-avii/Weather_app",
     liveUrl: "https://weather-app-theta-two-15.vercel.app/",
     featured: false,

@@ -1,13 +1,40 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, ArrowRight, Download } from "lucide-react";
+import { Mail, ArrowRight, Download, Zap, GitPullRequest, Briefcase, Layers } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const roles = [
   "Full Stack Developer",
   "MERN Stack Specialist",
+  "GSSoC Contributor",
   "Backend Engineer",
-  "AI Integration Enthusiast",
+];
+
+const credibilityCards = [
+  {
+    icon: <Briefcase className="text-purple-400" size={24} />,
+    title: "Internship Availability",
+    value: "Ready to Join",
+    description: "Available immediately for full-time or internship MERN roles (40 hrs/wk).",
+  },
+  {
+    icon: <GitPullRequest className="text-cyan-400" size={24} />,
+    title: "Open Source Contributions",
+    value: "100+ Merged PRs",
+    description: "Active contributor to GirlScript Summer of Code (GSSoC) and modern web tools.",
+  },
+  {
+    icon: <Layers className="text-emerald-400" size={24} />,
+    title: "Production Projects",
+    value: "10+ Apps Built",
+    description: "Developed end-to-end MERN portals, real-time engines, and custom AI integrations.",
+  },
+  {
+    icon: <Zap className="text-yellow-400" size={24} />,
+    title: "Engineering Impact",
+    value: "40% Latency Cut",
+    description: "Optimized REST API structures, database index mappings, and secure caching.",
+  },
 ];
 
 export default function Hero() {
@@ -46,7 +73,7 @@ export default function Hero() {
     <section
       id="home"
       ref={heroRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background pt-20"
+      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background pt-24 pb-16"
       style={{
         "--x": `${mousePos.x}px`,
         "--y": `${mousePos.y}px`,
@@ -81,7 +108,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full flex flex-col justify-between">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           {/* Main Hero Typography */}
           <div className="lg:col-span-7 flex flex-col justify-center text-left ">
@@ -96,7 +123,7 @@ export default function Hero() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
               </span>
-              <span>Available for Freelance & Full-time Roles</span>
+              <span>Available for Internship & Full-time Roles</span>
             </motion.div>
 
             {/* Hi, I'm Abhishekh Kumar */}
@@ -140,8 +167,9 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg text-mutedText font-body max-w-xl mb-8 leading-relaxed"
             >
-              Building scalable web applications, custom API orchestrations, and
-              AI-powered digital products.
+              MERN Specialist & Open Source Contributor. Engineered 10+ web apps,
+              merged 100+ PRs (including GSSoC), and optimized backend latency by 40%.
+              Available for immediate internship roles.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -153,7 +181,7 @@ export default function Hero() {
             >
               <button
                 onClick={() => handleScrollTo("projects")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm transition-all shadow-glow-primary hover:opacity-95 group gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm transition-all shadow-glow-primary hover:opacity-95 group gap-2 cursor-pointer"
               >
                 View Projects
                 <ArrowRight
@@ -164,14 +192,14 @@ export default function Hero() {
 
               <button
                 onClick={() => handleScrollTo("contact")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface text-text font-semibold rounded-xl text-sm transition-all border border-border-hover hover:bg-surface-hover hover:border-white/20"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface text-text font-semibold rounded-xl text-sm transition-all border border-border-hover hover:bg-surface-hover hover:border-white/20 cursor-pointer"
               >
                 Contact Me
               </button>
 
               <button
                 onClick={() => alert("Resume download triggered (Mock PDF)")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface/50 text-mutedText hover:text-text font-semibold rounded-xl text-sm transition-all border border-border hover:border-border-hover gap-2"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface/50 text-mutedText hover:text-text font-semibold rounded-xl text-sm transition-all border border-border hover:border-border-hover gap-2 cursor-pointer"
               >
                 <Download size={15} /> Resume
               </button>
@@ -295,6 +323,36 @@ export default function Hero() {
             ))}
           </div>
         </div>
+
+        {/* Credibility Cards Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
+        >
+          {credibilityCards.map((card, idx) => (
+            <div
+              key={idx}
+              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default bg-surface/50"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-xl bg-border/40 flex items-center justify-center mb-4">
+                  {card.icon}
+                </div>
+                <h3 className="text-xs text-mutedText font-semibold uppercase tracking-wider">
+                  {card.title}
+                </h3>
+                <div className="text-xl sm:text-2xl font-extrabold font-heading text-text mt-1">
+                  {card.value}
+                </div>
+                <p className="text-xs sm:text-sm text-mutedText font-body mt-2 leading-relaxed">
+                  {card.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

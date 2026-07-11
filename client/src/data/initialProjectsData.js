@@ -1,5 +1,79 @@
 export const initialProjectsData = [
   {
+    _id: "mem-project-5",
+    title: "SmartTech",
+    subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
+    description:
+      "A full-stack MERN e-commerce application that provides a seamless online shopping experience with secure authentication, product management, and online payments.",
+
+    longDescription:
+      "SmartTech is a feature-rich e-commerce platform developed using the MERN stack. It allows users to browse products by category, search for items, manage shopping carts, place secure orders, and make online payments through Razorpay. The platform includes user authentication with JWT and Google OAuth, an admin dashboard for managing products, categories, users, and orders, and a responsive UI optimized for all devices.",
+
+    image: "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
+
+    tags: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redux Toolkit",
+      "JWT",
+      "Tailwind CSS",
+      "Razorpay",
+      "Google OAuth",
+    ],
+
+    features: [
+      "25+ Reusable React components & global styles",
+      "JWT Cookie Authentication & Google OAuth login flow",
+      "Razorpay Payment Gateway with custom billing pipelines",
+      "15+ secure REST API endpoints with Mongo relation maps",
+      "Interactive role-based dashboards (Admin & Customer profiles)",
+    ],
+
+    architectureDiagram:
+      "React Client → Express REST API → JWT & Google OAuth Authentication → MongoDB Database → Razorpay Payment Gateway",
+
+    apiFlow: [
+      "User Authentication",
+      "JWT Token Verification",
+      "Product & Category APIs",
+      "Cart & Order Processing",
+      "Razorpay Payment Integration",
+      "Admin Management APIs",
+      "Response to Client",
+    ],
+
+    databaseDesign:
+      "Collections: Users, Products, Categories, Orders, Payments, Cart. Relationships maintained using ObjectId references with optimized indexing for efficient queries.",
+
+    challengesSolved:
+      "Implemented secure JWT authentication with refresh tokens, Google OAuth integration, Razorpay payment gateway, role-based admin access, protected APIs, efficient product filtering, and scalable MongoDB schema design.",
+
+    performanceOptimizations:
+      "Optimized API responses, implemented lazy loading, reduced unnecessary re-renders using Redux Toolkit, optimized images, code splitting with React, and efficient MongoDB queries.",
+
+    futureImprovements: [
+      "Wishlist Functionality",
+      "Product Reviews & Ratings",
+      "Order Tracking",
+      "Coupon & Discount System",
+      "Inventory Management",
+      "Email Notifications",
+      "PWA Support",
+    ],
+
+    githubUrl: "https://github.com/code-with-avii/SmartTech",
+
+    liveUrl: "smart-tech-gold.vercel.app",
+
+    featured: true,
+
+    role: "Full Stack Developer",
+
+    duration: "3 Months",
+  },
+  {
     _id: "mem-project-3",
     title: "AI Prompt Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
@@ -18,10 +92,11 @@ export const initialProjectsData = [
       "OpenAI API",
     ],
     features: [
-      "Interactive prompt playground with direct AI completions using OpenAI API",
-      "Advanced search with multi-category filters, sorting, and user ratings",
-      "Wallet system with credit deductions and transactional history logging",
-      "Glassmorphic design details and Framer Motion layout transitions",
+      "30+ Reusable React & Next.js layout modules",
+      "OpenAI & Gemini API integrations with sandbox playground",
+      "Wallet credit deduction system and transaction logs",
+      "10+ secure REST API routes for model uploads & audits",
+      "Framer Motion layout transitions & custom animations",
     ],
     architectureDiagram:
       "Client React Web -> CORS API Gateway -> JWT Authentication -> Express Controllers -> MongoDB Atlas / OpenAI API Wrapper",
@@ -59,10 +134,11 @@ export const initialProjectsData = [
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Node.js", "Express", "MongoDB", "Redis"],
     features: [
-      "Strict HTTPOnly secure cookies storing double-hashed refresh tokens",
+      "HTTPOnly secure cookies storing double-hashed refresh tokens",
+      "8+ secure API endpoints shielded via CORS and Helmet",
       "Active session manager tracking browser, OS, and location IP",
-      "Role-Based Access Control (RBAC) with hierarchical authorization middleware",
-      "Multi-Factor Authentication (MFA) via Google Authenticator TOTP codes",
+      "Multi-Factor Authentication (MFA) via Google Authenticator TOTP",
+      "Role-Based Access Control (RBAC) hierarchical authorization middleware",
     ],
     architectureDiagram:
       "React App -> Express Router -> bcrypt Validator -> Redis Session Cache -> Mongoose User Record",
@@ -88,48 +164,6 @@ export const initialProjectsData = [
     role: "Developer",
     duration: "2 Months",
   },
-//   {
-//     _id: "mem-project-4",
-//     title: "Real-Time Chat Application",
-//     subtitle:
-//       "Secure chat portal supporting channels, rich text, & read checks",
-//     description:
-//       "An interactive messaging application offering channel creation, instant communication, read receipts, and online status indicators.",
-//     longDescription:
-//       "Built with Socket.io, this chat portal replicates slack-like workflows. It processes active indicators, stores chat messages, and features full media sharing options.",
-//     image:
-//       "https://images.unsplash.com/photo-1614741118887-7a4ee193a5fa?q=80&w=800&auto=format&fit=crop",
-//     tags: ["React", "TypeScript", "Node.js", "Socket.io", "MongoDB"],
-//     features: [
-//       "Instant delivery of messages in private channels and general chat rooms",
-//       "Active status tracking showing users online/typing markers in real time",
-//       "Encrypted persistent chat histories containing rich links previews",
-//       "Custom animations using Framer Motion on chat drawers and notifications",
-//     ],
-//     architectureDiagram:
-//       "React UI (Socket Client) -> Socket.io Broker -> Node.js Cluster -> MongoDB Message Store",
-//     apiFlow: [
-//       "GET /api/channels - Retrieve channel listings for registered accounts",
-//       "GET /api/messages/:channelId - Load paginated past text records",
-//       "POST /api/channels/create - Initialize new chat rooms with permissions",
-//     ],
-//     databaseDesign:
-//       "Channel (id, name, isPrivate), Message (id, senderId, channelId, body, timestamp, readByUsers), UserPresence (userId, status, lastSeen)",
-//     challengesSolved:
-//       "Reduced chat sync overhead by designing lightweight payload footprints and writing a virtualized scrolling viewport that only renders visible message nodes, maintaining 60fps scrolling.",
-//     performanceOptimizations:
-//       "Chat logs are loaded dynamically in batches of 30 items. Media uploads are compressed directly within the client prior to database delivery.",
-//     futureImprovements: [
-//       "Implement WebRTC voice calls",
-//       "Thread replies and reactions mapping",
-//       "Message self-destruct timers",
-//     ],
-//     githubUrl: "https://github.com/abhishekh-developer/chat-app",
-//     liveUrl: "https://chat-app-abhishekh.vercel.app",
-//     featured: false,
-//     role: "Full Stack Engineer",
-//     duration: "3.5 Months",
-//   },
   {
     _id: "mem-project-0",
     title: "Weather Dashboard",
@@ -142,10 +176,10 @@ export const initialProjectsData = [
       "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Tailwind CSS", "ChartJS", "OpenWeather API"],
     features: [
-      "Real-time temperature, UV, and pressure tracker with geocoding locator",
-      "Custom graphs visualising hourly temperature shifts and weekly trends",
-      "In-browser memory caching of city outputs reducing API request thresholds",
-      "Animated weather card displays changing backgrounds in line with current conditions",
+      "12+ reusable UI graphing and meteorological metric panels",
+      "Geocoding locator tracking global coordinates in real time",
+      "In-browser localStorage cache reducing API calls by 50%",
+      "Interactive Chart.js visualizations plotting historical climate shifts",
     ],
     architectureDiagram:
       "Vite React UI -> LocalStorage (Cache) -> OpenWeather Maps API Proxy",
@@ -164,57 +198,55 @@ export const initialProjectsData = [
       "Radar map visualisations overlay",
       "Add comparative weather layout widgets",
     ],
-    githubUrl: "https://github.com/abhishekh-developer/weather-tracker",
-    liveUrl: "https://weather-tracker-abhishekh.vercel.app",
+    githubUrl: "https://github.com/code-with-avii/Weather_app",
+    liveUrl: "https://weather-app-theta-two-15.vercel.app/",
     featured: false,
     role: "Full Stack Developer",
     duration: "1.5 Months",
   },
   {
-   _id: "mem-project-4",
-  "title": "Hostel Help",
-  "subtitle": "Smart Hostel Management & Student Assistance Platform",
-  "description": "A full-stack MERN application that simplifies hostel management, complaint tracking, and communication between students and administrators.",
-  "longDescription": "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
-  "image": "https://your-image-url.com/hostel-help.png",
-  "tags": [
-    "React",
-    "Node.js",
-    "Express",
-    "MongoDB",
-    "JWT",
-    "Tailwind CSS"
-  ],
-  "features": [
-    "JWT Authentication",
-    "Role-based Access Control",
-    "Complaint Management",
-    "Issue Status Tracking",
-    "Responsive Dashboard",
-    "REST API"
-  ],
-  "architectureDiagram": "Client React App → Express API → JWT Authentication → MongoDB Database",
-  "apiFlow": [
-    "User Login",
-    "JWT Authentication",
-    "Protected Routes",
-    "Complaint CRUD Operations",
-    "Response to Client"
-  ],
-  "databaseDesign": "Collections: Users, Complaints, Admins, Hostels, Rooms. Relationships maintained using ObjectId references.",
-  "challengesSolved": "Implemented secure authentication, complaint lifecycle management, protected APIs, and efficient MongoDB schema design.",
-  "performanceOptimizations": "Optimized database queries, lazy-loaded React components, minimized API calls, and optimized images.",
-  "futureImprovements": [
-    "Socket.io Real-time Notifications",
-    "Room Allocation",
-    "Mess Management",
-    "Visitor Management",
-    "Online Fee Payment"
-  ],
-  "githubUrl": "https://github.com/code-with-avii/Hostel-Help",
-  "liveUrl": "https://hostel-help-pi.vercel.app/",
-  "featured": true,
-  "role": "Full Stack Developer",
-  "duration": "2 Months"
-}
+    _id: "mem-project-4",
+    title: "Hostel Help",
+    subtitle: "Smart Hostel Management & Student Assistance Platform",
+    description:
+      "A full-stack MERN application that simplifies hostel management, complaint tracking, and communication between students and administrators.",
+    longDescription:
+      "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
+    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
+    tags: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
+    features: [
+      "18+ reusable React layout components & navigation paths",
+      "JWT cookie authentication & secure database route guards",
+      "Role-based Student complaint registers & Admin dashboard profiles",
+      "12+ MERN-linked REST API endpoints handling CRUD logs",
+      "Real-time issue ticketing & maintenance lifecycle tracking",
+    ],
+    architectureDiagram:
+      "Client React App → Express API → JWT Authentication → MongoDB Database",
+    apiFlow: [
+      "User Login",
+      "JWT Authentication",
+      "Protected Routes",
+      "Complaint CRUD Operations",
+      "Response to Client",
+    ],
+    databaseDesign:
+      "Collections: Users, Complaints, Admins, Hostels, Rooms. Relationships maintained using ObjectId references.",
+    challengesSolved:
+      "Implemented secure authentication, complaint lifecycle management, protected APIs, and efficient MongoDB schema design.",
+    performanceOptimizations:
+      "Optimized database queries, lazy-loaded React components, minimized API calls, and optimized images.",
+    futureImprovements: [
+      "Socket.io Real-time Notifications",
+      "Room Allocation",
+      "Mess Management",
+      "Visitor Management",
+      "Online Fee Payment",
+    ],
+    githubUrl: "https://github.com/code-with-avii/Hostel-Help",
+    liveUrl: "https://hostel-help-pi.vercel.app/",
+    featured: true,
+    role: "Full Stack Developer",
+    duration: "2 Months",
+  },
 ];
