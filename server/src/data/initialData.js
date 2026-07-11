@@ -31,12 +31,12 @@ export const initialSkills = [
     icon: "Javascript",
     currentlyLearning: false,
   },
-  {
-    name: "TypeScript",
-    category: "Frontend",
-    icon: "Typescript",
-    currentlyLearning: false,
-  },
+  // {
+  //   name: "TypeScript",
+  //   category: "Frontend",
+  //   icon: "Typescript",
+  //   currentlyLearning: false,
+  // },
   {
     name: "Framer Motion",
     category: "Frontend",
@@ -137,7 +137,7 @@ export const initialSkills = [
     icon: "Postman",
     currentlyLearning: false,
   },
-  { name: "Figma", category: "Tools", icon: "Figma", currentlyLearning: false },
+  // { name: "Figma", category: "Tools", icon: "Figma", currentlyLearning: false },
 
   // AI
   {
@@ -199,7 +199,7 @@ export const initialExperiences = [
   {
     role: "Project Developer",
     company: "College Hackathons & Open Source",
-    duration: "2024 - 2025",
+    duration: "2024 - Present",
     type: "Team Projects",
     technologies: [
       "React",
@@ -217,12 +217,11 @@ export const initialExperiences = [
   {
     role: "Open Source Contributor",
     company: "GitHub Ecosystem",
-    duration: "2024 - Present",
+    duration: "2026 - Present",
     type: "Open Source Contributions",
-    technologies: ["TypeScript", "Tailwind CSS", "Framer Motion", "Git"],
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "Git"],
     achievements: [
       "Merged 100+ pull requests addressing performance bottlenecks and custom utility hook exports in component design files.",
-      "Active developer in the developer tooling space, building templates used by over 500+ student developers.",
     ],
   },
   {

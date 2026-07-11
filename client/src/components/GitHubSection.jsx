@@ -203,10 +203,10 @@ export default function GitHubSection() {
 
               <div className="space-y-4">
                 {[
-                  { label: "Most Used Stack", val: "TypeScript / React" },
-                  { label: "Total Commits (2025)", val: "1,482 commits" },
-                  { label: "PRs Approved/Merged", val: "124 PRs" },
-                  { label: "Code Review Approvals", val: "98 reviews" },
+                  { label: "Most Used Stack", val: "JavaScript / React" },
+                  { label: "Total Commits (2026)", val: "158 commits" },
+                  { label: "PRs Approved/Merged", val: "24 PRs" },
+                  { label: "Code Review Approvals", val: "8 reviews" },
                 ].map((stat, idx) => (
                   <div
                     key={idx}
@@ -229,7 +229,7 @@ export default function GitHubSection() {
                 </h4>
                 <div className="h-2 rounded-full overflow-hidden flex w-full">
                   <div
-                    className="bg-blue-400 h-full"
+                    className="bg-blue-100 h-full"
                     style={{ width: "45%" }}
                     title="TypeScript (0%)"
                   />

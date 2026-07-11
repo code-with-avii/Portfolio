@@ -5,25 +5,7 @@ import { useGetAchievementsQuery } from "../store/apiSlice.js";
 import { Trophy, Code, Award, Flame, ExternalLink } from "lucide-react";
 
 const fallbackAchievements = [
-  /*{
- _id: 'mem-ach-0',
- title: 'Smart India Hackathon Winner',
- category: 'Hackathons',
- value: '1st Place',
- description: 'National level winner for presenting an innovative emergency medical dispatch solution using geo-routing.',
- link: 'https://sih.gov.in',
- date: '2025'
- },
- */
-  // {
-  // _id: 'mem-ach-1',
-  // title: 'LeetCode Knight Badge',
-  // category: 'Coding Profile',
-  // value: '1950+ Rating',
-  // description: 'Solved over 1000+ problems across arrays, graphs, dynamic programming, and systems design topics.',
-  // link: 'https://leetcode.com',
-  // date: '2026'
-  // },
+
   {
     _id: "mem-ach-2",
     title: "100+ Merged Pull Requests",
@@ -34,33 +16,6 @@ const fallbackAchievements = [
     link: "https://github.com/code-with-avii",
     date: "2024 - Present",
   },
-  // {
-  // _id: 'mem-ach-3',
-  // title: 'AWS Certified Developer',
-  // category: 'Certifications',
-  // value: 'Associate Level',
-  // description: 'Validated expert competency in deploying, scaling, and managing containerised Node applications on AWS Cloud.',
-  // link: 'https://aws.amazon.com',
-  // date: '2025'
-  // },
-  // {
-  // _id: 'mem-ach-4',
-  // title: 'MongoDB Certified Developer',
-  // category: 'Certifications',
-  // value: 'Associate Developer',
-  // description: 'Demonstrated extensive knowledge of aggregation pipelines, schema designs, indexes, and database optimizations.',
-  // link: 'https://mongodb.com',
-  // date: '2025'
-  // },
-  // {
-  // _id: 'mem-ach-5',
-  // title: 'Codeforces Expert',
-  // category: 'Coding Profile',
-  // value: '1650+ Max Rating',
-  // description: 'Ranked in the top percentiles of international algorithms and data structures competitive contests.',
-  // link: 'https://codeforces.com',
-  // date: '2025'
-  // }
 ];
 
 // Helper component for count-up animations
