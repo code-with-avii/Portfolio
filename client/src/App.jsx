@@ -57,14 +57,10 @@ function BackgroundBlobs() {
 
 function App() {
   return (
-    <Provider store={store}>
       <ErrorBoundary>
-        <BrowserRouter>
           <BackgroundBlobs />
           <AnimatedRoutes />
-        </BrowserRouter>
       </ErrorBoundary>
-    </Provider>
   );
 }
 
