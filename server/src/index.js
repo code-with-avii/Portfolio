@@ -37,8 +37,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://portfolio-black-one-25.vercel.app",
-      "https://portfolio-n88yhwyf9-code-with-aviis-projects.vercel.app",
+       "https://www.avii.in",
+       "https://avii.in",
     ],
     credentials: true,
   })
