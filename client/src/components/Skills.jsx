@@ -237,103 +237,70 @@ export default function Skills() {
           </motion.p>
         </div>
 
-        {/* Tabbed Layout Container */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start mb-16 max-w-6xl mx-auto">
-          {/* Category Navigation Panel */}
-          <div className="lg:col-span-4 flex flex-row lg:flex-col gap-2.5 overflow-x-auto lg:overflow-x-visible pb-4 lg:pb-0 no-scrollbar">
-            {categories.map((category) => {
-              const isActive = activeCategory === category;
-              return (
-                <button
-                  key={category}
-                  onClick={() => setActiveCategory(category)}
-                  className={`relative flex items-center gap-3.5 px-5 py-4 rounded-xl text-sm font-semibold transition-all duration-300 w-full text-left whitespace-nowrap cursor-pointer ${
-                    isActive
-                      ? "text-text bg-surface border border-border shadow-md"
-                      : "text-mutedText hover:text-text hover:bg-surface/50 border border-transparent"
-                  }`}
-                >
-                  <span
-                    className={`p-2 rounded-lg transition-colors ${
-                      isActive
-                        ? "bg-gradient-purple-cyan text-white"
-                        : "bg-surface text-mutedText"
-                    }`}
-                  >
+        {/* Categorized Skills Layout */}
+        <div className="flex flex-col gap-12 mb-16 max-w-6xl mx-auto">
+          {categories.map((category) => {
+            const categorySkills = groupedSkills[category] || [];
+            if (categorySkills.length === 0) return null;
+
+            return (
+              <div key={category} className="glass-panel p-6 sm:p-8 rounded-2xl border border-border">
+                <div className="flex items-center gap-3 mb-6 border-b border-border/50 pb-4">
+                  <span className="p-2.5 rounded-xl bg-surface border border-border-hover text-cyan-400">
                     {categoryIcons[category]}
                   </span>
-                  <div className="flex flex-col text-left">
-                    <span className="font-heading font-bold">{category}</span>
-                    <span className="text-[10px] text-mutedText font-normal hidden lg:block">
-                      {activeCategory === category ? "Viewing Active Stack" : "Click to view"}
-                    </span>
+                  <div>
+                    <h3 className="font-heading font-extrabold text-xl text-text">
+                      {category}
+                    </h3>
+                    <p className="text-xs text-mutedText mt-0.5 font-body">
+                      {categoryDescriptions[category]}
+                    </p>
                   </div>
-                  {isActive && (
-                    <span className="ml-auto hidden lg:block text-cyan-400">
-                      <ChevronRight size={16} />
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
+                </div>
 
-          {/* Active Skills Display Grid */}
-          <div className="lg:col-span-8 glass-panel p-6 sm:p-8 rounded-2xl border border-border min-h-[400px] flex flex-col justify-between">
-            <div>
-              {/* Active Category Header */}
-              <div className="mb-6">
-                <h3 className="font-heading font-extrabold text-xl text-text flex items-center gap-2">
-                  <span className="text-gradient-purple-cyan font-bold">{activeCategory}</span> Development
-                </h3>
-                <p className="text-xs text-mutedText mt-1 font-body">
-                  {categoryDescriptions[activeCategory]}
-                </p>
-              </div>
-
-              {/* Grid of Skill Cards */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <AnimatePresence>
-                  {activeSkillsList.map((skill) => {
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5">
+                  {categorySkills.map((skill) => {
                     const prof = getSkillProficiency(skill.name);
                     return (
                       <motion.div
                         key={skill.name}
                         initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="p-4 rounded-xl bg-surface/60 border border-border/80 hover:border-zinc-700 transition-all flex flex-col justify-between"
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3 }}
+                        className="p-3 sm:p-4 rounded-xl bg-surface/40 border border-border/60 hover:border-zinc-700 hover:bg-surface/60 transition-all flex flex-col justify-between"
                       >
-                        <div className="flex items-center justify-between mb-3">
-                          <span className="font-code font-bold text-xs text-text flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                            {skill.name}
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 sm:mb-3 gap-1">
+                          <span className="font-code font-bold text-xs sm:text-sm text-text flex items-center gap-1.5 sm:gap-2 overflow-hidden">
+                            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shrink-0" />
+                            <span className="truncate">{skill.name}</span>
                           </span>
-                          <span className="text-[10px] font-semibold text-mutedText font-code bg-border/40 px-2 py-0.5 rounded">
+                          <span className="text-[9px] sm:text-[10px] font-semibold text-mutedText font-code bg-border/40 px-1.5 py-0.5 rounded w-fit">
                             {prof.label}
                           </span>
                         </div>
 
                         {/* Progress bar */}
-                        <div className="w-full bg-border/40 h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-border/40 h-1 sm:h-1.5 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
-                            animate={{ width: `${prof.percent}%` }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
-                            className="bg-gradient-purple-cyan h-full rounded-full"
+                            whileInView={{ width: `${prof.percent}%` }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 1, ease: "easeOut" }}
+                            className="bg-cyan-500/80 h-full rounded-full"
                           />
                         </div>
-                        <span className="text-[9px] font-code text-mutedText mt-1.5 text-right block font-bold">
-                          {prof.percent}% Confidence
+                        <span className="text-[9px] sm:text-[10px] font-code text-mutedText mt-1.5 sm:mt-2 text-right block font-semibold">
+                          {prof.percent}%
                         </span>
                       </motion.div>
                     );
                   })}
-                </AnimatePresence>
+                </div>
               </div>
-            </div>
-          </div>
+            );
+          })}
         </div>
 
         {/* Currently Learning Section */}

@@ -4,7 +4,7 @@ export const initialProjectsData = [
     title: "SmartTech",
     subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
     description:
-      "A full-stack MERN e-commerce application that provides a seamless online shopping experience with secure authentication, product management, and online payments.",
+      "Full-stack MERN e-commerce platform with secure Razorpay integration and role-based management dashboards for digital retailers and shoppers.",
 
     longDescription:
       "SmartTech is a feature-rich e-commerce platform developed using the MERN stack. It allows users to browse products by category, search for items, manage shopping carts, place secure orders, and make online payments through Razorpay. The platform includes user authentication with JWT and Google OAuth, an admin dashboard for managing products, categories, users, and orders, and a responsive UI optimized for all devices.",
@@ -78,7 +78,7 @@ export const initialProjectsData = [
     title: "AI Prompt Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
     description:
-      "A premium marketplace platform supporting custom AI engineering, prompt auctions, model sharing, and credit transactions.",
+      "SaaS marketplace using Next.js and OpenAI APIs for prompt engineers to trade custom fine-tuned models and execute sandboxed testing.",
     longDescription:
       "The AI Prompt Marketplace is a comprehensive SaaS portal designed for prompt engineers to publish, monetize, and execute fine-tuned models. It integrates OpenAI and Gemini models to preview runs directly, handles transactions via mock gateways, and lists curated listings under strict categories.",
     image:
@@ -127,7 +127,7 @@ export const initialProjectsData = [
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
     description:
-      "An authentication microservice implementing robust access guards, including role-based access, MFA, and active session termination.",
+      "Robust authentication microservice utilizing JWT and Redis for enterprise admins with real-time session tracking and multi-factor security.",
     longDescription:
       "This security system demonstrates implementation of JWT access/refresh tokens alongside strict CORS. Admins can view connected devices and terminate sessions in real time via Redis storage.",
     image:
@@ -169,7 +169,7 @@ export const initialProjectsData = [
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
     description:
-      "An aesthetic dashboard plotting historical and current weather parameters across global locations, with interactive hourly chart logs.",
+      "Real-time weather dashboard using OpenWeather API with search history caching and dynamic ChartJS forecasts for everyday users.",
     longDescription:
       "This frontend-driven dashboard connects to OpenWeather APIs, aggregates meteorological stats, saves search logs within local storage, and plots wind/humidity patterns using ChartJS.",
     image:
@@ -209,7 +209,7 @@ export const initialProjectsData = [
     title: "Hostel Help",
     subtitle: "Smart Hostel Management & Student Assistance Platform",
     description:
-      "A full-stack MERN application that simplifies hostel management, complaint tracking, and communication between students and administrators.",
+      "Smart MERN management portal for students and administrators with real-time complaint tracking and secure role-based access.",
     longDescription:
       "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
     image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",

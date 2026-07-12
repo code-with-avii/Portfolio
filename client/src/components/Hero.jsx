@@ -165,12 +165,34 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg text-mutedText font-body max-w-xl mb-8 leading-relaxed"
+              className="text-base sm:text-lg text-mutedText font-body max-w-xl mb-6 leading-relaxed"
             >
-              MERN Specialist & Open Source Contributor. Engineered 10+ web apps,
-              merged 100+ PRs (including GSSoC), and optimized backend latency by 40%.
-              Available for immediate internship roles.
+              Building scalable web applications, <br className="hidden sm:block" />
+              REST APIs and AI-powered products.
             </motion.p>
+
+            {/* Credibility Badges List */}
+            <motion.ul
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.25 }}
+              className="flex flex-col gap-3 mb-8 max-w-xl"
+            >
+              {[
+                "8+ Full Stack Projects",
+                "GSSoC 2026 Contributor",
+                "Open to SDE Internships",
+              ].map((badge, idx) => (
+                <li key={idx} className="flex items-center text-text text-sm sm:text-base font-medium">
+                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mr-3 shrink-0">
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
+                  {badge}
+                </li>
+              ))}
+            </motion.ul>
 
             {/* CTA Buttons */}
             <motion.div
