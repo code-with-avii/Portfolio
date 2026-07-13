@@ -33,7 +33,7 @@ export default function Footer() {
     {
       icon: <MapPin className="text-rose-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
       label: "Location",
-      value: "India",
+      value: "Pune, India",
       bgColor: "bg-rose-500/10",
       borderColor: "hover:border-rose-500/30",
     },
@@ -176,7 +176,7 @@ export default function Footer() {
                   <span className="text-[10px] font-bold text-mutedText uppercase tracking-wider mb-0.5 font-code">
                     {item.label}
                   </span>
-                  <span className="text-xs font-medium text-text font-body leading-relaxed break-words">
+                  <span className="text-xs font-medium text-text font-body leading-relaxed wrap-break-word">
                     {item.value}
                   </span>
                 </div>
