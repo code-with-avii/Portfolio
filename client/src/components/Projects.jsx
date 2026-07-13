@@ -18,8 +18,13 @@ const fallbackProjects = [
     _id: "mem-project-5",
     title: "SmartTech",
     subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
-    description:
-      "A full-stack MERN e-commerce application that provides a seamless online shopping experience with secure authentication, product management, and online payments.",
+    description: `• Built a complete MERN E-commerce platform
+• 25+ reusable React components
+• Redux Toolkit state management
+• Secure Authentication
+• Razorpay Payment Integration
+• Admin Dashboard
+• Responsive across all devices`,
     image:
       "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
     tags: [
@@ -48,8 +53,11 @@ const fallbackProjects = [
     _id: "mem-project-0",
     title: "AI Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
-    description:
-      "A premium marketplace platform supporting custom AI engineering, prompt auctions, model sharing, and credit transactions.",
+    description: `• 30+ Reusable Next.js components
+• OpenAI & Gemini API integration
+• Secure transaction & credits system
+• Sandboxed playground execution
+• Request caching reducing overhead by 30%`,
     image:
       "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
     tags: [
@@ -75,8 +83,11 @@ const fallbackProjects = [
     _id: "mem-project-1",
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
-    description:
-      "An authentication microservice implementing robust access guards, including role-based access, MFA, and active session termination.",
+    description: `• JWT & double-hashed refresh tokens
+• Multi-Factor Authentication (MFA)
+• Active session manager via Redis
+• Role-Based Access Control (RBAC)
+• Mitigated CSRF and XSS vectors`,
     image:
       "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Node.js", "Express", "MongoDB"],
@@ -95,8 +106,11 @@ const fallbackProjects = [
     _id: "mem-project-3",
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
-    description:
-      "An aesthetic dashboard plotting historical and current weather parameters across global locations, with interactive hourly chart logs.",
+    description: `• Real-time OpenWeather API integration
+• Interactive Chart.js visualizations
+• Geocoding locator
+• LocalStorage caching, 50% less API calls
+• Responsive Tailwind UI`,
     image:
       "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&auto=format&fit=crop",
     tags: ["React", "Tailwind CSS", "ChartJS", "OpenWeather API"],
@@ -276,9 +290,16 @@ export default function Projects() {
                       <p className="text-xs text-mutedText font-semibold mt-1 font-body leading-relaxed mb-4">
                         {project.subtitle}
                       </p>
-                      <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed line-clamp-3">
-                        {project.description}
-                      </p>
+                      <div className="text-xs sm:text-sm text-mutedText font-body leading-relaxed mb-4">
+                        <ul className="space-y-1">
+                          {project.description.split('\n').filter(line => line.trim() !== '').map((line, i) => (
+                            <li key={i} className="flex gap-2 items-start">
+                              <span className="text-cyan-400 mt-0.5">•</span>
+                              <span>{line.replace(/^•\s*/, '')}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
 

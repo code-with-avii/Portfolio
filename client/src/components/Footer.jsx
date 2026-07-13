@@ -1,6 +1,7 @@
 import React from "react";
-import { ArrowUp, Mail, Code2 } from "lucide-react";
+import { ArrowUp, Mail, Code2, MapPin, Briefcase, Zap, Coffee, Calendar } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const handleScrollToTop = () => {
@@ -12,6 +13,59 @@ export default function Footer() {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
+
+  const statusItems = [
+    {
+      icon: (
+        <div className="relative">
+          <span className="absolute -top-0.5 -right-0.5 flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+          <Code2 className="text-emerald-400 group-hover:scale-110 transition-transform duration-300" size={18} />
+        </div>
+      ),
+      label: "Currently",
+      value: "Building an AI-powered project",
+      bgColor: "bg-emerald-500/10",
+      borderColor: "hover:border-emerald-500/30",
+    },
+    {
+      icon: <MapPin className="text-rose-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
+      label: "Location",
+      value: "India",
+      bgColor: "bg-rose-500/10",
+      borderColor: "hover:border-rose-500/30",
+    },
+    {
+      icon: <Briefcase className="text-amber-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
+      label: "Open to",
+      value: "Internships • Full-time • Freelance",
+      bgColor: "bg-amber-500/10",
+      borderColor: "hover:border-amber-500/30",
+    },
+    {
+      icon: <Zap className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
+      label: "Response Time",
+      value: "Within 24 hours",
+      bgColor: "bg-cyan-500/10",
+      borderColor: "hover:border-cyan-500/30",
+    },
+    {
+      icon: <Coffee className="text-purple-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
+      label: "Fun Fact",
+      value: "I enjoy turning complex problems into intuitive interfaces.",
+      bgColor: "bg-purple-500/10",
+      borderColor: "hover:border-purple-500/30",
+    },
+    {
+      icon: <Calendar className="text-blue-400 group-hover:scale-110 transition-transform duration-300" size={18} />,
+      label: "Last Updated",
+      value: "July 2026",
+      bgColor: "bg-blue-500/10",
+      borderColor: "hover:border-blue-500/30",
+    },
+  ];
 
   return (
     <footer className="bg-surface border-t border-border py-12 relative">
@@ -82,6 +136,54 @@ export default function Footer() {
             </a>
           </div>
         </div>
+
+        {/* Developer Status Section */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="my-10 p-6 rounded-2xl bg-surface-hover/10 border border-border/40 backdrop-blur-xs relative overflow-hidden"
+        >
+          {/* Decorative background glow */}
+          <div className="absolute -right-10 -bottom-10 w-40 h-40 rounded-full bg-primary/5 blur-3xl pointer-events-none" />
+          
+          <div className="flex items-center gap-2 mb-6">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <h4 className="text-xs font-bold uppercase tracking-widest text-mutedText font-code">
+              Developer Status Snapshot
+            </h4>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {statusItems.map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                whileHover={{ y: -3 }}
+                className={`flex gap-4 p-4 rounded-xl bg-surface/40 border border-border/30 ${item.borderColor} hover:bg-surface/70 transition-all duration-300 group shadow-sm hover:shadow-glow-sm`}
+              >
+                <div className={`w-10 h-10 rounded-lg ${item.bgColor} flex items-center justify-center shrink-0`}>
+                  {item.icon}
+                </div>
+                <div className="flex flex-col justify-center min-w-0">
+                  <span className="text-[10px] font-bold text-mutedText uppercase tracking-wider mb-0.5 font-code">
+                    {item.label}
+                  </span>
+                  <span className="text-xs font-medium text-text font-body leading-relaxed break-words">
+                    {item.value}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
 
         {/* System info / bottom bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4">

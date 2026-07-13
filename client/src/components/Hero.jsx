@@ -167,8 +167,8 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-base sm:text-lg text-mutedText font-body max-w-xl mb-6 leading-relaxed"
             >
-              Building scalable web applications, <br className="hidden sm:block" />
-              REST APIs and AI-powered products.
+              Building Fast, Scalable & Beautiful Web Applications. <br className="hidden sm:block" />
+              I build production-ready applications with React, Express, MongoDB and modern UI/UX.
             </motion.p>
 
             {/* Credibility Badges List */}

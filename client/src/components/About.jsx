@@ -131,23 +131,21 @@ export default function About() {
               </h3>
               <div className="space-y-4 font-body text-mutedText text-sm sm:text-base leading-relaxed">
                 <p>
-                  I'm <strong className="text-text">Abhishekh Kumar</strong>, a
-                  full-stack engineer specializing in the MERN ecosystem. My
-                  coding journey is fueled by a desire to bridge technical
-                  complexity with sleek, intuitive design.
+                  I'm a Full Stack Developer passionate about building scalable web applications using React, Node.js, Express and MongoDB. I enjoy solving real-world problems through clean UI, optimized backend architecture and responsive user experiences.
                 </p>
-                <p>
-                  I enjoy developing robust server routing systems, implementing
-                  advanced database queries, and designing interactive UI
-                  micro-animations. Security and loading speed are core targets
-                  in every codebase I write.
-                </p>
-                <p>
-                  Currently, I'm integrating AI capabilities (like Gemini &
-                  OpenAI models) into web workflows to automate data ingestion
-                  and deliver smart, tailored solutions for modern SaaS
-                  products.
-                </p>
+                <div className="pt-2">
+                  <h4 className="font-heading font-bold text-text mb-3">Core Technologies:</h4>
+                  <ul className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>React</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>TypeScript</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>Node</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>Express</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>MongoDB</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>Tailwind</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>Redux</li>
+                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>REST APIs</li>
+                  </ul>
+                </div>
               </div>
             </motion.div>
 

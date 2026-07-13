@@ -3,8 +3,13 @@ export const initialProjectsData = [
     _id: "mem-project-5",
     title: "SmartTech",
     subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
-    description:
-      "Full-stack MERN e-commerce platform with secure Razorpay integration and role-based management dashboards for digital retailers and shoppers.",
+    description: `• Built a complete MERN E-commerce platform
+• 25+ reusable React components
+• Redux Toolkit state management
+• Secure Authentication
+• Razorpay Payment Integration
+• Admin Dashboard
+• Responsive across all devices`,
 
     longDescription:
       "SmartTech is a feature-rich e-commerce platform developed using the MERN stack. It allows users to browse products by category, search for items, manage shopping carts, place secure orders, and make online payments through Razorpay. The platform includes user authentication with JWT and Google OAuth, an admin dashboard for managing products, categories, users, and orders, and a responsive UI optimized for all devices.",
@@ -77,8 +82,11 @@ export const initialProjectsData = [
     _id: "mem-project-3",
     title: "AI Prompt Marketplace",
     subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
-    description:
-      "SaaS marketplace using Next.js and OpenAI APIs for prompt engineers to trade custom fine-tuned models and execute sandboxed testing.",
+    description: `• 30+ Reusable Next.js components
+• OpenAI & Gemini API integration
+• Secure transaction & credits system
+• Sandboxed playground execution
+• Request caching reducing overhead by 30%`,
     longDescription:
       "The AI Prompt Marketplace is a comprehensive SaaS portal designed for prompt engineers to publish, monetize, and execute fine-tuned models. It integrates OpenAI and Gemini models to preview runs directly, handles transactions via mock gateways, and lists curated listings under strict categories.",
     image:
@@ -126,8 +134,11 @@ export const initialProjectsData = [
     _id: "mem-project-1",
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
-    description:
-      "Robust authentication microservice utilizing JWT and Redis for enterprise admins with real-time session tracking and multi-factor security.",
+    description: `• JWT & double-hashed refresh tokens
+• Multi-Factor Authentication (MFA)
+• Active session manager via Redis
+• Role-Based Access Control (RBAC)
+• Mitigated CSRF and XSS vectors`,
     longDescription:
       "This security system demonstrates implementation of JWT access/refresh tokens alongside strict CORS. Admins can view connected devices and terminate sessions in real time via Redis storage.",
     image:
@@ -168,8 +179,11 @@ export const initialProjectsData = [
     _id: "mem-project-0",
     title: "Weather Dashboard",
     subtitle: "Dynamic weather portal with statistics & charts",
-    description:
-      "Real-time weather dashboard using OpenWeather API with search history caching and dynamic ChartJS forecasts for everyday users.",
+    description: `• Real-time OpenWeather API integration
+• Interactive Chart.js visualizations
+• Geocoding locator
+• LocalStorage caching, 50% less API calls
+• Responsive Tailwind UI`,
     longDescription:
       "This frontend-driven dashboard connects to OpenWeather APIs, aggregates meteorological stats, saves search logs within local storage, and plots wind/humidity patterns using ChartJS.",
     image:
@@ -208,8 +222,11 @@ export const initialProjectsData = [
     _id: "mem-project-4",
     title: "Hostel Help",
     subtitle: "Smart Hostel Management & Student Assistance Platform",
-    description:
-      "Smart MERN management portal for students and administrators with real-time complaint tracking and secure role-based access.",
+    description: `• Smart MERN management portal
+• Real-time complaint ticketing
+• Role-based Student & Admin access
+• Secure JWT Authentication
+• Responsive Tailwind design`,
     longDescription:
       "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
     image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
