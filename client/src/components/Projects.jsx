@@ -50,42 +50,12 @@ const fallbackProjects = [
     featured: true,
   },
   {
-    _id: "mem-project-0",
-    title: "AI Marketplace",
-    subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
-    description: `• 30+ Reusable Next.js components
-• OpenAI & Gemini API integration
-• Secure transaction & credits system
-• Sandboxed playground execution
-• Request caching reducing overhead by 30%`,
-    image:
-      "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-    tags: [
-      "Node.js",
-      "Tailwind CSS",
-      "Redux",
-      "Express",
-      "MongoDB",
-      "OpenAI API",
-    ],
-    features: [
-      "30+ Reusable React & Next.js layout modules",
-      "OpenAI & Gemini API integrations with sandbox playground",
-      "Wallet credit deduction system and transaction logs",
-      "10+ secure REST API routes for model uploads & audits",
-      "Framer Motion layout transitions & custom animations",
-    ],
-    githubUrl: "https://github.com/abhishekh-developer/ai-marketplace",
-    liveUrl: "https://ai-marketplace-abhishekh.vercel.app",
-    featured: false,
-  },
-  {
     _id: "mem-project-1",
     title: "Secure Authentication Suite",
     subtitle: "JWT, Session, MFA, and access control microservice",
     description: `• JWT & double-hashed refresh tokens
 • Multi-Factor Authentication (MFA)
-• Active session manager via Redis
+• Active session manager
 • Role-Based Access Control (RBAC)
 • Mitigated CSRF and XSS vectors`,
     image:
@@ -139,7 +109,10 @@ const filterTags = [
 
 export default function Projects() {
   const { data: reduxProjects } = useGetProjectsQuery();
-  const projects = reduxProjects && reduxProjects.length > 0 ? reduxProjects : fallbackProjects;
+  const projects =
+    reduxProjects && reduxProjects.length > 0
+      ? reduxProjects
+      : fallbackProjects;
 
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
@@ -248,7 +221,9 @@ export default function Projects() {
             {filteredProjects.map((project) => {
               // Convert Unsplash URLs dynamically to WebP with proper width and high compression to optimize payload size
               const optimizedImageUrl = project.image.includes("unsplash.com")
-                ? project.image.replace(/w=\d+/, "w=600").replace(/q=\d+/, "q=75") + "&fm=webp"
+                ? project.image
+                    .replace(/w=\d+/, "w=600")
+                    .replace(/q=\d+/, "q=75") + "&fm=webp"
                 : project.image;
 
               return (
@@ -292,12 +267,15 @@ export default function Projects() {
                       </p>
                       <div className="text-xs sm:text-sm text-mutedText font-body leading-relaxed mb-4">
                         <ul className="space-y-1">
-                          {project.description.split('\n').filter(line => line.trim() !== '').map((line, i) => (
-                            <li key={i} className="flex gap-2 items-start">
-                              <span className="text-cyan-400 mt-0.5">•</span>
-                              <span>{line.replace(/^•\s*/, '')}</span>
-                            </li>
-                          ))}
+                          {project.description
+                            .split("\n")
+                            .filter((line) => line.trim() !== "")
+                            .map((line, i) => (
+                              <li key={i} className="flex gap-2 items-start">
+                                <span className="text-cyan-400 mt-0.5">•</span>
+                                <span>{line.replace(/^•\s*/, "")}</span>
+                              </li>
+                            ))}
                         </ul>
                       </div>
                     </div>
