@@ -109,7 +109,7 @@ export default function ProjectDetail() {
             loading="eager"
             className="w-full h-full object-cover opacity-50"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-zinc-950 via-zinc-950/20 to-transparent" />
+          <div className="absolute inset-0 bg-zinc-950/70" />
           <div className="absolute bottom-8 left-6 sm:left-10 right-6">
             <span className="px-2.5 py-0.5 rounded-md bg-cyan-400/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
               Case Study
@@ -265,7 +265,7 @@ export default function ProjectDetail() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={`Launch live web application for ${project.title}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm hover:opacity-95 transition-all shadow-glow-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl text-sm transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 <ExternalLink size={16} aria-hidden="true" />
                 <span>Launch Live App</span>

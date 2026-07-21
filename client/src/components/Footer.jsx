@@ -1,9 +1,37 @@
-import React from "react";
-import { ArrowUp, Mail, Code2, MapPin, Briefcase, Zap, Coffee, Calendar } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { ArrowUp, Mail, Code2, MapPin, Briefcase, Zap, Coffee, Calendar, User } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { motion } from "framer-motion";
 
+const DEFAULT_PROFILE_PIC =
+  "";
+
 export default function Footer() {
+  const [profilePic, setProfilePic] = useState(() => {
+    return (
+      localStorage.getItem("admin_profile_pic") ||
+      localStorage.getItem("portfolio_profile_pic") ||
+      DEFAULT_PROFILE_PIC
+    );
+  });
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedPic =
+        localStorage.getItem("admin_profile_pic") ||
+        localStorage.getItem("portfolio_profile_pic") ||
+        DEFAULT_PROFILE_PIC;
+      setProfilePic(updatedPic);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("profilePicUpdated", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("profilePicUpdated", handleStorageChange);
+    };
+  }, []);
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -71,14 +99,28 @@ export default function Footer() {
     <footer className="bg-surface border-t border-border py-12 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-border">
-          {/* Logo / Brand */}
+          {/* Logo / Brand with Profile Picture */}
           <div className="flex items-center">
-            <div className="w-9 h-9 rounded-lg bg-gradient-purple-cyan flex items-center justify-center p-2 text-white font-bold text-base mr-3 shadow-glow-primary">
-              <Code2 size={16} />
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-primary/40 flex items-center justify-center bg-surface relative shadow-sm shrink-0 mr-3">
+              {profilePic ? (
+                <img
+                  src={profilePic}
+                  alt="Abhishekh Profile Avatar"
+                  className="w-full h-full object-cover"
+                  onError={() => setProfilePic(null)}
+                />
+              ) : (
+                <User size={20} className="text-primary" />
+              )}
             </div>
-            <span className="font-heading font-bold text-base tracking-tight text-text">
-              Abhishekh Kumar
-            </span>
+            <div>
+              <span className="font-heading font-bold text-base tracking-tight text-text block leading-tight">
+                Abhishekh Kumar
+              </span>
+              <span className="text-xs text-mutedText font-code">
+                Full Stack Developer
+              </span>
+            </div>
           </div>
 
           {/* Quick links */}

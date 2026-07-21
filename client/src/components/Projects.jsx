@@ -200,9 +200,9 @@ export default function Projects() {
                 onClick={() => setSelectedTag(tag)}
                 aria-pressed={selectedTag === tag}
                 aria-label={`Filter projects by ${tag}`}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 ${
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   selectedTag === tag
-                    ? "bg-gradient-purple-cyan text-white border-transparent shadow-glow-primary"
+                    ? "bg-primary text-white border-transparent shadow-sm"
                     : "bg-surface/50 text-mutedText border-border hover:border-border-hover hover:text-text"
                 }`}
               >

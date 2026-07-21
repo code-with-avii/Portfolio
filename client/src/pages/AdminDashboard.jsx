@@ -18,6 +18,9 @@ import {
   ShieldCheck,
   Clock,
   CheckCircle,
+  Camera,
+  Image,
+  Save,
 } from "lucide-react";
 
 export default function AdminDashboard() {
@@ -26,6 +29,36 @@ export default function AdminDashboard() {
   const { isAuthenticated } = useAppSelector((state) => state.auth);
   const { messages, loading } = useAppSelector((state) => state.messages);
   const [selectedMessage, setSelectedMessage] = useState(null);
+
+  const [adminPic, setAdminPic] = useState(() => {
+    return (
+      localStorage.getItem("admin_profile_pic") ||
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80"
+    );
+  });
+  const [picInput, setPicInput] = useState(adminPic);
+  const [picSavedStatus, setPicSavedStatus] = useState("");
+
+  const handleSaveProfilePic = (newPic) => {
+    const val = newPic || picInput;
+    localStorage.setItem("admin_profile_pic", val);
+    setAdminPic(val);
+    window.dispatchEvent(new Event("profilePicUpdated"));
+    setPicSavedStatus("Profile picture updated!");
+    setTimeout(() => setPicSavedStatus(""), 3000);
+  };
+
+  const handleAdminFileUpload = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPicInput(reader.result);
+        handleSaveProfilePic(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Auth Protection Guard
   useEffect(() => {
@@ -134,6 +167,68 @@ export default function AdminDashboard() {
               {unreadCount}
             </div>
           </div>
+        </div>
+
+        {/* Admin Profile Picture Control */}
+        <div className="glass-panel p-6 rounded-2xl border border-border mb-10">
+          <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div className="flex items-center gap-4">
+              <div className="relative group shrink-0">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary flex items-center justify-center bg-surface shadow-md">
+                  {adminPic ? (
+                    <img
+                      src={adminPic}
+                      alt="Admin Profile"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <ShieldCheck size={28} className="text-primary" />
+                  )}
+                </div>
+              </div>
+              <div>
+                <h2 className="text-base font-bold font-heading text-text flex items-center gap-2">
+                  <Image size={18} className="text-primary" /> Profile Picture Control
+                </h2>
+                <p className="text-xs text-mutedText mt-0.5 font-medium">
+                  Update the Navbar profile avatar visible across the portfolio.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex-1 max-w-xl w-full flex flex-col sm:flex-row items-center gap-3">
+              <input
+                type="text"
+                value={picInput}
+                onChange={(e) => setPicInput(e.target.value)}
+                placeholder="Paste image URL..."
+                className="flex-1 w-full bg-surface/80 border border-border rounded-xl px-3.5 py-2 text-xs text-text placeholder-zinc-500 focus:outline-none focus:border-primary font-code"
+              />
+              <div className="flex items-center gap-2 w-full sm:w-auto shrink-0">
+                <label className="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border hover:border-border-hover bg-surface hover:bg-surface-hover rounded-xl text-xs font-semibold text-text cursor-pointer transition-all">
+                  <Camera size={14} /> Upload
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAdminFileUpload}
+                    className="hidden"
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={() => handleSaveProfilePic()}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 bg-primary hover:bg-primary/90 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                >
+                  <Save size={14} /> Save
+                </button>
+              </div>
+            </div>
+          </div>
+          {picSavedStatus && (
+            <p className="text-xs font-semibold text-emerald-500 mt-3 flex items-center gap-1">
+              <CheckCircle size={14} /> {picSavedStatus}
+            </p>
+          )}
         </div>
 
         {/* Dashboard Inbox layout */}

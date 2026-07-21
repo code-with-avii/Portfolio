@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import confetti from "canvas-confetti";
+import { href } from "react-router";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
@@ -196,7 +197,8 @@ export default function Contact() {
                   },
                   {
                     icon: <FaLinkedin size={18} />,
-                    label: "https://www.linkedin.com/in/abhishekh07/",
+                    label: "LinkedIn",
+                    href : "https://www.linkedin.com/in/abhishekh07/"
                   },
                   {
                     icon: <FaXTwitter size={18} />,
@@ -340,7 +342,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading || status === "success"}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-xs sm:text-sm hover:opacity-95 transition-all disabled:opacity-50 shadow-glow-primary"
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl text-xs sm:text-sm transition-all disabled:opacity-50 shadow-sm"
                 >
                   {loading ? (
                     <span className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />

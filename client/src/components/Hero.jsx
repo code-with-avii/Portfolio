@@ -26,7 +26,7 @@ const credibilityCards = [
   {
     icon: <Layers className="text-emerald-400" size={24} />,
     title: "Production Projects",
-    value: "10+ Apps Built",
+    value: "10+ Web Apps Built",
     description: "Developed end-to-end MERN portals, real-time engines, and custom AI integrations.",
   },
   {
@@ -134,7 +134,7 @@ export default function Hero() {
               className="text-4xl sm:text-6xl font-extrabold font-heading text-text leading-tight mb-4"
             >
               Hi, I'm{" "}
-              <span className="bg-linear-to-r from-sky-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
+              <span className="text-primary">
                 Abhishekh Kumar
               </span>
             </motion.h1>
@@ -152,7 +152,7 @@ export default function Hero() {
                     animate={{ y: 0, opacity: 1,filter:"blur(0px)" }}
                     exit={{ y: -15, opacity: 0,filter:"blur(8px)"}}
                     transition={{ duration: 0.4, ease:[0.22,1,0.36,1] }}
-                    className="absolute inset-y-0 left-0 flex items-center text-2xl sm:text-3xl font-heading font-bold bg-linear-to-r from-blue-500 via-cyan-400 to-teal-400 bg-clip-text text-transparent whitespace-nowrap"
+                    className="absolute inset-y-0 left-0 flex items-center text-2xl sm:text-3xl font-heading font-bold text-primary whitespace-nowrap"
                   >
                     {roles[roleIndex]}
                   </motion.span>
@@ -203,7 +203,7 @@ export default function Hero() {
             >
               <button
                 onClick={() => handleScrollTo("projects")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-gradient-purple-cyan text-white font-semibold rounded-xl text-sm transition-all shadow-glow-primary hover:opacity-95 group gap-2 cursor-pointer"
+                className="inline-flex items-center justify-center px-6 py-3.5 bg-primary text-white font-semibold rounded-xl text-sm transition-all shadow-md hover:bg-primary/90 group gap-2 cursor-pointer"
               >
                 View Projects
                 <ArrowRight
@@ -271,9 +271,9 @@ export default function Hero() {
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 4, repeat: Infinity }}
-              className="absolute w-24 h-24 rounded-3xl bg-surface/85 border border-border-hover flex items-center justify-center shadow-glow-primary z-20"
+              className="absolute w-24 h-24 rounded-3xl bg-surface/85 border border-border-hover flex items-center justify-center shadow-md z-20"
             >
-              <div className="w-12 h-12 rounded-2xl bg-gradient-purple-cyan flex items-center justify-center text-white font-bold text-xl">
+              <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-bold text-xl">
                 AK
               </div>
             </motion.div>

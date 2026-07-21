@@ -41,7 +41,7 @@ const AnimatedCounter = ({ value, label, duration = 2 }) => {
 
   return (
     <div className="text-center p-6 bg-surface/50 border border-border rounded-2xl">
-      <div className="text-3xl sm:text-4xl font-extrabold font-heading bg-linear-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+      <div className="text-3xl sm:text-4xl font-extrabold font-heading text-primary">
         {count}+
       </div>
       <div className="text-xs text-mutedText font-semibold mt-2 uppercase tracking-wider">

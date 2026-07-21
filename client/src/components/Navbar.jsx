@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Code, FileText, Moon, Sun } from "lucide-react";
+import { Menu, X, FileText, Moon, Sun, User } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const navLinks = [
@@ -11,6 +11,10 @@ const navLinks = [
   { name: "Contact", href: "#contact" },
 ];
 
+// Default profile picture configured in code
+const DEFAULT_PROFILE_PIC =
+  "";
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -19,8 +23,33 @@ export default function Navbar() {
     const saved = localStorage.getItem("theme");
     return saved ? saved === "dark" : true; // Default to dark mode
   });
+  const [profilePic, setProfilePic] = useState(() => {
+    return (
+      localStorage.getItem("admin_profile_pic") ||
+      localStorage.getItem("portfolio_profile_pic") ||
+      DEFAULT_PROFILE_PIC
+    );
+  });
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Listen for admin profile picture updates
+  useEffect(() => {
+    const handleStorageChange = () => {
+      const updatedPic =
+        localStorage.getItem("admin_profile_pic") ||
+        localStorage.getItem("portfolio_profile_pic") ||
+        DEFAULT_PROFILE_PIC;
+      setProfilePic(updatedPic);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("profilePicUpdated", handleStorageChange);
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("profilePicUpdated", handleStorageChange);
+    };
+  }, []);
 
   // Sync theme with HTML document
   useEffect(() => {
@@ -132,24 +161,36 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-12">
-          {/* Logo */}
-          <div
-            className="shrink-0 flex items-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded-lg p-1"
-            onClick={() => navigate("/")}
-            onKeyDown={handleLogoKeyDown}
-            tabIndex={0}
-            role="link"
-            aria-label="Abhishekh Dev Home"
-          >
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-purple-cyan flex items-center justify-between p-2 text-white font-bold text-base sm:text-lg mr-2 shadow-glow-primary">
-              <Code size={22} className="mx-auto" aria-hidden="true" />
+          {/* Logo & Profile Picture */}
+          <div className="shrink-0 flex items-center gap-2.5">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-primary/40 flex items-center justify-center bg-surface relative shadow-sm shrink-0">
+              {profilePic ? (
+                <img
+                  src={profilePic}
+                  alt="Abhishekh Profile Avatar"
+                  className="w-full h-full object-cover"
+                  onError={() => setProfilePic(null)}
+                />
+              ) : (
+                <User size={20} className="text-primary" />
+              )}
             </div>
-            <span className="font-heading font-bold text-lg tracking-tight text-text hover:text-cyan-400 transition-colors">
-              Abhishekh
-              <span className="text-secondary text-xs ml-1 bg-white/10 px-1.5 py-0.5 rounded font-code">
-                DEV
+
+            <div
+              className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg py-1 px-0.5"
+              onClick={() => navigate("/")}
+              onKeyDown={handleLogoKeyDown}
+              tabIndex={0}
+              role="link"
+              aria-label="Abhishekh Dev Home"
+            >
+              <span className="font-heading font-bold text-lg tracking-tight text-text hover:text-primary transition-colors">
+                Abhishekh
+                <span className="text-primary text-xs ml-1 bg-primary/10 px-1.5 py-0.5 rounded font-code">
+                  DEV
+                </span>
               </span>
-            </span>
+            </div>
           </div>
 
           {/* Desktop Nav Links */}
@@ -159,7 +200,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative font-body font-medium text-sm transition-colors py-2 px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded-md ${
+                className={`relative font-body font-medium text-sm transition-colors py-2 px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md ${
                   activeSection === link.href.substring(1) &&
                   location.pathname === "/"
                     ? "text-text"
@@ -175,7 +216,7 @@ export default function Navbar() {
                 {link.name}
                 {activeSection === link.href.substring(1) &&
                   location.pathname === "/" && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-purple-cyan rounded-full transition-transform" />
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full transition-transform" />
                   )}
               </a>
             ))}
@@ -185,7 +226,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text hover:border-white/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text hover:border-white/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
             >
               {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
@@ -197,7 +238,7 @@ export default function Navbar() {
                 e.preventDefault();
                 alert("Resume download triggered (Mock PDF)");
               }}
-              className="inline-flex items-center px-4 py-2 text-xs font-semibold text-text bg-surface hover:bg-surface-hover border border-border-hover rounded-lg transition-all shadow-md group gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
+              className="inline-flex items-center px-4 py-2 text-xs font-semibold text-text bg-surface hover:bg-surface-hover border border-border-hover rounded-lg transition-all shadow-md group gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label="Download Resume PDF"
             >
               <FileText
@@ -213,14 +254,14 @@ export default function Navbar() {
           <div className="md:hidden flex items-center space-x-3">
             <button
               onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
             >
               {isDark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
             </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-expanded={isOpen}
               aria-controls="mobile-navigation-drawer"
               aria-label={isOpen ? "Close Menu" : "Open Menu"}
@@ -249,7 +290,7 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-4 py-3 rounded-lg bg-surface/40 border border-border text-base font-medium text-mutedText hover:text-text hover:bg-surface/80 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="block px-4 py-3 rounded-lg bg-surface/40 border border-border text-base font-medium text-mutedText hover:text-text hover:bg-surface/80 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               {link.name}
             </a>
@@ -257,7 +298,7 @@ export default function Navbar() {
           <div className="pt-4 border-t border-border">
             <button
               onClick={() => alert("Resume download triggered (Mock PDF)")}
-              className="w-full flex items-center justify-center py-4 bg-gradient-purple-cyan text-white font-medium rounded-lg text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500"
+              className="w-full flex items-center justify-center py-4 bg-primary text-white font-medium rounded-lg text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               aria-label="Download Resume PDF"
             >
               <FileText size={16} className="mr-2" aria-hidden="true" /> Download Resume
