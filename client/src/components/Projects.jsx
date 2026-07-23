@@ -1,350 +1,230 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useAppSelector } from "../store/hooks.js";
 import { useGetProjectsQuery } from "../store/apiSlice.js";
-
-import {
-  ExternalLink,
-  BookOpen,
-  Search,
-  Filter,
-  FolderGit,
-} from "lucide-react";
-import { FaGithub } from "react-icons/fa6";
+import { BookMarked, ExternalLink } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const fallbackProjects = [
+/* ── Fallback data ────────────────────────────────────────────────────────── */
+const FALLBACK = [
   {
     _id: "mem-project-5",
     title: "SmartTech",
-    subtitle: "Modern E-Commerce Platform for Electronics & Gadgets",
-    description: `• Built a complete MERN E-commerce platform
-• 25+ reusable React components
-• Redux Toolkit state management
-• Secure Authentication
-• Razorpay Payment Integration
-• Admin Dashboard
-• Responsive across all devices`,
-    image:
-      "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
-    tags: [
-      "React",
-      "Node.js",
-      "Express",
-      "MongoDB",
-      "Redux Toolkit",
-      "JWT",
-      "Tailwind CSS",
-      "Razorpay",
-      "Google OAuth",
-    ],
-    features: [
-      "25+ Reusable React components & global styles",
-      "JWT Cookie Authentication & Google OAuth login flow",
-      "Razorpay Payment Gateway with custom billing pipelines",
-      "15+ secure REST API endpoints with Mongo relation maps",
-      "Interactive role-based dashboards (Admin & Customer profiles)",
-    ],
+    subtitle: "Full-stack MERN e-commerce platform for electronics",
+    description:
+      "Built with 25+ reusable React components, Redux Toolkit state management, JWT + Google OAuth authentication, Razorpay payment gateway, and an admin dashboard.",
+    tags: ["React", "Node.js", "Express", "MongoDB", "Redux Toolkit"],
     githubUrl: "https://github.com/code-with-avii/SmartTech",
     liveUrl: "https://smart-tech-gold.vercel.app",
     featured: true,
   },
   {
     _id: "mem-project-1",
-    title: "Secure Authentication Suite",
-    subtitle: "JWT, Session, MFA, and access control microservice",
-    description: `• JWT & double-hashed refresh tokens
-• Multi-Factor Authentication (MFA)
-• Active session manager
-• Role-Based Access Control (RBAC)
-• Mitigated CSRF and XSS vectors`,
-    image:
-      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Node.js", "Express", "MongoDB"],
-    features: [
-      "HTTPOnly secure cookies storing double-hashed refresh tokens",
-      "8+ secure API endpoints shielded via CORS and Helmet",
-      "Active session manager tracking browser, OS, and location IP",
-      "Multi-Factor Authentication (MFA) via Google Authenticator TOTP",
-      "Role-Based Access Control (RBAC) hierarchical authorization middleware",
-    ],
+    title: "Authentication-Microservice",
+    subtitle: "JWT, MFA, RBAC, and session management microservice",
+    description:
+      "HTTPOnly secure cookies with double-hashed refresh tokens, Google Authenticator TOTP MFA, Role-Based Access Control, and CSRF/XSS protection layers.",
+    tags: ["Node.js", "Express", "MongoDB", "JWT", "Helmet"],
     githubUrl: "https://github.com/code-with-avii/Authentication",
     liveUrl: "https://auth-service-abhishekh.vercel.app",
     featured: false,
   },
   {
     _id: "mem-project-3",
-    title: "Weather Dashboard",
-    subtitle: "Dynamic weather portal with statistics & charts",
-    description: `• Real-time OpenWeather API integration
-• Interactive Chart.js visualizations
-• Geocoding locator
-• LocalStorage caching, 50% less API calls
-• Responsive Tailwind UI`,
-    image:
-      "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Tailwind CSS", "ChartJS", "OpenWeather API"],
-    features: [
-      "12+ reusable UI graphing and meteorological metric panels",
-      "Geocoding locator tracking global coordinates in real time",
-      "In-browser localStorage cache reducing API calls by 50%",
-      "Interactive Chart.js visualizations plotting historical climate shifts",
-    ],
+    title: "Weather_app",
+    subtitle: "Real-time weather portal with Chart.js visualizations",
+    description:
+      "OpenWeather API integration with geocoding, interactive Chart.js histograms, and localStorage caching reducing API calls by 50%.",
+    tags: ["React", "Tailwind CSS", "Chart.js"],
     githubUrl: "https://github.com/code-with-avii/Weather_app",
     liveUrl: "https://weather-app-theta-two-15.vercel.app/",
     featured: false,
   },
 ];
 
-const filterTags = [
-  "All",
-  "React",
-  "Next.js",
-  "Node.js",
-  "Express",
-  "MongoDB",
-  "TypeScript",
-  "Redis",
-];
+const ALL_TAGS = ["All", "React", "Node.js", "MongoDB", "Express", "TypeScript"];
 
+/* ── Helper for GitHub Language Colors ────────────────────────────────────── */
+const getLangColor = (tag) => {
+  const colors = {
+    "React": "#61dafb",
+    "Node.js": "#339933",
+    "MongoDB": "#47A248",
+    "Express": "#ffffff",
+    "TypeScript": "#3178c6",
+    "JavaScript": "#f1e05a",
+    "Tailwind CSS": "#38bdf8"
+  };
+  return colors[tag] || "#8b949e";
+};
+
+/* ── Component ──────────────────────────────────────────────────────────── */
 export default function Projects() {
   const { data: reduxProjects } = useGetProjectsQuery();
-  const projects =
-    reduxProjects && reduxProjects.length > 0
-      ? reduxProjects
-      : fallbackProjects;
-
+  const projects = reduxProjects?.length > 0 ? reduxProjects : FALLBACK;
   const navigate = useNavigate();
-  const [search, setSearch] = useState("");
-  const [selectedTag, setSelectedTag] = useState("All");
+  const [filter, setFilter] = useState("All");
 
-  // Filter projects by both tag and search input
-  const filteredProjects = projects.filter((project) => {
-    const matchesSearch =
-      project.title.toLowerCase().includes(search.toLowerCase()) ||
-      project.subtitle.toLowerCase().includes(search.toLowerCase()) ||
-      project.description.toLowerCase().includes(search.toLowerCase());
-
-    const matchesTag =
-      selectedTag === "All" ||
-      project.tags.some(
-        (tag) => tag.toLowerCase() === selectedTag.toLowerCase(),
-      );
-
-    return matchesSearch && matchesTag;
-  });
+  const filtered = projects.filter(p =>
+    filter === "All" || p.tags.some(t => t.toLowerCase() === filter.toLowerCase())
+  );
 
   return (
     <section
       id="projects"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "clamp(64px, 10vw, 120px) 0",
+        borderTop: "1px solid var(--border)",
+        scrollMarginTop: 80,
+      }}
     >
-      {/* Background blurs */}
-      <div className="absolute bottom-1/3 left-0 w-87.5 h-87.5 rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div style={{ maxWidth: 1000, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <FolderGit size={12} /> My Work
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
-          >
-            Featured Engineering Projects
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            Explore interactive software applications showcasing full-stack
-            logic, system integrations, and elegant UI styles.
-          </motion.p>
-        </div>
-
-        {/* Filter and Search Controls */}
-        <div className="flex flex-col md:flex-row gap-5 items-stretch justify-between mb-12 max-w-5xl mx-auto">
-          {/* Search bar */}
-          <div className="relative grow max-w-md">
-            <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-mutedText">
-              <Search size={16} aria-hidden="true" />
-            </span>
-            <input
-              type="text"
-              placeholder="Search projects by name or technology..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              aria-label="Search projects by name or technology"
-              className="w-full pl-10 pr-4 py-3 bg-surface/50 border border-border-hover rounded-xl text-sm text-text placeholder-zinc-500 focus:outline-none focus:border-primary/50 focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 transition-all font-body"
-            />
-          </div>
-
-          {/* Filter Tags */}
-          <div className="flex flex-wrap gap-2 items-center overflow-x-auto no-scrollbar py-1">
-            <span className="text-xs text-mutedText font-semibold flex items-center gap-1 mr-1">
-              <Filter size={12} aria-hidden="true" /> Tags:
-            </span>
-            {filterTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => setSelectedTag(tag)}
-                aria-pressed={selectedTag === tag}
-                aria-label={`Filter projects by ${tag}`}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-body border transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
-                  selectedTag === tag
-                    ? "bg-primary text-white border-transparent shadow-sm"
-                    : "bg-surface/50 text-mutedText border-border hover:border-border-hover hover:text-text"
-                }`}
-              >
-                {tag}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Projects Grid */}
+        {/* Section header */}
         <motion.div
-          layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
         >
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project) => {
-              // Convert Unsplash URLs dynamically to WebP with proper width and high compression to optimize payload size
-              const optimizedImageUrl = project.image.includes("unsplash.com")
-                ? project.image
-                    .replace(/w=\d+/, "w=600")
-                    .replace(/q=\d+/, "q=75") + "&fm=webp"
-                : project.image;
-
-              return (
-                <motion.div
-                  key={project._id}
-                  layout
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ y: -6 }}
-                  className="glass-panel rounded-2xl border border-border overflow-hidden flex flex-col justify-between hover:border-border-hover transition-all card-glow-border group cursor-default"
-                >
-                  <div>
-                    {/* Preview Image zoom wrapper */}
-                    <div className="relative h-48 w-full overflow-hidden border-b border-border bg-surface">
-                      <img
-                        src={optimizedImageUrl}
-                        alt={project.title}
-                        loading="lazy"
-                        width="600"
-                        height="400"
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-
-                      {/* Featured label */}
-                      {project.featured && (
-                        <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-primary/20 text-primary border border-primary/30 rounded-md backdrop-blur-md">
-                          Featured Project
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Body Content */}
-                    <div className="p-6">
-                      <h3 className="text-lg font-heading font-bold text-text group-hover:text-cyan-400 transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-xs text-mutedText font-semibold mt-1 font-body leading-relaxed mb-4">
-                        {project.subtitle}
-                      </p>
-                      <div className="text-xs sm:text-sm text-mutedText font-body leading-relaxed mb-4">
-                        <ul className="space-y-1">
-                          {project.description
-                            .split("\n")
-                            .filter((line) => line.trim() !== "")
-                            .map((line, i) => (
-                              <li key={i} className="flex gap-2 items-start">
-                                <span className="text-cyan-400 mt-0.5">•</span>
-                                <span>{line.replace(/^•\s*/, "")}</span>
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom Tags & CTA Actions */}
-                  <div className="px-6 pb-6">
-                    {/* Tags list */}
-                    <div className="flex flex-wrap gap-1.5 mb-6">
-                      {project.tags.slice(0, 4).map((tag, tIdx) => (
-                        <span
-                          key={tIdx}
-                          className="px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-code text-mutedText"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {project.tags.length > 4 && (
-                        <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-[10px] font-code text-mutedText">
-                          +{project.tags.length - 4} more
-                        </span>
-                      )}
-                    </div>
-
-                    {/* Actions buttons */}
-                    <div className="grid grid-cols-3 gap-2 border-t border-border pt-4">
-                      <button
-                        onClick={() => navigate(`/project/${project._id}`)}
-                        className="inline-flex items-center justify-center py-2 bg-primary/10 border border-primary/20 text-xs font-semibold text-purple-300 rounded-lg hover:bg-primary/20 transition-all gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-                        aria-label={`Read case study for ${project.title}`}
-                      >
-                        <BookOpen size={13} aria-hidden="true" />
-                        Case Study
-                      </button>
-
-                      <a
-                        href={project.githubUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center py-2 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover text-xs font-semibold text-mutedText hover:text-text rounded-lg transition-all gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-                        aria-label={`View GitHub repository for ${project.title}`}
-                      >
-                        <FaGithub size={13} aria-hidden="true" />
-                        Code
-                      </a>
-
-                      <a
-                        href={project.liveUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center py-2 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover text-xs font-semibold text-mutedText hover:text-text rounded-lg transition-all gap-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-                        aria-label={`View live demo for ${project.title}`}
-                      >
-                        <ExternalLink size={13} aria-hidden="true" />
-                        Live Demo
-                      </a>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
-          </AnimatePresence>
+          <div className="section-num">[ 03 ]</div>
+          <h2 className="section-title">Repositories</h2>
         </motion.div>
 
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-16 text-mutedText font-body text-sm">
-            No projects found matching the criteria. Try adjusting your query or
-            filters.
-          </div>
+        {/* Filter pills */}
+        <div 
+          className="no-scrollbar"
+          style={{ 
+            display: "flex", flexWrap: "nowrap", overflowX: "auto", 
+            gap: 8, marginBottom: 36, paddingBottom: 4 
+          }}
+        >
+          {ALL_TAGS.map(tag => (
+            <button
+              key={tag}
+              onClick={() => setFilter(tag)}
+              style={{
+                fontFamily: "var(--font-mono)", fontSize: "0.78rem", fontWeight: 500,
+                padding: "4px 12px", borderRadius: "2em", cursor: "pointer",
+                background: filter === tag ? "#21262d" : "transparent",
+                color: filter === tag ? "#c9d1d9" : "#8b949e",
+                border: `1px solid ${filter === tag ? "#f0f6fc1a" : "transparent"}`,
+                transition: "all 0.15s ease",
+              }}
+              onMouseEnter={e => {
+                if (filter !== tag) e.currentTarget.style.background = "#161b22";
+              }}
+              onMouseLeave={e => {
+                if (filter !== tag) e.currentTarget.style.background = "transparent";
+              }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
+
+        {/* Project list — GitHub Repo Style */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))",
+          gap: 16,
+        }}>
+          <AnimatePresence mode="popLayout">
+            {filtered.map((p, i) => (
+              <motion.article
+                key={p._id}
+                layout
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 8 }}
+                transition={{ duration: 0.35, delay: i * 0.04 }}
+                style={{
+                  background: "#0d1117",
+                  border: "1px solid #30363d",
+                  borderRadius: 6,
+                  padding: "16px",
+                  display: "flex",
+                  flexDirection: "column",
+                  cursor: "pointer",
+                  transition: "border-color 0.2s ease"
+                }}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "#8b949e"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "#30363d"}
+                onClick={() => navigate(`/project/${p._id}`)}
+              >
+                {/* Header Row */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <BookMarked size={16} color="#8b949e" />
+                    <span style={{ 
+                      fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem", 
+                      color: "var(--ink)", wordBreak: "break-all"
+                    }}>
+                      code-with-avii / {p.title}
+                    </span>
+                  </div>
+                  <span style={{
+                    fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 500,
+                    color: "#8b949e", border: "1px solid #30363d", borderRadius: "2em",
+                    padding: "1px 7px"
+                  }}>
+                    Public
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p style={{
+                  fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "#8b949e",
+                  lineHeight: 1.5, marginBottom: 16, flexGrow: 1
+                }}>
+                  {p.description}
+                </p>
+
+                {/* Tags mapping to GitHub tags */}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
+                  {p.tags.map(t => (
+                    <span key={t} style={{
+                      fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 500,
+                      color: "var(--ink)", background: "var(--surface2)", padding: "0 7px",
+                      borderRadius: "2em", border: "1px solid var(--border)"
+                    }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Footer Meta Row */}
+                <div style={{ display: "flex", alignItems: "center", gap: 16, fontFamily: "var(--font-body)", fontSize: "0.75rem", color: "var(--muted)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+                    <div style={{ width: 10, height: 10, borderRadius: "50%", background: getLangColor(p.tags[0]) }} />
+                    <span>{p.tags[0] || "JavaScript"}</span>
+                  </div>
+
+                  {p.liveUrl && (
+                    <a 
+                      href={p.liveUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      onClick={e => e.stopPropagation()}
+                      style={{ display: "flex", alignItems: "center", gap: 4, color: "var(--muted)", textDecoration: "none", marginLeft: "auto" }}
+                      onMouseEnter={e => e.currentTarget.style.color = "var(--ink)"}
+                      onMouseLeave={e => e.currentTarget.style.color = "var(--muted)"}
+                    >
+                      <ExternalLink size={14} /> Live
+                    </a>
+                  )}
+                </div>
+
+              </motion.article>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {filtered.length === 0 && (
+          <p style={{ textAlign: "center", color: "#8b949e", padding: "48px 0", fontFamily: "var(--font-body)" }}>
+            0 repositories matched your search.
+          </p>
         )}
       </div>
     </section>

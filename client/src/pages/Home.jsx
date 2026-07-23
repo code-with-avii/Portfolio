@@ -6,8 +6,6 @@ import About from "../components/About.jsx";
 import Skills from "../components/Skills.jsx";
 import Experience from "../components/Experience.jsx";
 import Projects from "../components/Projects.jsx";
-import Achievements from "../components/Achievements.jsx";
-import GitHubSection from "../components/GitHubSection.jsx";
 import Contact from "../components/Contact.jsx";
 import Footer from "../components/Footer.jsx";
 
@@ -25,9 +23,6 @@ export default function Home() {
       <Skills />
       <Projects />
       <Experience />
-    
-      <Achievements />
-      <GitHubSection />
       <Contact />
       <Footer />
     </div>

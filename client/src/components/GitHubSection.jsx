@@ -1,276 +1,201 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Star, GitFork, BookMarked, Code } from "lucide-react";
 import { FaGithub } from "react-icons/fa6";
+import { ExternalLink } from "lucide-react";
 
-const pinnedRepos = [
-  {
-    name: "ai-marketplace",
-    description:
-      "A premium SaaS Prompt Marketplace platform with credit transactions, OpenAI previews playground, and fine-tuned model sharing.",
-    language: "Javascipt",
-    langColor: "bg-blue-400",
-    stars: "",
-    forks: "",
-    //  link: 'https://github.com/abhishekh-developer/ai-marketplace'
-  },
+const PINNED_REPOS = [
   {
     name: "SmartTech",
-    description:
-      "SmartTech is a full-stack e-commerce platform built with the MERN stack, designed to provide a seamless online shopping experience for electronics and gadgets. It features secure authentication, product browsing, shopping cart, wishlist, order management, and a responsive, user-friendly interface.",
-    language: "Javascipt",
-    langColor: "bg-blue-400",
-    stars: "",
-    forks: "",
+    description: "Full-stack MERN e-commerce platform with secure auth, Razorpay payments, admin dashboard, and 25+ reusable React components.",
+    language: "JavaScript",
     link: "https://github.com/code-with-avii/SmartTech",
   },
-  //  {
-  //  name: 'Hostel help',
-  //  description: ' HIPAA-aligned EHR patient scheduling and doctor communication microservice portal featuring calendar dragging slots.',
-  //  language: 'React',
-  //  langColor: 'bg-sky-400',
-  //  stars: 62,
-  //  forks: 9,
-  //  link: 'https://github.com/abhishekh-developer/hospital-suite'
-  //  },
-  //  {
-  //  name: 'analytics-telemetry',
-  //  description: ' High-speed tracking ingestion system using Redis buffer streaming and Socket.io for live site user metrics monitoring.',
-  //  language: 'Node.js',
-  //  langColor: 'bg-green-400',
-  //  stars: 55,
-  //  forks: 12,
-  //  link: 'https://github.com/abhishekh-developer/analytics-telemetry'
-  //  }
+  {
+    name: "Auth Suite",
+    description: "JWT + MFA microservice with HTTPOnly cookies, RBAC, CSRF/XSS protection, and Google Authenticator TOTP support.",
+    language: "JavaScript",
+    link: "https://github.com/code-with-avii/Authentication",
+  },
+  {
+    name: "Weather Dashboard",
+    description: "OpenWeather API integration with Chart.js visualizations, geocoding, and localStorage caching (50% fewer API calls).",
+    language: "JavaScript",
+    link: "https://github.com/code-with-avii/Weather_app",
+  },
 ];
 
-// Generate simulated grid dots (53 weeks * 7 days)
-const contributionDots = Array.from({ length: 371 }, (_, idx) => {
-  // Randomise density for realistic commit calendar simulation
-  const rand = Math.random();
-  let color = "bg-surface"; // 0 commits
-  let commits = "No";
-
-  if (rand > 0.85) {
-    color = "bg-purple-900"; // 1-2 commits
-    commits = "1-2";
-  } else if (rand > 0.7) {
-    color = "bg-purple-700"; // 3-4 commits
-    commits = "3-4";
-  } else if (rand > 0.55) {
-    color = "bg-cyan-500"; // 5-8 commits
-    commits = "5-8";
-  } else if (rand > 0.45) {
-    color = "bg-cyan-400"; // 9+ commits
-    commits = "9+";
-  }
-
-  return { id: idx, color, commits };
+/* ── Deterministic contribution grid (siddz grayscale style) ────────────── */
+const DOTS = Array.from({ length: 371 }, (_, i) => {
+  const r = (Math.abs(Math.sin(i * 12.9898 + 78.233)) * 43758.5453) % 1;
+  if (r > 0.85) return { id: i, level: 4 };
+  if (r > 0.70) return { id: i, level: 3 };
+  if (r > 0.55) return { id: i, level: 2 };
+  if (r > 0.45) return { id: i, level: 1 };
+  return { id: i, level: 0 };
 });
+
+const DOT_COLORS = [
+  "var(--surface-2)",            // 0
+  "rgba(150, 150, 150, 0.25)",   // 1
+  "rgba(150, 150, 150, 0.45)",   // 2
+  "rgba(150, 150, 150, 0.7)",    // 3
+  "rgba(150, 150, 150, 1)",      // 4
+];
 
 export default function GitHubSection() {
   return (
-    <section className="py-24 relative overflow-hidden bg-background">
-      {/* Background radial spotlight */}
-      <div className="absolute top-1/2 left-1/2 w-125 h-125 rounded-full bg-primary/5 blur-[140px] pointer-events-none -translate-x-1/2 -translate-y-1/2" />
+    <section
+      style={{
+        background: "var(--canvas)",
+        padding: "96px 0",
+        borderTop: "1px solid var(--border)",
+      }}
+    >
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 06 ]</div>
+          <h2 className="section-title">Open Source</h2>
+        </motion.div>
+
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: 24,
+        }}>
+          {/* ── Contribution heatmap ───────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <FaGithub size={12} /> Live Repository Feed
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
+            transition={{ duration: 0.5, delay: 0.05 }}
+            className="card"
+            style={{ padding: "28px 26px", overflow: "hidden" }}
           >
-            Open Source Contribution Activity
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            Check out real-time commits logging and pinned codes stored in my
-            public space.
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start max-w-6xl mx-auto">
-          {/* Left Column: Stats & Contribution grid */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Contribution Calendar Grid */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-5 sm:p-6 rounded-2xl border border-border"
-            >
-              <h3 className="font-heading font-bold text-sm text-text mb-4 flex items-center gap-2">
-                <FaGithub size={15} /> @code-with-avii contributions in the
-                last year
-              </h3>
-
-              {/* <div className="overflow-x-auto no-scrollbar pb-2">
-                <div className="flex gap-0.75 w-162.5 flex-wrap h-22.5 overflow-hidden select-none">
-                  {contributionDots.map((dot) => (
-                    <div
-                      key={dot.id}
-                      className={`w-2.5 h-2.5 rounded-xs ${dot.color} transition-all hover:scale-125 cursor-pointer`}
-                      title={`${dot.commits} commits`}
-                    />
-                  ))}
-                </div>
-              </div> */}
-
-              {/* Grid Legend */}
-              <div className="flex items-center justify-between text-[10px] text-mutedText font-semibold font-code mt-4">
-                <span>Jan 2025</span>
-                <div className="flex items-center gap-1.5">
-                  <span>Less</span>
-                  <div className="w-2.5 h-2.5 rounded-xs bg-surface" />
-                  <div className="w-2.5 h-2.5 rounded-xs bg-purple-900" />
-                  <div className="w-2.5 h-2.5 rounded-xs bg-purple-700" />
-                  <div className="w-2.5 h-2.5 rounded-xs bg-cyan-500" />
-                  <div className="w-2.5 h-2.5 rounded-xs bg-cyan-400" />
-                  <span>More</span>
-                </div>
-                <span>Dec 2025</span>
-              </div>
-            </motion.div>
-
-            {/* Pinned Repositories Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {pinnedRepos.map((repo, idx) => (
-                <motion.a
-                  key={idx}
-                  href={repo.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="glass-panel p-5 rounded-2xl border border-border hover:border-border-hover transition-all card-glow-border cursor-pointer flex flex-col justify-between"
-                  whileHover={{ y: -4 }}
-                >
-                  <div>
-                    <div className="flex items-center gap-2 text-text font-heading font-bold text-sm">
-                      <BookMarked size={14} className="text-purple-400" />
-                      {repo.name}
-                    </div>
-                    <p className="text-xs text-mutedText mt-3 font-body leading-relaxed line-clamp-3">
-                      {repo.description}
-                    </p>
-                  </div>
-
-                  <div className="flex items-center justify-between mt-6 text-xs text-mutedText font-semibold font-code">
-                    <div className="flex items-center gap-1">
-                      <span
-                        className={`w-2.5 h-2.5 rounded-full ${repo.langColor} mr-1`}
-                      />
-                      {repo.language}
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <span className="flex items-center gap-0.5">
-                        <Star size={12} /> {repo.stars}
-                      </span>
-                      <span className="flex items-center gap-0.5">
-                        <GitFork size={12} /> {repo.forks}
-                      </span>
-                    </div>
-                  </div>
-                </motion.a>
-              ))}
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "space-between",
+              marginBottom: 20,
+            }}>
+              <span style={{
+                fontFamily: "var(--font-display)", fontWeight: 700,
+                fontSize: "0.95rem", color: "var(--ink)",
+              }}>
+                Contribution graph
+              </span>
+              <a
+                href="https://github.com/code-with-avii"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "flex", alignItems: "center", gap: 6,
+                  fontFamily: "var(--font-body)", fontSize: "0.78rem",
+                  color: "var(--muted)", textDecoration: "none",
+                  transition: "color 0.15s",
+                }}
+                onMouseEnter={e => e.currentTarget.style.color = "var(--ink)"}
+                onMouseLeave={e => e.currentTarget.style.color = "var(--muted)"}
+              >
+                <FaGithub size={14} /> @code-with-avii
+              </a>
             </div>
-          </div>
 
-          {/* Right Column: Key Statistics Metrics */}
-          <div className="lg:col-span-4 space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-6 rounded-2xl border border-border"
-            >
-              <h3 className="font-heading font-bold text-sm text-text mb-6 flex items-center gap-2">
-                <Code size={15} /> Code Base Metrics
-              </h3>
-
-              <div className="space-y-4">
-                {[
-                  { label: "Most Used Stack", val: "JavaScript / React" },
-                  { label: "Total Commits (2026)", val: "158 commits" },
-                  { label: "PRs Approved/Merged", val: "24 PRs" },
-                  { label: "Code Review Approvals", val: "8 reviews" },
-                ].map((stat, idx) => (
+            <div className="no-scrollbar" style={{ overflowX: "auto" }}>
+              <div style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(53, 1fr)",
+                gridTemplateRows: "repeat(7, 1fr)",
+                gridAutoFlow: "column",
+                gap: 3,
+                minWidth: 480,
+              }}>
+                {DOTS.map(dot => (
                   <div
-                    key={idx}
-                    className="flex justify-between border-b border-border pb-2.5"
-                  >
-                    <span className="text-xs text-mutedText font-body">
-                      {stat.label}
-                    </span>
-                    <span className="text-xs text-text font-bold font-code">
-                      {stat.val}
-                    </span>
-                  </div>
+                    key={dot.id}
+                    title={`Level ${dot.level}`}
+                    style={{
+                      width: "100%", aspectRatio: "1",
+                      borderRadius: 2,
+                      background: DOT_COLORS[dot.level],
+                    }}
+                  />
                 ))}
               </div>
+            </div>
+            
+            <div style={{
+              display: "flex", alignItems: "center", justifyContent: "flex-end",
+              gap: 4, marginTop: 12,
+              fontFamily: "var(--font-body)", fontSize: "0.62rem",
+              color: "var(--faint)", letterSpacing: "0.05em", textTransform: "uppercase",
+            }}>
+              Less
+              {DOT_COLORS.map((c, i) => (
+                <div key={i} style={{ width: 10, height: 10, borderRadius: 2, background: c }} />
+              ))}
+              More
+            </div>
+          </motion.div>
 
-              {/* Language Distribution chart */}
-              <div className="mt-8">
-                <h4 className="text-xs text-text font-heading font-bold mb-3">
-                  Top Languages Used
-                </h4>
-                <div className="h-2 rounded-full overflow-hidden flex w-full">
-                  <div
-                    className="bg-blue-100 h-full"
-                    style={{ width: "0%" }}
-                    title="TypeScript (0%)"
-                  />
-                  <div
-                    className="bg-sky-400 h-full"
-                    style={{ width: "55%" }}
-                    title="JavaScript (55%)"
-                  />
-                  <div
-                    className="bg-emerald-400 h-full"
-                    style={{ width: "15%" }}
-                    title="CSS/HTML (15%)"
-                  />
-                  <div
-                    className="bg-yellow-500 h-full"
-                    style={{ width: "30%" }}
-                    title="Others (30%)"
-                  />
+          {/* ── Pinned repos ──────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            style={{ display: "flex", flexDirection: "column", gap: 12 }}
+          >
+            {PINNED_REPOS.map((repo, i) => (
+              <motion.a
+                key={repo.name}
+                href={repo.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, x: 12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: 0.12 + i * 0.07 }}
+                className="card"
+                style={{
+                  padding: "18px 22px", textDecoration: "none",
+                  display: "flex", flexDirection: "column", gap: 6,
+                }}
+              >
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+                  <span style={{
+                    fontFamily: "var(--font-display)", fontWeight: 700,
+                    fontSize: "0.95rem", color: "var(--ink)", letterSpacing: "-0.01em",
+                  }}>
+                    {repo.name}
+                  </span>
+                  <ExternalLink size={13} style={{ color: "var(--faint)", flexShrink: 0, marginTop: 2 }} />
                 </div>
-
-                <div className="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-[10px] font-code text-mutedText">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-blue-100" /> TS
-                    (0%)
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-sky-400" /> JS
-                    (55%)
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400" /> CSS
-                    (15%)
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-yellow-500" />{" "}
-                    Others (30%)
+                <p style={{
+                  fontFamily: "var(--font-body)", fontSize: "0.82rem",
+                  color: "var(--muted)", lineHeight: 1.6, margin: 0,
+                }}>
+                  {repo.description}
+                </p>
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
+                  <span style={{
+                    width: 8, height: 8, borderRadius: "50%",
+                    background: "#e34c26", display: "inline-block", // HTML-like JS color
+                  }} />
+                  <span style={{
+                    fontFamily: "var(--font-body)", fontSize: "0.72rem",
+                    color: "var(--faint)",
+                  }}>
+                    {repo.language}
                   </span>
                 </div>
-              </div>
-            </motion.div>
-          </div>
+              </motion.a>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>

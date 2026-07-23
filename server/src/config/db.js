@@ -87,14 +87,18 @@ const seedDatabase = async () => {
     }
 
     // 2. Seed Skills
-    await Skill.deleteMany({});
-    await Skill.insertMany(initialSkills);
-    console.log("Skills collections force updated and seeded.");
+    const skillCount = await Skill.countDocuments();
+    if (skillCount === 0) {
+      await Skill.insertMany(initialSkills);
+      console.log("Default skills seeded.");
+    }
 
     // 3. Seed Projects
-    await Project.deleteMany({});
-    await Project.insertMany(initialProjects);
-    console.log("Projects collections force updated and seeded.");
+    const projectCount = await Project.countDocuments();
+    if (projectCount === 0) {
+      await Project.insertMany(initialProjects);
+      console.log("Default projects seeded.");
+    }
 
     // 4. Seed Experiences
     const expCount = await Experience.countDocuments();

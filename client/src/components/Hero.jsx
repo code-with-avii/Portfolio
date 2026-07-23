@@ -1,380 +1,248 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, ArrowRight, Download, Zap, GitPullRequest, Briefcase, Layers } from "lucide-react";
-import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
+import { ArrowRight, Code2, GitMerge, Award, Layers } from "lucide-react";
 
-const roles = [
-  "Full Stack MERN Developer",
-  "Frontend Specialist",
-  "GSSoC Contributor",
-  "Backend Engineer",
-];
-
-const credibilityCards = [
-  {
-    icon: <Briefcase className="text-purple-400" size={24} />,
-    title: "Internship Availability",
-    value: "Ready to Join",
-    description: "Available immediately for full-time or internship MERN roles (40 hrs/wk).",
-  },
-  {
-    icon: <GitPullRequest className="text-cyan-400" size={24} />,
-    title: "Open Source Contributions",
-    value: "100+ Merged PRs",
-    description: "Active contributor to GirlScript Summer of Code (GSSoC) and modern web tools.",
-  },
-  {
-    icon: <Layers className="text-emerald-400" size={24} />,
-    title: "Production Projects",
-    value: "10+ Web Apps Built",
-    description: "Developed end-to-end MERN portals, real-time engines, and custom AI integrations.",
-  },
-  {
-    icon: <Zap className="text-yellow-400" size={24} />,
-    title: "Engineering Impact",
-    value: "40% Latency Cut",
-    description: "Optimized REST API structures, database index mappings, and secure caching.",
-  },
+const CODE_LINES = [
+  { text: 'import { Developer } from "@abhishekh/core";', color: "var(--muted)" },
+  { text: '', color: "var(--ink)" },
+  { text: 'export const Profile = () => {', color: "var(--ink)" },
+  { text: '  return (', color: "var(--ink)" },
+  { text: '    <Developer', color: "var(--accent)" },
+  { text: '      role="Full Stack Engineer"', color: "var(--muted)" },
+  { text: '      stack={["MongoDB", "Express", "React", "Node"]}', color: "var(--muted)" },
+  { text: '      available={true}', color: "var(--muted)" },
+  { text: '    />', color: "var(--accent)" },
+  { text: '  );', color: "var(--ink)" },
+  { text: '};', color: "var(--ink)" },
 ];
 
 export default function Hero() {
-  const [roleIndex, setRoleIndex] = useState(0);
-  const heroRef = useRef(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [lineIdx, setLineIdx] = useState(0);
 
-  // Cycle role titles
   useEffect(() => {
-    const timer = setInterval(() => {
-      setRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, []);
+    if (lineIdx < CODE_LINES.length) {
+      const t = setTimeout(() => setLineIdx(i => i + 1), 300 + Math.random() * 400);
+      return () => clearTimeout(t);
+    } else {
+      const t = setTimeout(() => setLineIdx(0), 10000); // Loop after 10s
+      return () => clearTimeout(t);
+    }
+  }, [lineIdx]);
 
-  // Spotlight mouse track
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      setMousePos({ x, y });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
-
-  const handleScrollTo = (id) => {
+  const scrollTo = id => {
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
     <section
       id="home"
-      ref={heroRef}
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background pt-24 pb-16"
       style={{
-        "--x": `${mousePos.x}px`,
-        "--y": `${mousePos.y}px`,
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        background: "#000000",
+        padding: "120px 24px 80px",
+        position: "relative",
       }}
     >
-      {/* Background radial spotlight & grid */}
-      <div className="absolute inset-0 spotlight-glow pointer-events-none z-10" />
-      <div className="absolute inset-0 grid-bg opacity-45 pointer-events-none z-0" />
-
-      {/* Floating abstract particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none">
-        <motion.div
-          animate={{
-            y: [0, -25, 0],
-            x: [0, 15, 0],
-          }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/4 left-10 w-72 h-72 rounded-full bg-primary/10 blur-[100px]"
-        />
-        <motion.div
-          animate={{
-            y: [0, 30, 0],
-            x: [0, -20, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1,
-          }}
-          className="absolute bottom-1/4 right-10 w-96 h-96 rounded-full bg-secondary/10 blur-[120px]"
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full flex flex-col justify-between">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Main Hero Typography */}
-          <div className="lg:col-span-7 flex flex-col justify-center text-left ">
-            {/* Animated Greeting Label */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%" }}>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-center">
+          
+          {/* ── Left: Information Architecture ───────────────────────────────────── */}
+          <div>
+            {/* Status Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="inline-flex items-center space-x-2 border border-border-hover bg-border backdrop-blur-md px-3.5 py-1.5 rounded-full w-fit mb-6 text-sm text-cyan-400 font-semibold"
+              transition={{ duration: 0.5 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                fontFamily: "var(--font-mono)", fontSize: "0.75rem",
+                color: "var(--ink)", marginBottom: 32,
+                border: "1px solid var(--border)",
+                padding: "6px 14px", borderRadius: 4,
+                textTransform: "uppercase", letterSpacing: "0.05em"
+              }}
             >
-              <span className="flex h-2 w-2 relative">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-              </span>
-              <span>Available for Internship & Full-time Roles</span>
+              <span style={{ width: 8, height: 8, background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
+              Open for opportunities
             </motion.div>
 
-            {/* Hi, I'm Abhishekh Kumar */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+            {/* Headline */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-4xl sm:text-6xl font-extrabold font-heading text-text leading-tight mb-4"
+              transition={{ duration: 0.55, delay: 0.08 }}
             >
-              Hi, I'm{" "}
-              <span className="text-primary">
-                Abhishekh Kumar
-              </span>
-            </motion.h1>
+              <h1 style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(2.5rem, 6vw, 4.8rem)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.05,
+                color: "var(--ink)",
+                margin: 0,
+              }}>
+                Architecting high-performance <br className="hidden sm:block" />
+                <span style={{
+                  fontFamily: "var(--font-serif)",
+                  fontWeight: 400,
+                  fontStyle: "italic",
+                  color: "var(--muted)",
+                  paddingRight: "0.15em",
+                }}>
+                  web applications.
+                </span>
+              </h1>
+            </motion.div>
 
-            {/* Roles Cycler */}
-            <div className="h-14 sm:h-16 mb-6 gap-3 flex items-center">
-              <span className="text-xl sm:text-3xl font-heading text-mutedText font-medium whitespace-nowrap">
-                I am a
-              </span>
-              <div className="relative flex items-center h-full min-w-90">
-                <AnimatePresence mode="wait">
-                  <motion.span
-                    key={roleIndex}
-                    initial={{ y: 15, opacity: 0,filter:"blur(8px)" }}
-                    animate={{ y: 0, opacity: 1,filter:"blur(0px)" }}
-                    exit={{ y: -15, opacity: 0,filter:"blur(8px)"}}
-                    transition={{ duration: 0.4, ease:[0.22,1,0.36,1] }}
-                    className="absolute inset-y-0 left-0 flex items-center text-2xl sm:text-3xl font-heading font-bold text-primary whitespace-nowrap"
-                  >
-                    {roles[roleIndex]}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-            </div>
-
-            {/* Tagline */}
+            {/* Sub-headline */}
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-base sm:text-lg text-mutedText font-body max-w-xl mb-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.55, delay: 0.16 }}
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "1.1rem",
+                color: "var(--muted)",
+                maxWidth: 540,
+                lineHeight: 1.6,
+                marginTop: 24,
+              }}
             >
-              Building Fast, Scalable & Beautiful Web Applications. <br className="hidden sm:block" />
-              I build production-ready applications with React, Express, MongoDB and modern UI/UX.
+              Hi, I'm Abhishekh. A Full-Stack MERN Engineer focused on writing clean code, building robust APIs, and delivering high-performance user interfaces.
             </motion.p>
 
-            {/* Credibility Badges List */}
-            <motion.ul
-              initial={{ opacity: 0, y: 20 }}
+            {/* Trust Metrics Grid */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.25 }}
-              className="flex flex-col gap-3 mb-8 max-w-xl"
+              transition={{ duration: 0.55, delay: 0.22 }}
+              style={{
+                display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 12,
+                marginTop: 32,
+              }}
             >
               {[
-                "8+ Full Stack Projects",
-                "GSSoC 2026 Contributor",
-                "Open to SDE Internships",
-              ].map((badge, idx) => (
-                <li key={idx} className="flex items-center text-text text-sm sm:text-base font-medium">
-                  <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 mr-3 shrink-0">
-                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                  {badge}
-                </li>
+                { label: "PRs Merged", value: "100+", icon: GitMerge },
+                { label: "Contributor", value: "GSSoC '26", icon: Award },
+                { label: "Full-Stack Apps", value: "5+", icon: Layers },
+              ].map((metric, i) => (
+                <div key={i} style={{
+                  border: "1px solid var(--border)", background: "var(--surface)",
+                  padding: "16px", borderRadius: 8,
+                }}>
+                  <metric.icon size={16} color="var(--accent)" style={{ marginBottom: 12 }} />
+                  <div style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 700, color: "var(--ink)", marginBottom: 4 }}>
+                    {metric.value}
+                  </div>
+                  <div style={{ fontFamily: "var(--font-body)", fontSize: "0.8rem", color: "var(--muted)" }}>
+                    {metric.label}
+                  </div>
+                </div>
               ))}
-            </motion.ul>
+            </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.3 }}
-              className="flex flex-col sm:flex-row gap-4 mb-8"
+              transition={{ duration: 0.55, delay: 0.3 }}
+              style={{ display: "flex", gap: 16, marginTop: 40 }}
+              className="flex-col sm:flex-row"
             >
-              <button
-                onClick={() => handleScrollTo("projects")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-primary text-white font-semibold rounded-xl text-sm transition-all shadow-md hover:bg-primary/90 group gap-2 cursor-pointer"
+              <button 
+                onClick={() => scrollTo("projects")} 
+                style={{
+                  background: "var(--ink)", color: "#000000",
+                  fontFamily: "var(--font-body)", fontSize: "0.95rem", fontWeight: 600,
+                  padding: "14px 28px", border: "none", borderRadius: 6, cursor: "pointer",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                }}
+                className="w-full sm:w-auto hover:bg-gray-200 transition-colors"
               >
-                View Projects
-                <ArrowRight
-                  size={16}
-                  className="group-hover:translate-x-1 transition-transform"
-                />
+                View Architecture <ArrowRight size={16} />
               </button>
-
-              <button
-                onClick={() => handleScrollTo("contact")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface text-text font-semibold rounded-xl text-sm transition-all border border-border-hover hover:bg-surface-hover hover:border-white/20 cursor-pointer"
+              <button 
+                onClick={() => scrollTo("contact")} 
+                style={{
+                  background: "transparent", color: "var(--ink)",
+                  fontFamily: "var(--font-body)", fontSize: "0.95rem", fontWeight: 600,
+                  padding: "14px 28px", border: "1px solid var(--border-strong)", borderRadius: 6, cursor: "pointer",
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 10,
+                }}
+                className="w-full sm:w-auto hover:border-gray-400 transition-colors"
               >
                 Contact Me
               </button>
-
-              <button
-                onClick={() => alert("Resume download triggered (Mock PDF)")}
-                className="inline-flex items-center justify-center px-6 py-3.5 bg-surface/50 text-mutedText hover:text-text font-semibold rounded-xl text-sm transition-all border border-border hover:border-border-hover gap-2 cursor-pointer"
-              >
-                <Download size={15} /> Resume
-              </button>
-            </motion.div>
-
-            {/* Social Links */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1, delay: 0.4 }}
-              className="flex items-center space-x-5"
-            >
-              {[
-                {
-                  icon: <FaGithub size={20} />,
-                  href: "https://github.com/code-with-avii",
-                },
-                {
-                  icon: <FaLinkedin size={20} />,
-                  href: "https://www.linkedin.com/in/abhishekh07/",
-                },
-                { icon: <FaXTwitter size={20} />, href: "https://x.com/MondalAvii94420" },
-                {
-                  icon: <Mail size={20} />,
-                  href: "mailto:aviimondal689@gmail.com",
-                },
-              ].map((social, idx) => (
-                <a
-                  key={idx}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-lg bg-surface/50 hover:bg-surface-hover border border-border hover:border-border-hover text-mutedText hover:text-text flex items-center justify-center transition-all"
-                >
-                  {social.icon}
-                </a>
-              ))}
             </motion.div>
           </div>
 
-          {/* Interactive Floating Tech Stack visual */}
-          <div className="lg:col-span-5 relative h-95 sm:h-112.5 w-full flex items-center justify-center select-none">
-            {/* Visual Canvas Orbit circle */}
-            <div className="absolute w-70 h-70 sm:w-87.5 sm:h-87.5 rounded-full border border-border border-dashed animate-[spin_60s_linear_infinite]" />
-
-            {/* Center Core node */}
-            <motion.div
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 4, repeat: Infinity }}
-              className="absolute w-24 h-24 rounded-3xl bg-surface/85 border border-border-hover flex items-center justify-center shadow-md z-20"
+          {/* ── Right: Interactive Code Editor ─────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="w-full"
+          >
+            <div 
+              style={{ 
+                background: "#0a0a0a", border: "1px solid var(--border-strong)",
+                borderRadius: 12, overflow: "hidden",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+              }}
             >
-              <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center text-white font-bold text-xl">
-                AK
-              </div>
-            </motion.div>
-
-            {/* Orbiting Icons */}
-            {[
-              {
-                name: "React",
-                color: "text-sky-400",
-                delay: 0,
-                x: -120,
-                y: -70,
-              },
-              {
-                name: "Node.js",
-                color: "text-green-400",
-                delay: 1,
-                x: 120,
-                y: -70,
-              },
-              {
-                name: "MongoDB",
-                color: "text-emerald-500",
-                delay: 2,
-                x: 110,
-                y: 90,
-              },
-              {
-                name: "Tailwind",
-                color: "text-cyan-400",
-                delay: 3,
-                x: -110,
-                y: 90,
-              },
-              {
-                name: "Redux",
-                color: "text-purple-500",
-                delay: 4,
-                x: 0,
-                y: -130,
-              },
-              {
-                name: "Express",
-                color: "text-mutedText",
-                delay: 5,
-                x: 0,
-                y: 130,
-              },
-            ].map((tech, idx) => (
-              <motion.div
-                key={idx}
-                animate={{
-                  y: [tech.y, tech.y - 12, tech.y],
-                  x: [tech.x, tech.x + 8, tech.x],
-                }}
-                transition={{
-                  duration: 5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: tech.delay * 0.8,
-                }}
-                className={`absolute w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-surface/90 border border-border-hover hover:border-white/20 flex items-center justify-center text-sm font-semibold shadow-md ${tech.color} z-10 cursor-pointer`}
-                whileHover={{ scale: 1.15, rotate: 10 }}
-              >
-                <span className="text-[10px] sm:text-xs font-code font-bold uppercase">
-                  {tech.name.split(".")[0]}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Credibility Cards Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-16 sm:mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 w-full"
-        >
-          {credibilityCards.map((card, idx) => (
-            <div
-              key={idx}
-              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default bg-surface/50"
-            >
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-border/40 flex items-center justify-center mb-4">
-                  {card.icon}
+              {/* Editor Header */}
+              <div style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                padding: "12px 16px", borderBottom: "1px solid var(--border)", background: "#050505"
+              }}>
+                <div style={{ display: "flex", gap: 6 }}>
+                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#ef4444" }} />
+                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#eab308" }} />
+                  <div style={{ width: 10, height: 10, borderRadius: "50%", background: "#22c55e" }} />
                 </div>
-                <h3 className="text-xs text-mutedText font-semibold uppercase tracking-wider">
-                  {card.title}
-                </h3>
-                <div className="text-xl sm:text-2xl font-extrabold font-heading text-text mt-1">
-                  {card.value}
+                <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--muted)", display: "flex", alignItems: "center", gap: 6 }}>
+                  <Code2 size={14} /> Profile.tsx
                 </div>
-                <p className="text-xs sm:text-sm text-mutedText font-body mt-2 leading-relaxed">
-                  {card.description}
-                </p>
               </div>
+
+              {/* Editor Body */}
+              <div style={{ padding: "24px", fontFamily: "var(--font-mono)", fontSize: "0.85rem", lineHeight: 1.6, overflowX: "auto" }}>
+                {CODE_LINES.map((line, i) => (
+                  <div 
+                    key={i} 
+                    style={{ 
+                      display: "flex", opacity: i < lineIdx ? 1 : 0, 
+                      transition: "opacity 0.2s" 
+                    }}
+                  >
+                    <div style={{ width: 24, color: "#333", textAlign: "right", marginRight: 16, userSelect: "none" }}>
+                      {i + 1}
+                    </div>
+                    <div style={{ color: line.color, whiteSpace: "pre" }}>
+                      {line.text}
+                    </div>
+                  </div>
+                ))}
+                
+                {/* Blinking Cursor at active line */}
+                {lineIdx < CODE_LINES.length && (
+                  <div style={{ display: "flex" }}>
+                    <div style={{ width: 24, marginRight: 16 }} />
+                    <div className="animate-blink" style={{ width: 8, height: 16, background: "var(--accent)", marginTop: 4 }} />
+                  </div>
+                )}
+              </div>
+
             </div>
-          ))}
-        </motion.div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );

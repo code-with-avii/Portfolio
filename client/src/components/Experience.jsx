@@ -1,179 +1,158 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useAppSelector } from "../store/hooks.js";
 import { useGetExperiencesQuery } from "../store/apiSlice.js";
-import { Briefcase, Calendar, Star, Milestone } from "lucide-react";
+import { GitCommit, GitBranch } from "lucide-react";
 
 const fallbackExperiences = [
   {
     role: "Full Stack Developer",
     company: "Freelance & Open Source",
-    duration: "2025 - Present",
-    type: "Freelance Work",
+    duration: "2025 – Present",
+    type: "Freelance",
     technologies: ["React", "Next.js", "Node.js", "MongoDB", "OpenAI API"],
     achievements: [
-      "Architected custom E-commerce APIs and automated dashboard integrations.",
-      "Developed AI-assisted workflows resulting in a 40% reduction in client customer support ticket response times.",
+      "Architected custom e-commerce APIs and automated dashboard integrations.",
+      "Developed AI-assisted workflows reducing client support response times by 40%.",
     ],
+    hash: "a7f9d2e",
   },
-  // {
-  // role: 'Lead Project Developer',
-  // company: 'College Hackathons & Open Source',
-  // duration: '2024 - 2025',
-  // type: 'Team Projects',
-  // technologies: ['React', 'Tailwind CSS', 'Express.js', 'MongoDB', 'Socket.io'],
-  // achievements: [
-  // 'Won First Place in SIH (Smart India Hackathon) 2025 for building a real-time disaster resource dispatcher.',
-  // 'Mentored a team of 4 junior developers, enforcing clean git practices, unit tests, and continuous delivery.',
-  // 'Implemented full authentication flows using httpOnly secure cookies and JSON Web Tokens.'
-  // ]
-  // },
   {
     role: "Open Source Contributor",
-    company: "GitHub Ecosystem",
-    duration: "2025 - Present",
-    type: "Open Source Contributions",
-    technologies: ["Tailwind CSS", "Framer Motion", "Git"],
+    company: "GitHub / GSSoC 2026",
+    duration: "2025 – Present",
+    type: "Open Source",
+    technologies: ["Tailwind CSS", "Framer Motion", "Git", "React"],
     achievements: [
-      "Merged 100+ pull requests addressing performance bottlenecks and custom utility hook exports in component design files.",
-      "Active developer in the developer tooling space, building templates used by over 500+ student developers.",
+      "Merged 100+ pull requests addressing performance bottlenecks and custom utility hook exports.",
+      "Built templates adopted by 500+ student developers across the GSSoC ecosystem.",
     ],
+    hash: "4b1c9f8",
   },
   {
-    role: "Undergraduate ",
-    duration: "2024 - Present",
-    type: "College Projects",
+    role: "Undergraduate Engineer",
+    company: "B.Tech — Computer Science",
+    duration: "2024 – Present",
+    type: "Academic",
     technologies: ["JavaScript", "HTML5", "CSS3", "Node.js", "PostgreSQL"],
     achievements: [
-      "Developed and deployed the hostel management portal managing hostel activitiesCreated a centralized hostel management solution that automated key administrative tasks, enhanced communication between students and wardens, and improved the overall efficiency of hostel operations.",
-    //   "Designed highly responsive layouts supporting desktop, mobile, and display panels, with 100% lighthouse compliance.",
+      "Developed and deployed a hostel management portal that automated administrative tasks and improved operational efficiency.",
     ],
+    hash: "8f3d1a4",
   },
 ];
 
 export default function Experience() {
   const { data: reduxExps } = useGetExperiencesQuery();
-  const experiences = reduxExps && reduxExps.length > 0 ? reduxExps : fallbackExperiences;
+  // Ensure data has hashes if coming from API
+  const experiences = (reduxExps?.length > 0 ? reduxExps : fallbackExperiences).map((exp, i) => ({
+    ...exp,
+    hash: exp.hash || Math.random().toString(16).slice(2, 9),
+  }));
 
   return (
     <section
       id="experience"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "clamp(64px, 10vw, 120px) 0",
+        borderTop: "1px solid var(--border)",
+        scrollMarginTop: 80,
+      }}
     >
-      {/* Background blurs */}
-      <div className="absolute top-1/4 right-0 w-75 h-75 unded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-primary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <Milestone size={12} /> Career Development
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
-          >
-            Professional & Project Timeline
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            Tracing my experiences across college initiatives, engineering
-            teams, and open source ecosystems.
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 04 ]</div>
+          <h2 className="section-title">Experience.log</h2>
+        </motion.div>
 
-        {/* Vertical Timeline Tree */}
-        <div className="relative border-l border-zinc-800 md:border-l-0 md:before:absolute md:before:left-1/2 md:before:top-0 md:before:h-full md:before:w-0.5 md:before:bg-surface-hover max-w-5xl mx-auto space-y-12">
-          {experiences.map((exp, idx) => {
-            const isLeft = idx % 2 === 0;
+        {/* Git History Timeline */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 0, paddingLeft: 8 }}>
+          
+          <div style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--muted)", marginBottom: 16, fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
+            <GitBranch size={16} />
+            <span>branch: <strong>main</strong></span>
+          </div>
 
-            return (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className={`relative flex flex-col md:flex-row items-stretch w-full ${
-                  isLeft ? "md:flex-row-reverse" : ""
-                }`}
-              >
-                {/* Desktop Center Timeline Node Icon */}
-                <span className="absolute -left-4.25 md:left-1/2 md:-translate-x-1/2 top-4 w-9 h-9 rounded-full bg-surface border-2 border-zinc-700 flex items-center justify-center text-mutedText z-20 shadow-md group-hover:border-primary transition-all">
-                  <Briefcase size={14} className="text-cyan-400" />
-                </span>
+          {experiences.map((exp, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: idx * 0.08 }}
+              style={{
+                position: "relative",
+                paddingLeft: 40,
+                paddingBottom: 48,
+                borderLeft: idx === experiences.length - 1 ? "2px solid transparent" : "2px solid var(--border-strong)",
+              }}
+            >
+              {/* Git Commit Node */}
+              <div style={{
+                position: "absolute", left: -9, top: 0,
+                width: 16, height: 16, borderRadius: "50%",
+                background: "var(--canvas)", border: "3px solid var(--accent)",
+              }} />
 
-                {/* Main Card Wrapper */}
-                <div
-                  className={`w-full md:w-1/2 pl-6 md:pl-0 ${isLeft ? "md:pr-10" : "md:pl-10"}`}
-                >
-                  <div className="glass-panel p-6 sm:p-8 rounded-2xl border border-border hover:border-border-hover transition-all card-glow-border cursor-default h-full flex flex-col justify-between">
-                    <div>
-                      {/* Header metadata */}
-                      <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
-                        <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 bg-border border border-border-hover rounded-full text-cyan-400">
-                          {exp.type}
-                        </span>
-                        <div className="flex items-center text-xs text-mutedText font-code">
-                          <Calendar size={13} className="mr-1.5" />
-                          {exp.duration}
-                        </div>
-                      </div>
+              {/* Commit Hash & Date */}
+              <div style={{
+                display: "flex", alignItems: "center", gap: 12, marginBottom: 12,
+                fontFamily: "var(--font-mono)", fontSize: "0.75rem",
+              }}>
+                <span style={{ color: "var(--accent)" }}>commit {exp.hash}</span>
+                <span style={{ color: "var(--muted)" }}>{exp.duration}</span>
+              </div>
 
-                      {/* Role & Company */}
-                      <h3 className="text-lg font-heading font-bold text-text leading-snug">
-                        {exp.role}
-                      </h3>
-                      <h4 className="text-sm font-body text-mutedText font-semibold mb-5">
-                        {exp.company}
-                      </h4>
-
-                      {/* Achievements bullets */}
-                      <ul className="space-y-2.5 text-mutedText text-xs sm:text-sm font-body mb-6">
-                        {exp.achievements.map((bullet, bIdx) => (
-                          <li
-                            key={bIdx}
-                            className="flex items-start gap-2.5 leading-relaxed"
-                          >
-                            <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-primary" />
-                            <span>{bullet}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Tech list tag array */}
-                    {exp.technologies && exp.technologies.length > 0 && (
-                      <div className="flex flex-wrap gap-1.5 pt-4 border-t border-border">
-                        {exp.technologies.map((tech, tIdx) => (
-                          <span
-                            key={tIdx}
-                            className="px-2.5 py-0.5 rounded-md bg-surface border border-border text-[10px] sm:text-xs font-code text-mutedText"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+              {/* Commit Message (Role & Company) */}
+              <div className="card" style={{ padding: 24 }}>
+                <h3 style={{
+                  fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.1rem",
+                  color: "var(--ink)", letterSpacing: "-0.02em", margin: "0 0 4px 0",
+                }}>
+                  {exp.role}
+                </h3>
+                <div style={{
+                  fontFamily: "var(--font-mono)", fontSize: "0.8rem",
+                  color: "var(--muted)", marginBottom: 16,
+                }}>
+                  @ {exp.company}
                 </div>
 
-                {/* Empty filler block for desktop layout symmetry */}
-                <div className="hidden md:block w-1/2" />
-              </motion.div>
-            );
-          })}
+                {/* Achievements block resembling file diffs */}
+                <div style={{ display: "flex", flexDirection: "column", gap: 8, marginBottom: 20 }}>
+                  {exp.achievements.map((bullet, bi) => (
+                    <p key={bi} style={{
+                      fontFamily: "var(--font-mono)", fontSize: "0.85rem",
+                      color: "var(--muted)", lineHeight: 1.6, margin: 0,
+                      display: "flex", gap: 12
+                    }}>
+                      <span style={{ color: "#22c55e", flexShrink: 0 }}>+</span>
+                      <span>{bullet}</span>
+                    </p>
+                  ))}
+                </div>
+
+                {/* Tags */}
+                {exp.technologies?.length > 0 && (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 7, marginTop: 16, paddingTop: 16, borderTop: "1px dashed var(--border)" }}>
+                    {exp.technologies.map(t => (
+                      <span key={t} className="tag" style={{ background: "transparent", borderColor: "var(--border-strong)", color: "var(--muted)" }}>
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

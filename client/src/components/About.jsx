@@ -1,253 +1,105 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import {
-  Award,
-  Briefcase,
-  Code,
-  Sparkles,
-  BookOpen,
-  Terminal,
-} from "lucide-react";
-
-const stats = [
-  {
-    icon: <Briefcase className="text-purple-400" size={20} />,
-    label: "Projects Completed",
-    value: "10+",
-  },
-  {
-    icon: <Code className="text-cyan-400" size={20} />,
-    label: "Primary Stack",
-    value: "MERN Stack",
-  },
-  {
-    icon: <Terminal className="text-emerald-400" size={20} />,
-    label: "Architecture Focus",
-    value: "Backend/API",
-  },
-  {
-    icon: <Award className="text-yellow-400" size={20} />,
-    label: "Core Philosophy",
-    value: "Always Learning",
-  },
-];
-
-const timelineMilestones = [
-  {
-    year: "2024",
-    title: "Started Programming",
-    description:
-      "Began with C/C++, HTML/CSS, Javascipt and basic algorithmic problem solving. Discovered a deep passion for computing systems and software building.",
-    detail:
-      "Learned memory structures, pointers, and basic computer science topics.",
-  },
-  {
-    year: "2025",
-    title: "Learned React & Modern Web",
-    description:
-      "Transitioned to modern JavaScript and React. Built interactive dashboards and component libraries, understanding clean state management.",
-    detail:
-      "Mastered Redux Toolkit, Context API, responsive Tailwind styles, and SPA routing.",
-  },
-  {
-    year: "2025",
-    title: "Built MERN Applications",
-    description:
-      "Integrated Express and MongoDB backends. Designed RESTful architectures, database indexing, and user schema relational mappings.",
-    detail:
-      "Created complete CRUD portals, including hospital registries and real-time chat APIs.",
-  },
-  {
-    year: "2026",
-    title: "Advanced Backend Development",
-    description:
-      "Focused on microservices, performance caching via Redis, rate limiters, session protection, JWT security, and file-upload pipelines.",
-    detail:
-      "Worked with security frameworks like Helmet, CORS configurations, and input validators.",
-  },
-  {
-    year: "2026",
-    title: "Open Source Contributor",
-    description:
-      "Actively contributing to UI component packs and developer tools. Writing accessible, clean code tested extensively under continuous integration.",
-    detail:
-      "Merged 100+ pull requests",
-  },
-];
+import { ArrowUpRight, GraduationCap, Code2, Globe } from "lucide-react";
 
 export default function About() {
-  const [activeMilestone, setActiveMilestone] = useState(0);
-
   return (
     <section
       id="about"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "clamp(64px, 10vw, 120px) 0",
+        borderTop: "1px solid var(--border)",
+        scrollMarginTop: 80,
+      }}
     >
-      {/* Background blurs */}
-      <div className="absolute top-1/3 right-0 w-87.5 h-87.5rounded-full bg-primary/5 blur-[120px] pointer-events-none" />
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 01 ]</div>
+          <h2 className="section-title">Background</h2>
+        </motion.div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 mt-12">
+          
+          {/* Left Column: Big Statement */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-primary mb-2 flex items-center justify-center gap-1.5"
+            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <Sparkles size={12} /> My Story
+            <h3 style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              fontWeight: 700,
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              margin: "0 0 24px 0",
+              letterSpacing: "-0.03em"
+            }}>
+              Driven by a passion for <span style={{ color: "var(--accent)" }}>clean code</span> and scalable architecture.
+            </h3>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>
+              I believe that great software is built at the intersection of robust backend engineering and seamless user experiences.
+            </p>
           </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
-          >
-            A Visual Journey of Engineering
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            I construct performance-driven web products, focusing on robust
-            backend infrastructures and fluid user interfaces.
-          </motion.p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Narrative & Stats - Left column */}
-          <div className="lg:col-span-6 space-y-8">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-            >
-              <h3 className="text-xl font-heading font-bold text-text mb-4 flex items-center gap-2">
-                <BookOpen className="text-primary" size={18} /> Who I Am
-              </h3>
-              <div className="space-y-4 font-body text-mutedText text-sm sm:text-base leading-relaxed">
-                <p>
-                  I'm a Full Stack Developer passionate about building scalable web applications using React, Node.js, Express and MongoDB. I enjoy solving real-world problems through clean UI, optimized backend architecture and responsive user experiences.
-                </p>
-                <div className="pt-2">
-                  <h4 className="font-heading font-bold text-text mb-3">Core Technologies:</h4>
-                  <ul className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm">
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-cyan-400"></div>React</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>TypeScript</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>Node</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-gray-400"></div>Express</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500"></div>MongoDB</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-teal-400"></div>Tailwind</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>Redux</li>
-                    <li className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-yellow-400"></div>REST APIs</li>
-                  </ul>
+          {/* Right Column: Real Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            style={{ display: "flex", flexDirection: "column", gap: 32 }}
+          >
+            {/* Paragraphs */}
+            <div style={{ display: "flex", flexDirection: "column", gap: 20, fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--ink)", lineHeight: 1.7 }}>
+              <p style={{ margin: 0 }}>
+                I am a <strong>Full Stack Engineer</strong> specializing in the MERN stack (MongoDB, Express, React, Node.js). My journey in software development started with a deep curiosity about how systems communicate, leading me to focus heavily on backend architecture and API design.
+              </p>
+              <p style={{ margin: 0 }}>
+                Currently pursuing my <strong>B.E. in Information Technology</strong>, I bridge the gap between academic theory and production-grade engineering. I am actively involved in the open-source community as a contributor to GSSoC 2026, where I collaborate with developers worldwide to build better tools.
+              </p>
+              <p style={{ margin: 0 }}>
+                Whether it's optimizing database queries for sub-200ms response times or crafting fluid React interfaces, I approach every project with an engineering mindset: <em>measure, optimize, and scale.</em>
+              </p>
+            </div>
+
+            {/* Quick Facts Bento */}
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 12 }}>
+              <div style={{
+                background: "#0a0a0a", border: "1px solid var(--border)", borderRadius: 8, padding: "20px",
+                display: "flex", flexDirection: "column", gap: 12
+              }}>
+                <GraduationCap size={20} color="var(--accent)" />
+                <div>
+                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--ink)", fontSize: "1.1rem" }}>Education</div>
+                  <div style={{ fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: "0.9rem", marginTop: 4 }}>B.E. Information Technology</div>
                 </div>
               </div>
-            </motion.div>
 
-            {/* Statistics Cards */}
-            <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 15 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="glass-panel p-5 rounded-xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-border flex items-center justify-center mb-3">
-                    {stat.icon}
-                  </div>
-                  <div>
-                    <div className="text-2xl font-bold font-heading text-text">
-                      {stat.value}
-                    </div>
-                    <div className="text-xs text-mutedText mt-0.5">
-                      {stat.label}
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-
-          {/* Interactive Timeline - Right column */}
-          <div className="lg:col-span-6">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-            >
-              <h3 className="text-xl font-heading font-bold text-text mb-6">
-                Interactive Timeline
-              </h3>
-
-              <div className="relative border-l border-border-hover pl-6 space-y-8 pb-4">
-                {timelineMilestones.map((milestone, idx) => {
-                  const isActive = activeMilestone === idx;
-                  return (
-                    <div
-                      key={idx}
-                      className="relative cursor-pointer group"
-                      onClick={() => setActiveMilestone(idx)}
-                    >
-                      {/* Timeline dot */}
-                      <span
-                        className={`absolute -left-7.75 top-1 w-4 h-4 rounded-full border-2 transition-all duration-300 ${
-                          isActive
-                            ? "bg-primary border-primary scale-125 shadow-glow-primary"
-                            : "bg-surface border-zinc-700 group-hover:border-zinc-500"
-                        }`}
-                      />
-
-                      {/* Timeline Item Content */}
-                      <div className="transition-all duration-300">
-                        <div className="flex items-center gap-2">
-                          <span
-                            className={`text-xs font-code font-bold px-2 py-0.5 rounded ${
-                              isActive
-                                ? "bg-primary/20 text-primary"
-                                : "bg-border text-mutedText"
-                            }`}
-                          >
-                            {milestone.year}
-                          </span>
-                          <h4
-                            className={`font-heading font-bold text-sm sm:text-base transition-colors ${
-                              isActive
-                                ? "text-text"
-                                : "text-mutedText group-hover:text-text"
-                            }`}
-                          >
-                            {milestone.title}
-                          </h4>
-                        </div>
-
-                        {isActive && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            className="mt-2 text-xs sm:text-sm text-mutedText space-y-2 pl-1 overflow-hidden"
-                          >
-                            <p>{milestone.description}</p>
-                            <p className="text-[11px] text-cyan-400 font-code font-semibold border-l border-cyan-500/30 pl-2">
-                              {milestone.detail}
-                            </p>
-                          </motion.div>
-                        )}
-                      </div>
-                    </div>
-                  );
-                })}
+              <div style={{
+                background: "#0a0a0a", border: "1px solid var(--border)", borderRadius: 8, padding: "20px",
+                display: "flex", flexDirection: "column", gap: 12
+              }}>
+                <Globe size={20} color="var(--accent)" />
+                <div>
+                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--ink)", fontSize: "1.1rem" }}>Location</div>
+                  <div style={{ fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: "0.9rem", marginTop: 4 }}>India (Open to Remote)</div>
+                </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+
+          </motion.div>
+
         </div>
       </div>
     </section>

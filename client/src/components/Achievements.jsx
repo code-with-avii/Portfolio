@@ -1,185 +1,208 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import { useAppSelector } from "../store/hooks.js";
 import { useGetAchievementsQuery } from "../store/apiSlice.js";
-import { Trophy, Code, Award, Flame, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 
+/* ── Fallback data ────────────────────────────────────────────────────────── */
 const fallbackAchievements = [
-
   {
     _id: "mem-ach-2",
     title: "100+ Merged Pull Requests",
     category: "Open Source",
     value: "Active Contributor",
     description:
-      "Contributed performance patches, accessibility audits, and custom utility features to popular repositories.",
+      "Contributed performance patches, accessibility audits, and custom utility features to popular repositories across GSSoC 2026.",
     link: "https://github.com/code-with-avii",
-    date: "2024 - Present",
+    date: "2024 – Present",
   },
 ];
 
-// Helper component for count-up animations
-const AnimatedCounter = ({ value, label, duration = 2 }) => {
+/* ── Count-up hook ────────────────────────────────────────────────────────── */
+function useCountUp(target, duration = 1800) {
   const [count, setCount] = useState(0);
+  const rafRef = useRef(null);
 
   useEffect(() => {
-    let start = 0;
-    const end = value;
-    if (start === end) return;
+    let start = null;
+    const step = (ts) => {
+      if (!start) start = ts;
+      const elapsed = ts - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(eased * target));
+      if (progress < 1) rafRef.current = requestAnimationFrame(step);
+    };
+    rafRef.current = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [target, duration]);
 
-    const totalMiliseconds = duration * 1000;
-    const incrementTime = Math.max(Math.floor(totalMiliseconds / end), 20);
+  return count;
+}
 
-    const timer = setInterval(() => {
-      start += 1;
-      setCount(start);
-      if (start >= end) clearInterval(timer);
-    }, incrementTime);
-
-    return () => clearInterval(timer);
-  }, [value, duration]);
-
+/* ── Stat counter card ───────────────────────────────────────────────────── */
+function StatCard({ value, suffix = "+", label }) {
+  const count = useCountUp(value);
   return (
-    <div className="text-center p-6 bg-surface/50 border border-border rounded-2xl">
-      <div className="text-3xl sm:text-4xl font-extrabold font-heading text-primary">
-        {count}+
+    <div
+      className="bento-card"
+      style={{ padding: "24px 20px", textAlign: "center" }}
+    >
+      <div style={{
+        fontFamily: "var(--font-display)", fontWeight: 800,
+        fontSize: "clamp(1.8rem, 4vw, 2.6rem)", letterSpacing: "-0.05em",
+        color: "var(--ink)",
+      }}>
+        {count.toLocaleString()}{suffix}
       </div>
-      <div className="text-xs text-mutedText font-semibold mt-2 uppercase tracking-wider">
+      <div style={{
+        fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.08em",
+        textTransform: "uppercase", color: "var(--ink-muted)", marginTop: 6,
+      }}>
         {label}
       </div>
     </div>
   );
+}
+
+const CATEGORY_ACCENT = {
+  "Open Source":       "#A78BFA",
+  "Hackathons":        "#F59E0B",
+  "Certifications":    "#60A5FA",
+  "GitHub Milestones": "#34D399",
+  "Coding Profile":    "#F472B6",
 };
 
-const categoryColors = {
-  "Open Source": "border-purple-500/20 text-purple-400 bg-purple-500/5",
-  Hackathons: "border-yellow-500/20 text-yellow-400 bg-yellow-500/5",
-  Certifications: "border-cyan-500/20 text-cyan-400 bg-cyan-500/5",
-  "GitHub Milestones":
-    "border-emerald-500/20 text-emerald-400 bg-emerald-500/5",
-  "Coding Profile": "border-pink-500/20 text-pink-400 bg-pink-500/5",
-};
-
-const categoryIcons = {
-  "Open Source": <Code size={16} />,
-  Hackathons: <Trophy size={16} />,
-  Certifications: <Award size={16} />,
-  "GitHub Milestones": <Code size={16} />,
-  "Coding Profile": <Flame size={16} />,
-};
-
+/* ── Main component ──────────────────────────────────────────────────────── */
 export default function Achievements() {
   const { data: reduxAchs } = useGetAchievementsQuery();
-  const achievements = reduxAchs && reduxAchs.length > 0 ? reduxAchs : fallbackAchievements;
+  const achievements = reduxAchs?.length > 0 ? reduxAchs : fallbackAchievements;
 
   return (
     <section
       id="achievements"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "96px 0",
+        borderTop: "1px solid var(--border)",
+      }}
     >
-      {/* Background blurs */}
-      <div className="absolute top-1/2 right-0 w-100 h-100 rounded-full bg-primary/5 blur-[120px] pointer-events-none -translate-y-1/2" />
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-primary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <Trophy size={12} /> Milestones
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
-          >
-            Recognition & Achievements
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            A validation checklist of certifications, platform ranks, and
-            hackathon milestones.
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 05 ]</div>
+          <h2 className="section-title">Milestones</h2>
+        </motion.div>
 
-        {/* Counters Grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto mb-16">
-          <AnimatedCounter value={10} label="Projects Built" />
-          <AnimatedCounter value={500} label="Github Contributions" />
-          <AnimatedCounter value={5} label="Certifications" />
-          <AnimatedCounter value={1500} label="Coding Hours" />
-        </div>
+        {/* Stat row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.08 }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
+            gap: 12,
+            marginBottom: 40,
+          }}
+        >
+          <StatCard value={10}   suffix="+" label="Projects Built"       />
+          <StatCard value={500}  suffix="+" label="GitHub Contributions"  />
+          <StatCard value={100}  suffix="+" label="Merged PRs"            />
+          <StatCard value={1500} suffix="+" label="Coding Hours"          />
+        </motion.div>
 
-        {/* Achievements Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {achievements.map((ach) => (
-            <motion.div
-              key={ach._id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -5 }}
-              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between hover:border-border-hover transition-all card-glow-border cursor-default"
-            >
-              <div>
-                {/* Header Category and Date */}
-                <div className="flex items-center justify-between gap-2 mb-4">
-                  <span
-                    className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full border text-xs font-semibold ${
-                      categoryColors[ach.category] ||
-                      "border-zinc-800 text-mutedText bg-surface-hover/10"
-                    }`}
-                  >
-                    {categoryIcons[ach.category]}
-                    {ach.category}
-                  </span>
-                  <span className="text-[10px] text-mutedText font-code font-bold">
-                    {ach.date}
-                  </span>
-                </div>
+        {/* Achievement cards */}
+        {achievements.length > 0 && (
+          <div style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+            gap: 16,
+          }}>
+            {achievements.map((ach, i) => {
+              const accent = CATEGORY_ACCENT[ach.category] || "var(--ink-muted)";
+              return (
+                <motion.div
+                  key={ach._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.07 }}
+                  className="bento-card"
+                  style={{ padding: "24px 26px", display: "flex", flexDirection: "column" }}
+                >
+                  {/* Top row */}
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+                    <span style={{
+                      fontFamily: "var(--font-mono)", fontSize: "0.65rem", letterSpacing: "0.09em",
+                      textTransform: "uppercase", color: accent,
+                      background: `${accent}14`, border: `1px solid ${accent}33`,
+                      padding: "3px 10px", borderRadius: 6,
+                    }}>
+                      {ach.category}
+                    </span>
+                    <span style={{
+                      fontFamily: "var(--font-mono)", fontSize: "0.65rem",
+                      color: "var(--ink-faint)", letterSpacing: "0.04em",
+                    }}>
+                      {ach.date}
+                    </span>
+                  </div>
 
-                {/* Title & Badge Value */}
-                <h3 className="text-base sm:text-lg font-heading font-bold text-text leading-snug">
-                  {ach.title}
-                </h3>
-                <div className="text-cyan-400 text-xs font-semibold font-code mt-1">
-                  {ach.value}
-                </div>
+                  <h3 style={{
+                    fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "0.98rem",
+                    color: "var(--ink)", letterSpacing: "-0.02em", marginBottom: 4,
+                  }}>
+                    {ach.title}
+                  </h3>
 
-                {/* Description */}
-                <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed mt-4">
-                  {ach.description}
-                </p>
-              </div>
+                  <div style={{
+                    fontFamily: "var(--font-mono)", fontSize: "0.72rem",
+                    color: accent, marginBottom: 12, letterSpacing: "0.04em",
+                  }}>
+                    {ach.value}
+                  </div>
 
-              {/* Footer link */}
-              {ach.link && (
-                <div className="mt-6 pt-4 border-t border-border">
-                  <a
-                    href={ach.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center text-xs text-mutedText hover:text-cyan-400 transition-colors gap-1.5 group"
-                  >
-                    View Verification
-                    <ExternalLink
-                      size={12}
-                      className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                    />
-                  </a>
-                </div>
-              )}
-            </motion.div>
-          ))}
-        </div>
+                  <p style={{
+                    fontFamily: "var(--font-body)", fontSize: "0.83rem",
+                    color: "var(--ink-muted)", lineHeight: 1.65, flex: 1,
+                    margin: 0,
+                  }}>
+                    {ach.description}
+                  </p>
+
+                  {ach.link && (
+                    <div style={{ marginTop: 18, paddingTop: 14, borderTop: "1px solid var(--border)" }}>
+                      <a
+                        href={ach.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "inline-flex", alignItems: "center", gap: 6,
+                          fontFamily: "var(--font-body)", fontSize: "0.78rem",
+                          color: "var(--ink-muted)", textDecoration: "none",
+                          transition: "color 0.15s",
+                        }}
+                        onMouseEnter={e => e.currentTarget.style.color = "var(--ink)"}
+                        onMouseLeave={e => e.currentTarget.style.color = "var(--ink-muted)"}
+                      >
+                        View on GitHub <ExternalLink size={11} />
+                      </a>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        )}
       </div>
     </section>
   );

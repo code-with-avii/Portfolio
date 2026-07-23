@@ -1,37 +1,22 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Cpu,
-  Database,
-  Settings,
-  Terminal,
-  Layers,
-} from "lucide-react";
 
-const skillCategories = [
+const CATEGORIES = [
   {
-    title: "Frontend",
-    icon: <Layers size={20} />,
-    description: "Building interactive user interfaces",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS"],
+    label: "Frontend",
+    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Redux"],
   },
   {
-    title: "Backend",
-    icon: <Terminal size={20} />,
-    description: "Designing robust APIs and logic pipelines",
-    skills: ["Node.js", "Express", "JWT", "REST APIs"],
+    label: "Backend",
+    skills: ["Node.js", "Express", "JWT Auth", "REST APIs", "WebSocket", "Helmet"],
   },
   {
-    title: "Database",
-    icon: <Database size={20} />,
-    description: "Data storage and management",
-    skills: ["MongoDB", "PostgreSQL"],
+    label: "Database",
+    skills: ["MongoDB", "Mongoose", "PostgreSQL", "Redis"],
   },
   {
-    title: "Tools",
-    icon: <Settings size={20} />,
-    description: "Workflow and code management",
-    skills: ["Git", "GitHub", "Vercel", "Render", "Postman", "VS Code"],
+    label: "Tooling",
+    skills: ["Git", "GitHub", "Postman", "VS Code", "Vercel", "Render", "Vite"],
   },
 ];
 
@@ -39,79 +24,102 @@ export default function Skills() {
   return (
     <section
       id="skills"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "clamp(64px, 10vw, 120px) 0",
+        borderTop: "1px solid var(--border)",
+        scrollMarginTop: 80,
+      }}
     >
-      {/* Background visual highlight */}
-      <div className="absolute top-1/2 left-0 w-112.5 h-112.5 rounded-full bg-secondary/5 blur-[130px] pointer-events-none -translate-y-1/2" />
+      <div style={{ maxWidth: 900, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-secondary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <Cpu size={14} /> Technical Capability
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
-          >
-            My Tech Stack & Tools
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            An organized breakdown of the technologies I use to build scalable products.
-          </motion.p>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 02 ]</div>
+          <h2 className="section-title">Tech Stack</h2>
+        </motion.div>
 
-        {/* Categorized Skills Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
-          {skillCategories.map((category, idx) => (
-            <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1, duration: 0.5 }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border flex flex-col hover:border-border-hover transition-all"
-            >
-              <div className="flex items-center gap-4 mb-6 border-b border-border/50 pb-5">
-                <span className="p-3 rounded-xl bg-surface border border-border-hover text-cyan-400 shadow-sm">
-                  {category.icon}
-                </span>
-                <div>
-                  <h3 className="font-heading font-extrabold text-xl text-text">
-                    {category.title}
-                  </h3>
-                  <p className="text-sm text-mutedText mt-1 font-body">
-                    {category.description}
-                  </p>
-                </div>
-              </div>
+        {/* Terminal Window */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="card"
+          style={{ background: "#050505", overflow: "hidden", border: "1px solid var(--border-strong)" }}
+        >
+          {/* Traffic Lights Header */}
+          <div style={{
+            display: "flex", gap: 6, padding: "14px 18px",
+            borderBottom: "1px solid var(--border)", background: "var(--surface)",
+            alignItems: "center"
+          }}>
+            <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#ef4444" }} />
+            <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#eab308" }} />
+            <div style={{ width: 12, height: 12, borderRadius: "50%", background: "#22c55e" }} />
+            <span style={{ marginLeft: 16, fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--muted)" }}>
+              bash — ~ /portfolio
+            </span>
+          </div>
 
-              <div className="flex flex-wrap gap-3 mt-auto">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="inline-flex items-center px-4 py-2 rounded-lg bg-surface/40 border border-border hover:border-zinc-500 hover:bg-surface/80 transition-colors text-sm text-text font-medium font-code"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 mr-2.5" />
-                    {skill}
-                  </span>
-                ))}
+          {/* Terminal Content */}
+          <div style={{
+            padding: "clamp(12px, 4vw, 24px)", fontFamily: "var(--font-mono)", fontSize: "clamp(0.72rem, 2vw, 0.85rem)",
+            color: "var(--ink)", lineHeight: 1.6, overflowX: "auto"
+          }} className="no-scrollbar">
+            
+            {/* Command */}
+            <div style={{ marginBottom: 16, display: "flex", gap: 8, flexWrap: "wrap" }}>
+              <span style={{ color: "#22c55e", fontWeight: 700 }}>abhishekh@portfolio:~$</span>
+              <span style={{ color: "var(--ink)" }}>npm list --depth=1</span>
+            </div>
+
+            {/* Tree Output */}
+            <div>
+              <div style={{ color: "var(--muted)", marginBottom: 8, wordBreak: "break-all" }}>
+                abhishekh-portfolio@1.0.0
               </div>
-            </motion.div>
-          ))}
-        </div>
+              
+              {CATEGORIES.map((cat, ci) => {
+                const isLastCat = ci === CATEGORIES.length - 1;
+                return (
+                  <div key={cat.label}>
+                    <div style={{ display: "flex", gap: 8 }}>
+                      <span style={{ color: "var(--muted)" }}>{isLastCat ? "└──" : "├──"}</span>
+                      <span style={{ color: "#60a5fa", fontWeight: 600 }}>{cat.label}</span>
+                    </div>
+                    
+                    {cat.skills.map((skill, si) => {
+                      const isLastSkill = si === cat.skills.length - 1;
+                      return (
+                        <div key={skill} style={{ display: "flex", gap: 8 }}>
+                          <span style={{ color: "var(--muted)" }}>
+                            {isLastCat ? "    " : "│   "}
+                            {isLastSkill ? "└──" : "├──"}
+                          </span>
+                          <span style={{ color: "var(--muted)" }}>{skill}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })}
+            </div>
+            
+            {/* Blinking Prompt */}
+            <div style={{ marginTop: 24, display: "flex", gap: 8 }}>
+              <span style={{ color: "#22c55e", fontWeight: 700 }}>abhishekh@portfolio:~$</span>
+              <span className="animate-blink" style={{ color: "var(--ink)" }}>_</span>
+            </div>
+
+          </div>
+        </motion.div>
       </div>
     </section>
   );

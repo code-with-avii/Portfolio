@@ -1,311 +1,222 @@
-import React, { useState, useEffect } from "react";
-import { Menu, X, FileText, Moon, Sun, User } from "lucide-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Menu, X } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Skills", href: "#skills" },
-  { name: "Projects", href: "#projects" },
+const NAV_LINKS = [
+  { name: "About",      href: "#about"      },
+  { name: "Skills",     href: "#skills"     },
+  { name: "Projects",   href: "#projects"   },
   { name: "Experience", href: "#experience" },
-  { name: "Achievements", href: "#achievements" },
-  { name: "Contact", href: "#contact" },
+  { name: "Contact",    href: "#contact"    },
 ];
 
-// Default profile picture configured in code
-const DEFAULT_PROFILE_PIC =
-  "";
-
 export default function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
+  const [isOpen, setIsOpen]     = useState(false);
+  const [active, setActive]     = useState("home");
   const [scrolled, setScrolled] = useState(false);
-  const [isDark, setIsDark] = useState(() => {
-    const saved = localStorage.getItem("theme");
-    return saved ? saved === "dark" : true; // Default to dark mode
-  });
-  const [profilePic, setProfilePic] = useState(() => {
-    return (
-      localStorage.getItem("admin_profile_pic") ||
-      localStorage.getItem("portfolio_profile_pic") ||
-      DEFAULT_PROFILE_PIC
-    );
-  });
+
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
 
-  // Listen for admin profile picture updates
+  /* scroll detection */
   useEffect(() => {
-    const handleStorageChange = () => {
-      const updatedPic =
-        localStorage.getItem("admin_profile_pic") ||
-        localStorage.getItem("portfolio_profile_pic") ||
-        DEFAULT_PROFILE_PIC;
-      setProfilePic(updatedPic);
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-    window.addEventListener("profilePicUpdated", handleStorageChange);
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-      window.removeEventListener("profilePicUpdated", handleStorageChange);
-    };
+    const fn = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
   }, []);
 
-  // Sync theme with HTML document
+  /* body lock when mobile menu is open */
   useEffect(() => {
-    const root = document.documentElement;
-    if (isDark) {
-      root.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      root.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
-  }, [isDark]);
-
-  // Prevent background scrolling when mobile menu is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.classList.add("overflow-hidden");
-    } else {
-      document.body.classList.remove("overflow-hidden");
-    }
-
-    return () => {
-      document.body.classList.remove("overflow-hidden");
-    };
+    document.body.style.overflow = isOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
   }, [isOpen]);
 
-  // Handle Escape key to close mobile drawer
+  /* Escape key */
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    const fn = e => { if (e.key === "Escape") setIsOpen(false); };
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
   }, []);
 
-  // Performance-optimized Scrollspy using IntersectionObserver
+  /* scrollspy */
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-
-    if (location.pathname !== "/") {
-      setActiveSection("");
-      return () => window.removeEventListener("scroll", handleScroll);
-    }
-
-    const sections = ["home", ...navLinks.map((link) => link.href.substring(1))];
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observerOptions = {
-      root: null,
-      rootMargin: "-45% 0px -45% 0px", // Triggers when section occupies the active middle portion
-      threshold: 0,
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
-    };
+    if (location.pathname !== "/") { setActive(""); return; }
+    const ids = ["home", ...NAV_LINKS.map(l => l.href.slice(1))];
+    const obs = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+    );
+    ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
+    return () => obs.disconnect();
   }, [location]);
 
-  const handleNavClick = (e, href) => {
+  const navTo = useCallback((e, href) => {
     e.preventDefault();
     setIsOpen(false);
-
-    if (location.pathname !== "/") {
-      navigate("/");
-      setTimeout(() => {
-        const el = document.querySelector(href);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 100);
-    } else {
+    const go = () => {
       const el = document.querySelector(href);
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const handleLogoKeyDown = (e) => {
-    if (e.key === "Enter" || e.key === " ") {
-      e.preventDefault();
-      navigate("/");
-    }
-  };
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 72;
+      window.scrollTo({ top, behavior: "smooth" });
+    };
+    if (location.pathname !== "/") { navigate("/"); setTimeout(go, 120); } else go();
+  }, [location, navigate]);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? "glass-panel py-3 shadow-lg border-b border-border"
-          : "bg-transparent py-3 sm:py-4"
-      }`}
-      aria-label="Main Navigation"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-12">
-          {/* Logo & Profile Picture */}
-          <div className="shrink-0 flex items-center gap-2.5">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden border-2 border-primary/40 flex items-center justify-center bg-surface relative shadow-sm shrink-0">
-              {profilePic ? (
-                <img
-                  src={profilePic}
-                  alt="Abhishekh Profile Avatar"
-                  className="w-full h-full object-cover"
-                  onError={() => setProfilePic(null)}
-                />
-              ) : (
-                <User size={20} className="text-primary" />
-              )}
-            </div>
+    <>
+      <nav
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+          background: scrolled ? "#000000" : "transparent",
+          borderBottom: scrolled ? "1px solid #1a1a1a" : "1px solid transparent",
+          transition: "background 0.3s ease, border-color 0.3s ease",
+        }}
+        aria-label="Main navigation"
+      >
+        <div style={{
+          maxWidth: 1100, margin: "0 auto", padding: "0 24px",
+          display: "flex", alignItems: "center", justifyContent: "space-between",
+          height: 56,
+        }}>
 
-            <div
-              className="cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-lg py-1 px-0.5"
-              onClick={() => navigate("/")}
-              onKeyDown={handleLogoKeyDown}
-              tabIndex={0}
-              role="link"
-              aria-label="Abhishekh Dev Home"
-            >
-              <span className="font-heading font-bold text-lg tracking-tight text-text hover:text-primary transition-colors">
-                Abhishekh
-                <span className="text-primary text-xs ml-1 bg-primary/10 px-1.5 py-0.5 rounded font-code">
-                  DEV
-                </span>
-              </span>
-            </div>
+          {/* Logo — Terminal Prompt Style */}
+          <button
+            onClick={() => navigate("/")}
+            aria-label="Go to top"
+            style={{
+              background: "none", border: "none", padding: 0, cursor: "pointer",
+              display: "flex", alignItems: "center", gap: 0,
+            }}
+          >
+            <span style={{
+              fontFamily: "var(--font-mono)", fontWeight: 700,
+              fontSize: "0.9rem", color: "#22c55e",
+            }}>
+              ~
+            </span>
+            <span style={{
+              fontFamily: "var(--font-mono)", fontWeight: 700,
+              fontSize: "0.9rem", color: "var(--muted)",
+            }}>
+              /
+            </span>
+            <span style={{
+              fontFamily: "var(--font-mono)", fontWeight: 700,
+              fontSize: "0.9rem", color: "var(--ink)",
+            }}>
+              abhishekh
+            </span>
+            <span className="animate-blink" style={{
+              fontFamily: "var(--font-mono)", fontWeight: 700,
+              fontSize: "0.9rem", color: "var(--ink)", marginLeft: 2,
+            }}>
+              _
+            </span>
+          </button>
+
+          {/* Desktop links */}
+          <div className="hidden md:flex" style={{ alignItems: "center", gap: 0 }}>
+            {NAV_LINKS.map((link, i) => {
+              const isActive = active === link.href.slice(1) && location.pathname === "/";
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={e => navTo(e, link.href)}
+                  aria-current={isActive ? "page" : undefined}
+                  style={{
+                    fontFamily: "var(--font-mono)", fontSize: "0.8rem", fontWeight: 500,
+                    color: isActive ? "var(--ink)" : "#6b7280",
+                    textDecoration: "none", padding: "6px 16px",
+                    transition: "color 0.15s ease",
+                    position: "relative",
+                  }}
+                  onMouseEnter={e => { if (!isActive) e.currentTarget.style.color = "var(--ink)"; }}
+                  onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = "#6b7280"; }}
+                >
+                  <span style={{
+                    color: isActive ? "#22c55e" : "transparent",
+                    marginRight: 4,
+                    transition: "color 0.15s",
+                  }}>
+                    &gt;
+                  </span>
+                  {link.name}
+                </a>
+              );
+            })}
           </div>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center space-x-6">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className={`relative font-body font-medium text-sm transition-colors py-2 px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-md ${
-                  activeSection === link.href.substring(1) &&
-                  location.pathname === "/"
-                    ? "text-text"
-                    : "text-mutedText hover:text-text"
-                }`}
-                aria-current={
-                  activeSection === link.href.substring(1) &&
-                  location.pathname === "/"
-                    ? "page"
-                    : undefined
-                }
-              >
-                {link.name}
-                {activeSection === link.href.substring(1) &&
-                  location.pathname === "/" && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary rounded-full transition-transform" />
-                  )}
-              </a>
-            ))}
-          </div>
-
-          {/* Action Tools (Resume & Mode) */}
-          <div className="hidden md:flex items-center space-x-4">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text hover:border-white/20 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-            >
-              {isDark ? <Sun size={18} aria-hidden="true" /> : <Moon size={18} aria-hidden="true" />}
-            </button>
-
-            <a
-              href="#resume"
-              onClick={(e) => {
-                e.preventDefault();
-                alert("Resume download triggered (Mock PDF)");
-              }}
-              className="inline-flex items-center px-4 py-2 text-xs font-semibold text-text bg-surface hover:bg-surface-hover border border-border-hover rounded-lg transition-all shadow-md group gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label="Download Resume PDF"
-            >
-              <FileText
-                size={14}
-                className="group-hover:text-primary transition-colors"
-                aria-hidden="true"
-              />
-              Resume
-            </a>
-          </div>
-
-          {/* Mobile Menu Buttons */}
-          <div className="md:hidden flex items-center space-x-3">
-            <button
-              onClick={() => setIsDark(!isDark)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
-            >
-              {isDark ? <Sun size={16} aria-hidden="true" /> : <Moon size={16} aria-hidden="true" />}
-            </button>
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg border border-border-hover bg-surface/50 text-mutedText hover:text-text transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-expanded={isOpen}
-              aria-controls="mobile-navigation-drawer"
-              aria-label={isOpen ? "Close Menu" : "Open Menu"}
-            >
-              {isOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
-            </button>
-          </div>
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setIsOpen(o => !o)}
+            aria-label={isOpen ? "Close menu" : "Open menu"}
+            className="md:hidden"
+            style={{
+              background: "none", border: "1px solid #1a1a1a", cursor: "pointer",
+              color: "var(--muted)", display: "flex", alignItems: "center",
+              justifyContent: "center",
+              padding: 6, borderRadius: 4, width: 36, height: 36,
+              transition: "color 0.15s, border-color 0.15s",
+            }}
+            onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; e.currentTarget.style.borderColor = "#333"; }}
+            onMouseLeave={e => { e.currentTarget.style.color = "var(--muted)"; e.currentTarget.style.borderColor = "#1a1a1a"; }}
+          >
+            {isOpen ? <X size={18} strokeWidth={1.5} /> : <Menu size={18} strokeWidth={1.5} />}
+          </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Drawer */}
+      {/* Mobile Full-Screen Terminal Menu */}
       <div
-        id="mobile-navigation-drawer"
-        className={`md:hidden fixed left-0 right-0 top-16 bg-background overflow-y-auto z-40 transition-all duration-300 ${
-          isOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
-        aria-label="Mobile Navigation"
         role="dialog"
         aria-modal="true"
+        aria-label="Mobile navigation"
+        style={{
+          position: "fixed", top: 0, left: 0, right: 0, bottom: 0,
+          background: "#000000", zIndex: 49, padding: "72px 24px 40px",
+          display: "flex", flexDirection: "column",
+          transform: isOpen ? "translateX(0)" : "translateX(100%)",
+          transition: "transform 0.28s cubic-bezier(0.4,0,0.2,1), visibility 0.28s",
+          visibility: isOpen ? "visible" : "hidden",
+          overflowY: "auto",
+        }}
       >
-        <div className="px-4 py-6 space-y-3">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={(e) => handleNavClick(e, link.href)}
-              className="block px-4 py-3 rounded-lg bg-surface/40 border border-border text-base font-medium text-mutedText hover:text-text hover:bg-surface/80 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-            >
-              {link.name}
-            </a>
-          ))}
-          <div className="pt-4 border-t border-border">
-            <button
-              onClick={() => alert("Resume download triggered (Mock PDF)")}
-              className="w-full flex items-center justify-center py-4 bg-primary text-white font-medium rounded-lg text-sm transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              aria-label="Download Resume PDF"
-            >
-              <FileText size={16} className="mr-2" aria-hidden="true" /> Download Resume
-            </button>
+        {/* Terminal Header */}
+        <div style={{
+          fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "#22c55e",
+          marginBottom: 32, paddingBottom: 16, borderBottom: "1px dashed #1a1a1a",
+        }}>
+          root@abhishekh:~$ ls -la ./pages
+        </div>
+
+        {NAV_LINKS.map((link, i) => (
+          <a
+            key={link.name}
+            href={link.href}
+            onClick={e => navTo(e, link.href)}
+            style={{
+              display: "flex", alignItems: "center", gap: 12,
+              padding: "20px 0",
+              fontFamily: "var(--font-mono)", fontSize: "1.1rem", fontWeight: 600,
+              color: "var(--ink)", textDecoration: "none",
+              borderBottom: "1px solid #111",
+              transition: "color 0.15s",
+            }}
+          >
+            <span style={{ color: "#22c55e", fontSize: "0.85rem" }}>{`0${i + 1}`}</span>
+            <span>{link.name}</span>
+          </a>
+        ))}
+
+        <div style={{ marginTop: "auto", paddingTop: 32, borderTop: "1px dashed #1a1a1a" }}>
+          <div style={{
+            fontFamily: "var(--font-mono)", fontSize: "0.75rem", color: "var(--muted)",
+          }}>
+            <span style={{ color: "#22c55e" }}>abhishekh@portfolio:~$</span> exit
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 }

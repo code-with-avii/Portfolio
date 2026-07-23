@@ -1,30 +1,48 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  Mail,
-  Send,
-  CheckCircle2,
-  AlertCircle,
-  Copy,
-  Check,
-} from "lucide-react";
+import { Mail, Send, CheckCircle2, AlertCircle, Copy, Check } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import confetti from "canvas-confetti";
-import { href } from "react-router";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
 
+/* ── Shared input style ──────────────────────────────────────────────────── */
+const inputStyle = {
+  width: "100%",
+  fontFamily: "var(--font-body)",
+  fontSize: "0.875rem",
+  color: "var(--ink)",
+  background: "var(--surface-2)",
+  border: "1px solid var(--border)",
+  borderRadius: 10,
+  padding: "10px 14px",
+  outline: "none",
+  transition: "border-color 0.15s",
+  resize: "none",
+};
+
+const labelStyle = {
+  display: "block",
+  fontFamily: "var(--font-mono)",
+  fontSize: "0.68rem",
+  letterSpacing: "0.06em",
+  textTransform: "uppercase",
+  color: "var(--ink-muted)",
+  marginBottom: 6,
+};
+
+const SOCIALS = [
+  { label: "GitHub",   href: "https://github.com/code-with-avii",            icon: FaGithub   },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhishekh07/",      icon: FaLinkedin },
+  { label: "Twitter",  href: "https://x.com/MondalAvii94420",                 icon: FaXTwitter },
+];
+
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState("idle");
-  const [errorMessage, setErrorMessage] = useState("");
-  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [loading, setLoading]   = useState(false);
+  const [status, setStatus]     = useState("idle"); // idle | success | error
+  const [errorMsg, setErrorMsg] = useState("");
+  const [copied, setCopied]     = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("aviimondal689@gmail.com");
@@ -32,59 +50,39 @@ export default function Contact() {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleInputChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(p => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.subject ||
-      !formData.message
-    ) {
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
       setStatus("error");
-      setErrorMessage("Please fill out all fields.");
+      setErrorMsg("Please fill out all fields.");
       return;
     }
 
     setLoading(true);
     setStatus("idle");
-    setErrorMessage("");
+    setErrorMsg("");
 
     try {
-      const response = await fetch(`${API_URL}/messages`, {
+      const res  = await fetch(`${API_URL}/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      const data = await res.json();
 
-      const data = await response.json();
+      if (!res.ok) throw new Error(data.error || data.errors?.[0]?.msg || "Submission failed.");
 
-      if (!response.ok) {
-        throw new Error(
-          data.error ||
-            (data.errors && data.errors[0]?.msg) ||
-            "Failed to submit message.",
-        );
-      }
-
-      // Success
       setStatus("success");
       setFormData({ name: "", email: "", subject: "", message: "" });
-
-      // Trigger canvas-confetti blast
-      confetti({
-        particleCount: 150,
-        spread: 80,
-        origin: { y: 0.6 },
-        colors: ["#7C3AED", "#06B6D4", "#ffffff"],
-      });
+      confetti({ particleCount: 140, spread: 80, origin: { y: 0.6 }, colors: ["#F59E0B", "#ffffff", "#111111"] });
     } catch (err) {
       setStatus("error");
-      setErrorMessage(err.message || "Server error. Please try again later.");
+      setErrorMsg(err.message || "Server error. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -93,271 +91,263 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 relative overflow-hidden bg-background"
+      style={{
+        background: "var(--canvas)",
+        padding: "clamp(64px, 10vw, 120px) 0",
+        borderTop: "1px solid var(--border)",
+        scrollMarginTop: 80,
+      }}
     >
-      {/* Background radial spotlight */}
-      <div className="absolute bottom-0 right-0 w-112.5 h-112.5 rounded-full bg-secondary/5 blur-[130px] pointer-events-none" />
+      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 24px" }}>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="section-header"
+        >
+          <div className="section-num">[ 07 ]</div>
+          <h2 className="section-title">Contact</h2>
+        </motion.div>
+
+        {/* 2-column grid */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
+          gap: 24,
+          alignItems: "start",
+        }}>
+
+          {/* ── Left: info ────────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-xs font-bold uppercase tracking-widest text-primary mb-2 flex items-center justify-center gap-1.5"
-          >
-            <Mail size={12} /> Contact Channel
-          </motion.div>
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl sm:text-4xl font-bold font-heading text-text"
+            transition={{ duration: 0.5, delay: 0.05 }}
+            style={{ display: "flex", flexDirection: "column", gap: 16 }}
           >
-            Start a Conversation
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-mutedText mt-4 font-body text-base"
-          >
-            Submit an inquiry below or drop an email to discuss projects,
-            collaborations, or intern roles.
-          </motion.p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start max-w-5xl mx-auto">
-          {/* Contact Details & Links Column */}
-          <div className="lg:col-span-5 space-y-6">
-            {/* Availability Box */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-6 rounded-2xl border border-border flex flex-col justify-between"
-            >
-              <div>
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="flex h-2.5 w-2.5 relative">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                  </span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-emerald-400 font-heading">
-                    Open to Opportunities
-                  </span>
-                </div>
-                <h3 className="text-lg font-heading font-bold text-text mb-2">
-                  Let's build together
-                </h3>
-                <p className="text-xs sm:text-sm text-mutedText font-body leading-relaxed">
-                  I am available for freelance contracts, intern
-                  positions, or code consulting. Shoot me a message!
-                </p>
+            {/* Availability card */}
+            <div className="bento-card" style={{ padding: "26px 28px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
+                <span style={{
+                  width: 8, height: 8, borderRadius: "50%", background: "#22C55E",
+                  boxShadow: "0 0 0 2px rgba(34,197,94,0.25)", flexShrink: 0,
+                }} />
+                <span style={{
+                  fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.08em",
+                  textTransform: "uppercase", color: "#22C55E",
+                }}>
+                  Open to opportunities
+                </span>
               </div>
+              <h3 style={{
+                fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1rem",
+                color: "var(--ink)", marginBottom: 8, letterSpacing: "-0.02em",
+              }}>
+                Let's build together
+              </h3>
+              <p style={{
+                fontFamily: "var(--font-body)", fontSize: "0.85rem",
+                color: "var(--ink-muted)", lineHeight: 1.65, margin: 0,
+              }}>
+                Available for freelance contracts, intern positions, or code consulting.
+                Shoot me a message!
+              </p>
 
-              {/* Direct email display */}
-              <div className="flex items-center justify-between bg-surface/60 border border-border rounded-xl p-3 mt-6">
-                <div className="flex items-center gap-2 font-code text-xs text-mutedText">
-                  <Mail size={14} className="text-cyan-400" />
-                  <span>aviimondal689@gmail.com</span>
+              {/* Email copy */}
+              <div style={{
+                display: "flex", alignItems: "center", justifyContent: "space-between",
+                background: "var(--surface-2)", border: "1px solid var(--border)",
+                borderRadius: 9, padding: "10px 14px", marginTop: 18,
+              }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                  <Mail size={13} style={{ color: "var(--ink-muted)" }} />
+                  <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.72rem", color: "var(--ink-muted)" }}>
+                    aviimondal689@gmail.com
+                  </span>
                 </div>
                 <button
                   onClick={handleCopyEmail}
-                  className="p-2 bg-surface hover:bg-surface-hover rounded-lg text-mutedText hover:text-text transition-colors"
-                  title="Copy email to clipboard"
+                  title="Copy email"
+                  style={{
+                    background: "none", border: "none", cursor: "pointer",
+                    color: copied ? "#22C55E" : "var(--ink-muted)",
+                    display: "flex", alignItems: "center",
+                    transition: "color 0.15s",
+                  }}
                 >
-                  {copied ? (
-                    <Check size={14} className="text-emerald-400" />
-                  ) : (
-                    <Copy size={14} />
-                  )}
+                  {copied ? <Check size={14} /> : <Copy size={14} />}
                 </button>
               </div>
-            </motion.div>
+            </div>
 
-            {/* Social channels card */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="glass-panel p-6 rounded-2xl border border-border relative z-20"
-            >
-              <h4 className="text-xs text-text font-heading font-bold uppercase tracking-wider mb-4">
+            {/* Socials */}
+            <div className="bento-card" style={{ padding: "22px 26px" }}>
+              <div style={{
+                fontFamily: "var(--font-mono)", fontSize: "0.68rem", letterSpacing: "0.08em",
+                textTransform: "uppercase", color: "var(--ink-muted)", marginBottom: 14,
+              }}>
                 Networks
-              </h4>
-              <div className="flex flex-wrap gap-4">
-                {[
-                  {
-                    icon: <FaGithub size={18} />,
-                    label: "GitHub",
-                    href: "https://github.com/code-with-avii",
-                  },
-                  {
-                    icon: <FaLinkedin size={18} />,
-                    label: "LinkedIn",
-                    href : "https://www.linkedin.com/in/abhishekh07/"
-                  },
-                  {
-                    icon: <FaXTwitter size={18} />,
-                    label: "Twitter",
-                    href: "https://x.com/MondalAvii94420",
-                  },
-                ].map((item, idx) => (
+              </div>
+              <div style={{ display: "flex", gap: 10 }}>
+                {SOCIALS.map(s => (
                   <a
-                    key={idx}
-                    href={item.href}
+                    key={s.label}
+                    href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="grow flex items-center justify-center gap-2 py-2.5 bg-surface hover:bg-surface-hover border border-border hover:border-border-hover rounded-xl text-xs text-mutedText hover:text-text font-semibold transition-all"
+                    aria-label={s.label}
+                    style={{
+                      flex: 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 6,
+                      fontFamily: "var(--font-body)", fontSize: "0.78rem", color: "var(--ink-muted)",
+                      background: "var(--surface-2)", border: "1px solid var(--border)",
+                      borderRadius: 9, padding: "10px", textDecoration: "none",
+                      transition: "color 0.15s, border-color 0.15s",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.color = "var(--ink)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.18)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.color = "var(--ink-muted)"; e.currentTarget.style.borderColor = "var(--border)"; }}
                   >
-                    {item.icon}
-                    <span>{item.label}</span>
+                    <s.icon size={15} />
+                    <span className="hidden sm:inline">{s.label}</span>
                   </a>
                 ))}
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
 
-          {/* Message Form Column */}
-          <div className="lg:col-span-7">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-            >
-              <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Status messages */}
-                {status === "success" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2.5 bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs sm:text-sm p-3.5 rounded-xl font-body"
-                  >
-                    <CheckCircle2 size={16} />
-                    <span>
-                      Your inquiry was logged successfully! Abhishekh will
-                      review this shortly.
-                    </span>
-                  </motion.div>
-                )}
+          {/* ── Right: Form ────────────────────────────────────────────── */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="bento-card"
+            style={{ padding: "28px 30px" }}
+          >
+            <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 18 }}>
 
-                {status === "error" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="flex items-center gap-2.5 bg-red-500/10 border border-red-500/30 text-red-400 text-xs sm:text-sm p-3.5 rounded-xl font-body"
-                  >
-                    <AlertCircle size={16} />
-                    <span>{errorMessage}</span>
-                  </motion.div>
-                )}
-
-                {/* Form fields */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="name"
-                      className="text-xs font-semibold text-mutedText font-body"
-                    >
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="Jack Reacher"
-                      disabled={loading || status === "success"}
-                      className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
-                    />
-                  </div>
-                  <div className="space-y-1.5">
-                    <label
-                      htmlFor="email"
-                      className="text-xs font-semibold text-mutedText font-body"
-                    >
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      placeholder="reacher@example.com"
-                      disabled={loading || status === "success"}
-                      className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label
-                    htmlFor="subject"
-                    className="text-xs font-semibold text-mutedText font-body"
-                  >
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    id="subject"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Project Inquiry / Intern opening..."
-                    disabled={loading || status === "success"}
-                    className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label
-                    htmlFor="message"
-                    className="text-xs font-semibold text-mutedText font-body"
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    value={formData.message}
-                    onChange={handleInputChange}
-                    required
-                    placeholder="Provide details about your project or role proposal..."
-                    disabled={loading || status === "success"}
-                    className="w-full bg-surface/60 border border-border rounded-xl px-4 py-3 text-xs sm:text-sm text-text placeholder-zinc-600 focus:outline-none focus:border-primary/50 transition-all font-body resize-none"
-                  />
-                </div>
-
-                {/* Submit button */}
-                <button
-                  type="submit"
-                  disabled={loading || status === "success"}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl text-xs sm:text-sm transition-all disabled:opacity-50 shadow-sm"
+              {/* Status messages */}
+              {status === "success" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 10,
+                    background: "rgba(34,197,94,0.08)", border: "1px solid rgba(34,197,94,0.25)",
+                    color: "#22C55E", borderRadius: 10, padding: "12px 14px",
+                    fontFamily: "var(--font-body)", fontSize: "0.85rem",
+                  }}
                 >
-                  {loading ? (
-                    <span className="w-5 h-5 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                  ) : (
-                    <>
-                      <Send size={15} />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
-              </form>
-            </motion.div>
-          </div>
+                  <CheckCircle2 size={15} />
+                  Your message was sent! Abhishekh will respond shortly.
+                </motion.div>
+              )}
+
+              {status === "error" && (
+                <motion.div
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    display: "flex", alignItems: "center", gap: 10,
+                    background: "rgba(239,68,68,0.08)", border: "1px solid rgba(239,68,68,0.25)",
+                    color: "#EF4444", borderRadius: 10, padding: "12px 14px",
+                    fontFamily: "var(--font-body)", fontSize: "0.85rem",
+                  }}
+                >
+                  <AlertCircle size={15} />
+                  {errorMsg}
+                </motion.div>
+              )}
+
+              {/* Name + Email */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+                <div>
+                  <label htmlFor="contact-name" style={labelStyle}>Name</label>
+                  <input
+                    type="text" id="contact-name" name="name"
+                    value={formData.name} onChange={handleChange}
+                    required placeholder="Jack Reacher"
+                    disabled={loading || status === "success"}
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}
+                    onBlur={e => e.target.style.borderColor = "var(--border)"}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="contact-email" style={labelStyle}>Email</label>
+                  <input
+                    type="email" id="contact-email" name="email"
+                    value={formData.email} onChange={handleChange}
+                    required placeholder="reacher@example.com"
+                    disabled={loading || status === "success"}
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}
+                    onBlur={e => e.target.style.borderColor = "var(--border)"}
+                  />
+                </div>
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label htmlFor="contact-subject" style={labelStyle}>Subject</label>
+                <input
+                  type="text" id="contact-subject" name="subject"
+                  value={formData.subject} onChange={handleChange}
+                  required placeholder="Project inquiry / Internship role…"
+                  disabled={loading || status === "success"}
+                  style={inputStyle}
+                  onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}
+                  onBlur={e => e.target.style.borderColor = "var(--border)"}
+                />
+              </div>
+
+              {/* Message */}
+              <div>
+                <label htmlFor="contact-message" style={labelStyle}>Message</label>
+                <textarea
+                  id="contact-message" name="message" rows={5}
+                  value={formData.message} onChange={handleChange}
+                  required placeholder="Tell me about your project or role…"
+                  disabled={loading || status === "success"}
+                  style={{ ...inputStyle, resize: "none" }}
+                  onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}
+                  onBlur={e => e.target.style.borderColor = "var(--border)"}
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={loading || status === "success"}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                  background: "var(--ink)", color: "var(--canvas)",
+                  fontFamily: "var(--font-body)", fontWeight: 700, fontSize: "0.9rem",
+                  padding: "12px", borderRadius: 10, border: "none", cursor: loading || status === "success" ? "not-allowed" : "pointer",
+                  opacity: loading || status === "success" ? 0.6 : 1,
+                  transition: "opacity 0.15s",
+                }}
+              >
+                {loading ? (
+                  <span style={{
+                    width: 18, height: 18, borderRadius: "50%",
+                    border: "2px solid rgba(8,8,8,0.3)",
+                    borderTopColor: "#080808",
+                    animation: "spin 0.7s linear infinite",
+                    display: "inline-block",
+                  }} />
+                ) : (
+                  <><Send size={14} /> Send Message</>
+                )}
+              </button>
+            </form>
+          </motion.div>
         </div>
       </div>
+
+      <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
     </section>
   );
 }

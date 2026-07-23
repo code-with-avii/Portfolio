@@ -24,9 +24,7 @@ export default function ProjectDetail() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Scroll to top on mount
     window.scrollTo({ top: 0 });
-
     const fetchProjectDetails = async () => {
       try {
         const res = await fetch(`${API_URL}/projects/${id}`);
@@ -34,309 +32,190 @@ export default function ProjectDetail() {
         const data = await res.json();
         setProject(data);
       } catch (err) {
-        // API fallback to local data
         const localProject = initialProjectsData.find((p) => p._id === id);
-        if (localProject) {
-          setProject(localProject);
-        }
+        if (localProject) setProject(localProject);
       } finally {
         setLoading(false);
       }
     };
-
     fetchProjectDetails();
   }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="w-10 h-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
+      <div style={{ minHeight: "100vh", background: "var(--canvas)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ width: 40, height: 40, border: "3px solid var(--border)", borderTopColor: "var(--accent)", borderRadius: "50%" }} className="animate-spin" />
       </div>
     );
   }
 
   if (!project) {
     return (
-      <div className="min-h-screen bg-background flex flex-col items-center justify-center gap-4 text-center px-4">
-        <h2 className="text-2xl font-bold font-heading text-text">
-          Project Not Found
-        </h2>
-        <p className="text-mutedText text-sm max-w-sm">
-          The case study you are trying to view does not exist or has been
-          removed.
-        </p>
-        <button
-          onClick={() => navigate("/")}
-          className="inline-flex items-center gap-2 px-5 py-2.5 bg-surface text-text border border-border-hover rounded-xl text-sm hover:bg-surface-hover"
-        >
-          <ArrowLeft size={16} /> Back to Home
-        </button>
+      <div style={{ minHeight: "100vh", background: "var(--canvas)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 16 }}>
+        <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: "2rem", color: "var(--ink)" }}>Project Not Found</h2>
+        <button className="btn-secondary" onClick={() => navigate("/")}><ArrowLeft size={16} /> Back Home</button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background pb-24 pt-24 font-body relative overflow-hidden">
+    <div style={{ minHeight: "100vh", background: "var(--canvas)", paddingBottom: 96, paddingTop: 96, position: "relative" }}>
       <Helmet>
         <title>{project.title} — Case Study</title>
         <meta name="description" content={project.subtitle} />
       </Helmet>
-      {/* Background blurs */}
-      <div className="absolute top-0 right-0 w-125 h-125 rounded-full bg-primary/5 blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-125 h-125 rounded-full bg-secondary/5 blur-[150px] pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        
         {/* Back Link */}
         <button
           onClick={() => navigate("/")}
-          aria-label="Back to Portfolio Home Page"
-          className="inline-flex items-center gap-2 text-mutedText hover:text-text transition-colors mb-8 text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950 rounded-lg px-2 py-1"
+          style={{
+            display: "inline-flex", alignItems: "center", gap: 8,
+            fontFamily: "var(--font-mono)", fontSize: "0.75rem", fontWeight: 600,
+            textTransform: "uppercase", letterSpacing: "0.06em",
+            color: "var(--muted)", background: "transparent",
+            border: "none", cursor: "pointer", marginBottom: 32,
+          }}
+          onMouseEnter={e => e.currentTarget.style.color = "var(--ink)"}
+          onMouseLeave={e => e.currentTarget.style.color = "var(--muted)"}
         >
-          <ArrowLeft size={16} aria-hidden="true" /> Back to Portfolio
+          <ArrowLeft size={16} /> Back to Portfolio
         </button>
 
-        {/* Hero Header Banner */}
+        {/* Hero Banner (Grayscale style) */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative rounded-3xl overflow-hidden mb-12 bg-surface border border-border shadow-2xl h-70 sm:h-100"
+          className="card"
+          style={{ position: "relative", height: "clamp(300px, 40vh, 500px)", overflow: "hidden", marginBottom: 48 }}
         >
           <img
             src={project.image.includes("unsplash.com") ? project.image.replace(/w=\d+/, "w=1200").replace(/q=\d+/, "q=85") + "&fm=webp" : project.image}
             alt={project.title}
-            width="1200"
-            height="500"
-            loading="eager"
-            className="w-full h-full object-cover opacity-50"
+            className="img-grayscale"
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
-          <div className="absolute inset-0 bg-zinc-950/70" />
-          <div className="absolute bottom-8 left-6 sm:left-10 right-6">
-            <span className="px-2.5 py-0.5 rounded-md bg-cyan-400/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
-              Case Study
-            </span>
-            <h1 className="text-2xl sm:text-4xl font-extrabold font-heading text-text mt-3 leading-tight">
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--canvas) 0%, transparent 100%)" }} />
+          
+          <div style={{ position: "absolute", bottom: 40, left: 40, right: 40 }}>
+            <span className="tag" style={{ marginBottom: 16 }}>Case Study</span>
+            <h1 style={{
+              fontFamily: "var(--font-display)", fontWeight: 800,
+              fontSize: "clamp(2rem, 5vw, 3.5rem)", letterSpacing: "-0.03em",
+              color: "var(--ink)", margin: "0 0 8px 0",
+            }}>
               {project.title}
             </h1>
-            <p className="text-mutedText text-sm sm:text-base mt-2 font-medium max-w-2xl leading-relaxed">
+            <p style={{
+              fontFamily: "var(--font-body)", fontSize: "1.1rem",
+              color: "var(--muted)", maxWidth: 600, margin: 0,
+            }}>
               {project.subtitle}
             </p>
           </div>
         </motion.div>
 
         {/* Core Specs Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 max-w-5xl">
+        <div style={{
+          display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+          gap: 16, marginBottom: 64,
+        }}>
           {[
-            {
-              label: "Role",
-              val: project.role || "Lead Developer",
-              icon: <Cpu className="text-purple-400" size={16} />,
-            },
-            {
-              label: "Duration",
-              val: project.duration || "2 Months",
-              icon: <Zap className="text-cyan-400" size={16} />,
-            },
-            {
-              label: "Platform",
-              val: "Web Application",
-              icon: <HardDrive className="text-emerald-400" size={16} />,
-            },
-            {
-              label: "Database",
-              val: project.tags.includes("MongoDB") ? "MongoDB" : "PostgreSQL",
-              icon: <Database className="text-pink-400" size={16} />,
-            },
+            { label: "Role", val: project.role || "Lead Developer" },
+            { label: "Duration", val: project.duration || "2 Months" },
+            { label: "Platform", val: "Web Application" },
+            { label: "Database", val: project.tags.includes("MongoDB") ? "MongoDB" : "PostgreSQL" },
           ].map((item, idx) => (
-            <div
-              key={idx}
-              className="glass-panel p-4 rounded-xl border border-border flex items-center gap-3"
-            >
-              <div className="w-8 h-8 rounded-lg bg-border flex items-center justify-center shrink-0">
-                {item.icon}
+            <div key={idx} className="card" style={{ padding: "20px 24px", display: "flex", flexDirection: "column", gap: 8 }}>
+              <div style={{ fontFamily: "var(--font-mono)", fontSize: "0.68rem", color: "var(--muted)", letterSpacing: "0.06em", textTransform: "uppercase" }}>
+                // {item.label}
               </div>
-              <div>
-                <div className="text-[10px] uppercase font-bold text-mutedText">
-                  {item.label}
-                </div>
-                <div className="text-xs sm:text-sm font-semibold text-text mt-0.5">
-                  {item.val}
-                </div>
+              <div style={{ fontFamily: "var(--font-body)", fontSize: "1rem", fontWeight: 600, color: "var(--ink)" }}>
+                {item.val}
               </div>
             </div>
           ))}
         </div>
 
-        {/* Details Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Tech overview & specs */}
-          <div className="lg:col-span-7 space-y-8">
-            {/* Overview */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-            >
-              <h2 className="text-xl font-heading font-bold text-text mb-4">
-                Project Overview
-              </h2>
-              <p className="text-mutedText text-sm sm:text-base leading-relaxed font-body">
+        {/* Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* Left: Overview */}
+          <div className="lg:col-span-8 flex flex-col gap-12">
+            <section>
+              <h2 className="section-title" style={{ fontSize: "2rem", marginBottom: 24 }}>Project Overview</h2>
+              <p style={{ fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--muted)", lineHeight: 1.8 }}>
                 {project.longDescription || project.description}
               </p>
-            </motion.div>
+            </section>
 
-            {/* Architecture Diagram */}
             {project.architectureDiagram && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-              >
-                <h2 className="text-xl font-heading font-bold text-text mb-4">
-                  System Architecture
-                </h2>
-                <div className="bg-surface/60 border border-border rounded-xl p-4 font-code text-xs text-mutedText leading-relaxed overflow-x-auto">
-                  {project.architectureDiagram}
+              <section>
+                <h2 className="section-title" style={{ fontSize: "2rem", marginBottom: 24 }}>System Architecture</h2>
+                <div className="card no-scrollbar" style={{ padding: 24, overflowX: "auto" }}>
+                  <pre style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem", color: "var(--muted)", margin: 0 }}>
+                    {project.architectureDiagram}
+                  </pre>
                 </div>
-              </motion.div>
+              </section>
             )}
 
-            {/* API Endpoints Flow */}
             {project.apiFlow && project.apiFlow.length > 0 && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-              >
-                <h2 className="text-xl font-heading font-bold text-text mb-4">
-                  API Route Blueprint
-                </h2>
-                <div className="space-y-3 font-code text-xs sm:text-sm">
+              <section>
+                <h2 className="section-title" style={{ fontSize: "2rem", marginBottom: 24 }}>API Blueprint</h2>
+                <div className="card" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
                   {project.apiFlow.map((flow, idx) => (
-                    <div
-                      key={idx}
-                      className="flex gap-3 bg-surface/60 border border-border rounded-lg p-3"
-                    >
-                      <span className="text-cyan-400 font-bold shrink-0">
-                        {flow.split(" ")[0]}
-                      </span>
-                      <span className="text-mutedText">
-                        {flow.substring(flow.split(" ")[0].length)}
-                      </span>
+                    <div key={idx} style={{ display: "flex", gap: 16, fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
+                      <span style={{ color: "var(--accent)", fontWeight: 600 }}>{flow.split(" ")[0]}</span>
+                      <span style={{ color: "var(--muted)" }}>{flow.substring(flow.split(" ")[0].length)}</span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
-            )}
-
-            {/* Database schema design */}
-            {project.databaseDesign && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="glass-panel p-6 sm:p-8 rounded-2xl border border-border"
-              >
-                <h2 className="text-xl font-heading font-bold text-text mb-4 flex items-center gap-2">
-                  <Database size={18} className="text-pink-400" /> Database
-                  Design & Schemas
-                </h2>
-                <p className="text-mutedText text-sm leading-relaxed font-body">
-                  {project.databaseDesign}
-                </p>
-              </motion.div>
+              </section>
             )}
           </div>
 
-          {/* Right Column: Features, Challenges, Actions */}
-          <div className="lg:col-span-5 space-y-8">
-            {/* CTA action buttons */}
-            <div className="flex gap-4">
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View GitHub source code for ${project.title}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-surface hover:bg-surface-hover border border-border-hover rounded-xl text-sm text-text font-semibold transition-colors shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2 focus-visible:ring-offset-zinc-950"
-              >
-                <FaGithub size={16} aria-hidden="true" />
-                <span>GitHub Source</span>
+          {/* Right: Actions & Meta */}
+          <div className="lg:col-span-4 flex flex-col gap-8">
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ width: "100%", justifyContent: "center" }}>
+                <FaGithub /> GitHub Source
               </a>
-              <a
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`Launch live web application for ${project.title}`}
-                className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-primary hover:bg-primary/90 text-white font-semibold rounded-xl text-sm transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-              >
-                <ExternalLink size={16} aria-hidden="true" />
-                <span>Launch Live App</span>
-              </a>
+              {project.liveUrl && (
+                <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+                  <ExternalLink size={16} /> Launch Live App
+                </a>
+              )}
             </div>
 
-            {/* Core Features */}
-            <div className="glass-panel p-6 rounded-2xl border border-border">
-              <h2 className="text-lg font-heading font-bold text-text mb-4">
-                Core Specifications
-              </h2>
-              <ul className="space-y-3 text-mutedText text-xs sm:text-sm font-body">
-                {project.features.map((feature, idx) => (
-                  <li
-                    key={idx}
-                    className="flex items-start gap-2.5 leading-relaxed"
-                  >
-                    <span className="mt-1.5 shrink-0 w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                    <span>{feature}</span>
+            <div className="card" style={{ padding: 24 }}>
+              <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.2rem", color: "var(--ink)", marginBottom: 16 }}>
+                Core Features
+              </h3>
+              <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
+                {project.features.map((f, i) => (
+                  <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                    <span style={{ color: "var(--accent)", fontFamily: "var(--font-mono)" }}>›</span>
+                    <span style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--muted)", lineHeight: 1.5 }}>{f}</span>
                   </li>
                 ))}
               </ul>
             </div>
-
-            {/* Challenges solved */}
+            
             {project.challengesSolved && (
-              <div className="glass-panel p-6 rounded-2xl border border-border">
-                <h2 className="text-lg font-heading font-bold text-text mb-3 flex items-center gap-2">
-                  <ShieldCheck size={18} className="text-emerald-400" />{" "}
-                  Engineering Obstacles
-                </h2>
-                <p className="text-mutedText text-xs sm:text-sm leading-relaxed font-body">
+              <div className="card" style={{ padding: 24 }}>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.2rem", color: "var(--ink)", marginBottom: 16 }}>
+                  Engineering Challenges
+                </h3>
+                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>
                   {project.challengesSolved}
                 </p>
               </div>
             )}
-
-            {/* Performance Optimizations */}
-            {project.performanceOptimizations && (
-              <div className="glass-panel p-6 rounded-2xl border border-border">
-                <h2 className="text-lg font-heading font-bold text-text mb-3 flex items-center gap-2">
-                  <Zap size={18} className="text-yellow-400" /> Performance
-                  Tuning
-                </h2>
-                <p className="text-mutedText text-xs sm:text-sm leading-relaxed font-body">
-                  {project.performanceOptimizations}
-                </p>
-              </div>
-            )}
-
-            {/* Future Improvements Roadmap */}
-            {project.futureImprovements &&
-              project.futureImprovements.length > 0 && (
-                <div className="glass-panel p-6 rounded-2xl border border-border">
-                  <h2 className="text-lg font-heading font-bold text-text mb-4">
-                    Developer Roadmap
-                  </h2>
-                  <div className="space-y-2 text-xs sm:text-sm text-mutedText font-body">
-                    {project.futureImprovements.map((roadmap, idx) => (
-                      <div key={idx} className="flex items-center gap-2.5">
-                        <span className="font-code font-bold text-[10px] px-1.5 py-0.5 bg-surface border border-border rounded text-cyan-400">
-                          Roadmap #{idx + 1}
-                        </span>
-                        <span>{roadmap}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
           </div>
         </div>
+
       </div>
     </div>
   );
