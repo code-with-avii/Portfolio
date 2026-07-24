@@ -165,7 +165,7 @@ export default function Hero() {
                 }}
                 className="w-full sm:w-auto hover:bg-gray-200 transition-colors"
               >
-                View Architecture <ArrowRight size={16} />
+                View Projects <ArrowRight size={16} />
               </button>
               <button 
                 onClick={() => scrollTo("contact")} 
