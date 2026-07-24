@@ -24,7 +24,7 @@ export default function About() {
           className="section-header"
         >
           <div className="section-num">[ 01 ]</div>
-          <h2 className="section-title">Background</h2>
+          <h2 className="section-title">About</h2>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr] gap-12 lg:gap-24 mt-12">
@@ -63,7 +63,7 @@ export default function About() {
             {/* Paragraphs */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20, fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--ink)", lineHeight: 1.7 }}>
               <p style={{ margin: 0 }}>
-                I am a <strong>Full Stack Engineer</strong> specializing in the MERN stack (MongoDB, Express, React, Node.js). My journey in software development started with a deep curiosity about how systems communicate, leading me to focus heavily on backend architecture and API design.
+                I am a <strong>Full Stack MERN Engineer</strong> specializing in the MERN stack (MongoDB, Express, React, Node.js). My journey in software development started with a deep curiosity about how systems communicate, leading me to focus heavily on backend architecture and API design.
               </p>
               <p style={{ margin: 0 }}>
                 Currently pursuing my <strong>B.E. in Information Technology</strong>, I bridge the gap between academic theory and production-grade engineering. I am actively involved in the open-source community as a contributor to GSSoC 2026, where I collaborate with developers worldwide to build better tools.
