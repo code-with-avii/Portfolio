@@ -128,7 +128,7 @@ export default function Hero() {
               }}
             >
               {[
-                { label: "Total Hr", value: "1000+", icon: Time },
+                //{ label: "Total Hr", value: "1000+",icon:"Time"},
                 { label: "Contributor", value: "GSSoC '26", icon: Award },
                 { label: "Full-Stack Apps", value: "5+", icon: Layers },
               ].map((metric, i) => (
