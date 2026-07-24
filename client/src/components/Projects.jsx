@@ -89,7 +89,7 @@ export default function Projects() {
           className="section-header"
         >
           <div className="section-num">[ 03 ]</div>
-          <h2 className="section-title">Repositories</h2>
+          <h2 className="section-title">Projects</h2>
         </motion.div>
 
         {/* Filter pills */}
