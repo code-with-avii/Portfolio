@@ -31,12 +31,12 @@ export const initialSkills = [
     icon: "Javascript",
     currentlyLearning: false,
   },
-  // {
-  //   name: "TypeScript",
-  //   category: "Frontend",
-  //   icon: "Typescript",
-  //   currentlyLearning: false,
-  // },
+  {
+    name: "TypeScript",
+    category: "Frontend",
+    icon: "Typescript",
+    currentlyLearning: false,
+  },
   {
     name: "Framer Motion",
     category: "Frontend",

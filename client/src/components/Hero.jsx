@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Code2, GitMerge, Award, Layers } from "lucide-react";
+import { ArrowRight, Code2, GitMerge, Award, Layers, Clock } from "lucide-react";
 
 const CODE_LINES = [
   { text: 'import { Developer } from "@abhishekh/core";', color: "var(--muted)" },
@@ -128,7 +128,7 @@ export default function Hero() {
               }}
             >
               {[
-                { label: "PRs Merged", value: "100+", icon: GitMerge },
+                { label: "Total Hrs", value: "1000+", icon: Clock },
                 { label: "Contributor", value: "GSSoC '26", icon: Award },
                 { label: "Full-Stack Apps", value: "5+", icon: Layers },
               ].map((metric, i) => (
