@@ -128,7 +128,7 @@ export default function Hero() {
               }}
             >
               {[
-                { label: "Total Hrs", value: "1000+", icon: Clock },
+                { label: "PRs Merged", value: "100+", icon: GitMerge },
                 { label: "Contributor", value: "GSSoC '26", icon: Award },
                 { label: "Full-Stack Apps", value: "5+", icon: Layers },
               ].map((metric, i) => (
@@ -165,7 +165,7 @@ export default function Hero() {
                 }}
                 className="w-full sm:w-auto hover:bg-gray-200 transition-colors"
               >
-                View Architecture <ArrowRight size={16} />
+                View Projects <ArrowRight size={16} />
               </button>
               <button 
                 onClick={() => scrollTo("contact")} 
