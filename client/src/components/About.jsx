@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, GraduationCap, Code2, Globe } from "lucide-react";
+import { ArrowUpRight, GraduationCap, Code2, Globe, FileDown, Send } from "lucide-react";
 
 export default function About() {
   return (
@@ -58,23 +58,73 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            style={{ display: "flex", flexDirection: "column", gap: 32 }}
+            style={{ display: "flex", flexDirection: "column", gap: 28 }}
           >
             {/* Paragraphs */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20, fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--ink)", lineHeight: 1.7 }}>
-              <p style={{ margin: 0 }}>
-                I am a <strong>Full Stack MERN Engineer</strong> specializing in the MERN stack (MongoDB, Express, React, Node.js). My journey in software development started with a deep curiosity about how systems communicate, leading me to focus heavily on backend architecture and API design.
-              </p>
-              <p style={{ margin: 0 }}>
-                Currently pursuing my <strong>B.E. in Information Technology</strong>, I bridge the gap between academic theory and production-grade engineering. I am actively involved in the open-source community as a contributor to GSSoC 2026, where I collaborate with developers worldwide to build better tools.
-              </p>
-              <p style={{ margin: 0 }}>
-                Whether it's optimizing database queries for sub-200ms response times or crafting fluid React interfaces, I approach every project with an engineering mindset: <em>measure, optimize, and scale.</em>
+              <p style={{ margin: 0, fontWeight: 400 }}>
+                I'm a <strong>Full Stack Developer</strong> specializing in the <strong>MERN Stack</strong> and currently learning <strong>Generative AI</strong>. I enjoy solving real-world problems, designing scalable applications and continuously improving my DSA skills.
               </p>
             </div>
 
+            {/* CTA Buttons */}
+            <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 4 }}>
+              <a
+                href="/Resume_Abhishekh_Mondal.docx.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontSize: "0.9rem",
+                  padding: "12px 24px",
+                  borderRadius: 8,
+                  fontFamily: "var(--font-body)",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  transition: "transform 0.15s ease, background 0.15s ease",
+                }}
+                onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
+                onMouseLeave={e => e.currentTarget.style.transform = "none"}
+              >
+                <FileDown size={16} />
+                Resume
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  const el = document.getElementById("contact");
+                  if (el) {
+                    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+                    window.scrollTo({ top, behavior: "smooth" });
+                  }
+                }}
+                className="btn-secondary"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: 8,
+                  fontSize: "0.9rem",
+                  padding: "12px 24px",
+                  borderRadius: 8,
+                  fontFamily: "var(--font-body)",
+                  textDecoration: "none",
+                  fontWeight: 600,
+                  transition: "transform 0.15s ease, background 0.15s ease",
+                }}
+                onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
+                onMouseLeave={e => e.currentTarget.style.transform = "none"}
+              >
+                <Send size={16} />
+                Hire Me
+              </a>
+            </div>
+
             {/* Quick Facts Bento */}
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 12 }}>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginTop: 8 }}>
               <div style={{
                 background: "#0a0a0a", border: "1px solid var(--border)", borderRadius: 8, padding: "20px",
                 display: "flex", flexDirection: "column", gap: 12

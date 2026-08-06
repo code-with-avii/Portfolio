@@ -3,11 +3,12 @@ import { Menu, X } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const NAV_LINKS = [
-  { name: "About",      href: "#about"      },
-  { name: "Skills",     href: "#skills"     },
-  { name: "Projects",   href: "#projects"   },
-  { name: "Experience", href: "#experience" },
-  { name: "Contact",    href: "#contact"    },
+  { name: "About",          href: "#about"          },
+  { name: "Skills",         href: "#skills"         },
+  { name: "Projects",       href: "#projects"       },
+  { name: "Experience",     href: "#experience"     },
+  { name: "Certifications", href: "#certifications" },
+  { name: "Contact",        href: "#contact"        },
 ];
 
 export default function Navbar() {
