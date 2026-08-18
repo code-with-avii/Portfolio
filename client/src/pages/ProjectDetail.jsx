@@ -144,7 +144,7 @@ export default function ProjectDetail() {
           {/* Left: Overview */}
           <div className="lg:col-span-8 flex flex-col gap-12">
             <section>
-              <h2 className="section-title" style={{ fontSize: "2rem", marginBottom: 24 }}>Project Overview</h2>
+              <h2 className="section-title" style={{ fontSize: "1.5rem", marginBottom: 16 }}>Problem & Solution</h2>
               <p style={{ fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--muted)", lineHeight: 1.8 }}>
                 {project.longDescription || project.description}
               </p>
@@ -163,7 +163,7 @@ export default function ProjectDetail() {
 
             {project.apiFlow && project.apiFlow.length > 0 && (
               <section>
-                <h2 className="section-title" style={{ fontSize: "2rem", marginBottom: 24 }}>API Blueprint</h2>
+                <h2 className="section-title" style={{ fontSize: "1.5rem", marginBottom: 16 }}>API Implementation</h2>
                 <div className="card" style={{ padding: 24, display: "flex", flexDirection: "column", gap: 12 }}>
                   {project.apiFlow.map((flow, idx) => (
                     <div key={idx} style={{ display: "flex", gap: 16, fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
@@ -171,6 +171,39 @@ export default function ProjectDetail() {
                       <span style={{ color: "var(--muted)" }}>{flow.substring(flow.split(" ")[0].length)}</span>
                     </div>
                   ))}
+                </div>
+              </section>
+            )}
+
+            {project.databaseDesign && (
+              <section>
+                <h2 className="section-title" style={{ fontSize: "1.5rem", marginBottom: 16 }}>Database Design</h2>
+                <div className="card" style={{ padding: 24 }}>
+                  <p style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem", color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>
+                    {project.databaseDesign}
+                  </p>
+                </div>
+              </section>
+            )}
+
+            {project.challengesSolved && (
+              <section>
+                <h2 className="section-title" style={{ fontSize: "1.5rem", marginBottom: 16 }}>Engineering Challenges</h2>
+                <div className="card" style={{ padding: 24 }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>
+                    {project.challengesSolved}
+                  </p>
+                </div>
+              </section>
+            )}
+
+            {project.performanceOptimizations && (
+              <section>
+                <h2 className="section-title" style={{ fontSize: "1.5rem", marginBottom: 16 }}>Performance & Optimization</h2>
+                <div className="card" style={{ padding: 24 }}>
+                  <p style={{ fontFamily: "var(--font-body)", fontSize: "0.95rem", color: "var(--muted)", margin: 0, lineHeight: 1.6 }}>
+                    {project.performanceOptimizations}
+                  </p>
                 </div>
               </section>
             )}
@@ -202,15 +235,19 @@ export default function ProjectDetail() {
                 ))}
               </ul>
             </div>
-            
-            {project.challengesSolved && (
+            {project.futureImprovements && project.futureImprovements.length > 0 && (
               <div className="card" style={{ padding: 24 }}>
                 <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1.2rem", color: "var(--ink)", marginBottom: 16 }}>
-                  Engineering Challenges
+                  Future Improvements
                 </h3>
-                <p style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>
-                  {project.challengesSolved}
-                </p>
+                <ul style={{ padding: 0, margin: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
+                  {project.futureImprovements.map((imp, i) => (
+                    <li key={i} style={{ display: "flex", gap: 12, alignItems: "center" }}>
+                      <span style={{ color: "var(--accent)", fontFamily: "var(--font-mono)" }}>›</span>
+                      <span style={{ fontFamily: "var(--font-body)", fontSize: "0.9rem", color: "var(--muted)" }}>{imp}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
           </div>

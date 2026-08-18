@@ -9,36 +9,31 @@ const FALLBACK = [
   {
     _id: "mem-project-5",
     title: "SmartTech",
-    subtitle: "Full-stack MERN e-commerce platform for electronics",
-    description:
-      "Built with 25+ reusable React components, Redux Toolkit state management, JWT + Google OAuth authentication, Razorpay payment gateway, and an admin dashboard.",
-    tags: ["React", "Node.js", "Express", "MongoDB", "Redux Toolkit"],
+    subtitle: "Full-Stack E-Commerce Platform",
+    description: `• Product browsing & Cart management
+• Google OAuth & JWT authentication
+• Admin dashboard for product/user management
+• Razorpay payment integration
+• REST APIs with MongoDB & Redux`,
+    tags: ["React", "Node.js", "Express.js", "MongoDB", "Redux", "Razorpay"],
     githubUrl: "https://github.com/code-with-avii/SmartTech",
     liveUrl: "https://smart-tech-gold.vercel.app",
     featured: true,
   },
   {
-    _id: "mem-project-1",
-    title: "Authentication-Microservice",
-    subtitle: "JWT, MFA, RBAC, and session management microservice",
-    description:
-      "HTTPOnly secure cookies with double-hashed refresh tokens, Google Authenticator TOTP MFA, Role-Based Access Control, and CSRF/XSS protection layers.",
-    tags: ["Node.js", "Express", "MongoDB", "JWT", "Helmet"],
-    githubUrl: "https://github.com/code-with-avii/Authentication",
-    liveUrl: "https://auth-service-abhishekh.vercel.app",
-    featured: false,
-  },
-  {
-    _id: "mem-project-3",
-    title: "Weather_app",
-    subtitle: "Real-time weather portal with Chart.js visualizations",
-    description:
-      "OpenWeather API integration with geocoding, interactive Chart.js histograms, and localStorage caching reducing API calls by 50%.",
-    tags: ["React", "Tailwind CSS", "Chart.js"],
-    githubUrl: "https://github.com/code-with-avii/Weather_app",
-    liveUrl: "https://weather-app-theta-two-15.vercel.app/",
-    featured: false,
-  },
+    _id: "mem-project-4",
+    title: "Hostel Help",
+    subtitle: "Smart Hostel Management & Student Assistance Platform",
+    description: `• Complaint management system
+• JWT Authentication
+• Role-based access control (Student/Admin)
+• REST Backend APIs
+• MongoDB Database integration`,
+    tags: ["MERN", "JWT", "MongoDB", "Express.js", "React", "Node.js"],
+    githubUrl: "https://github.com/code-with-avii/Hostel-Help",
+    liveUrl: "https://hostel-help-pi.vercel.app/",
+    featured: true,
+  }
 ];
 
 const ALL_TAGS = ["All", "React", "Node.js", "MongoDB", "Express", "TypeScript"];
@@ -176,7 +171,7 @@ export default function Projects() {
                 {/* Description */}
                 <p style={{
                   fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "#8b949e",
-                  lineHeight: 1.5, marginBottom: 16, flexGrow: 1
+                  lineHeight: 1.6, marginBottom: 16, flexGrow: 1, whiteSpace: "pre-wrap"
                 }}>
                   {p.description}
                 </p>

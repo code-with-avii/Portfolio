@@ -63,14 +63,14 @@ export default function About() {
             {/* Paragraphs */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20, fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--ink)", lineHeight: 1.7 }}>
               <p style={{ margin: 0, fontWeight: 400 }}>
-                I'm a <strong>Full Stack Developer</strong> specializing in the <strong>MERN Stack</strong> and currently learning <strong>Generative AI</strong>. I enjoy solving real-world problems, designing scalable applications and continuously improving my DSA skills.
+                I'm a <strong>Software Engineer</strong> specializing in <strong>Full-Stack Development</strong> with the <strong>MERN Stack</strong>. I am passionate about system design, building scalable backend architectures, and continuously honing my DSA skills. My current focus is on securing a challenging Software Engineering role where I can build impactful, production-ready applications.
               </p>
             </div>
 
             {/* CTA Buttons */}
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 4 }}>
               <a
-                href="/Resume_Abhishekh_Mondal.docx.pdf"
+                href="/Abhishekh_Kumar_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"

@@ -3,20 +3,24 @@ import { motion } from "framer-motion";
 
 const CATEGORIES = [
   {
+    label: "Languages",
+    skills: ["C++", "JavaScript", "TypeScript"],
+  },
+  {
     label: "Frontend",
-    skills: ["React", "TypeScript", "JavaScript", "Tailwind CSS", "HTML", "CSS", "Redux","TypeScipt"],
+    skills: ["React", "Next.js", "Tailwind CSS", "Redux"],
   },
   {
     label: "Backend",
-    skills: ["Node.js", "Express", "JWT Auth", "REST APIs", "WebSocket", "Helmet"],
+    skills: ["Node.js", "Express.js", "REST APIs"],
   },
   {
     label: "Database",
-    skills: ["MongoDB", "Mongoose", "PostgreSQL", "Redis"],
+    skills: ["MongoDB", "Mongoose"],
   },
   {
-    label: "Tooling",
-    skills: ["Git", "GitHub", "Postman", "VS Code", "Vercel", "Render", "Vite"],
+    label: "Tools & Platforms",
+    skills: ["Git", "GitHub", "Postman"],
   },
 ];
 

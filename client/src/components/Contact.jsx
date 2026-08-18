@@ -146,14 +146,13 @@ export default function Contact() {
                 fontFamily: "var(--font-display)", fontWeight: 700, fontSize: "1rem",
                 color: "var(--ink)", marginBottom: 8, letterSpacing: "-0.02em",
               }}>
-                Let's build together
+                Open to Software Engineering opportunities
               </h3>
               <p style={{
                 fontFamily: "var(--font-body)", fontSize: "0.85rem",
                 color: "var(--ink-muted)", lineHeight: 1.65, margin: 0,
               }}>
-                Available for freelance contracts, intern positions, or code consulting.
-                Shoot me a message!
+                Currently looking for SDE Intern or Junior Software Engineer roles. Feel free to shoot me a message or connect via LinkedIn!
               </p>
 
               {/* Email copy */}

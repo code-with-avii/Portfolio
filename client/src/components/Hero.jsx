@@ -56,49 +56,49 @@ export default function Hero() {
           <div>
             {/* Status Pill */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              style={{
-                display: "inline-flex", alignItems: "center", gap: 8,
-                fontFamily: "var(--font-mono)", fontSize: "0.75rem",
-                color: "var(--ink)", marginBottom: 32,
-                border: "1px solid var(--border)",
-                padding: "6px 14px", borderRadius: 4,
-                textTransform: "uppercase", letterSpacing: "0.05em"
-              }}
-            >
-              <span style={{ width: 8, height: 8, background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
-              Open for opportunities
-            </motion.div>
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              fontFamily: "var(--font-mono)", fontSize: "0.8rem",
+              color: "var(--ink)", marginBottom: 24,
+              border: "1px solid var(--border)",
+              padding: "8px 16px", borderRadius: 6,
+              textTransform: "uppercase", letterSpacing: "0.05em"
+            }}
+          >
+            <span style={{ width: 8, height: 8, background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
+            Open for Software Engineering opportunities
+          </motion.div>
 
             {/* Headline */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08 }}
-            >
-              <h1 style={{
-                fontFamily: "var(--font-display)",
-                fontWeight: 800,
-                fontSize: "clamp(2.5rem, 6vw, 4.8rem)",
-                letterSpacing: "-0.04em",
-                lineHeight: 1.05,
-                color: "var(--ink)",
-                margin: 0,
-              }}>
-                Architecting high-performance <br className="hidden sm:block" />
-                <span style={{
-                  fontFamily: "var(--font-serif)",
-                  fontWeight: 400,
-                  fontStyle: "italic",
-                  color: "var(--muted)",
-                  paddingRight: "0.15em",
-                }}>
-                  web applications.
-                </span>
-              </h1>
-            </motion.div>
+             <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.08 }}
+          >
+            <h1 style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 800,
+              fontSize: "clamp(2.5rem, 6vw, 4.2rem)",
+              letterSpacing: "-0.04em",
+              lineHeight: 1.1,
+              color: "var(--ink)",
+              margin: "0 0 16px 0",
+            }}>
+              Abhishekh Kumar
+            </h1>
+            <h2 style={{
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: "clamp(1.5rem, 3vw, 2rem)",
+              color: "#22c55e",
+              margin: "0 0 24px 0",
+            }}>
+              Software Engineer | Full-Stack Developer
+            </h2>
+          </motion.div>
 
             {/* Sub-headline */}
             <motion.p
@@ -114,7 +114,7 @@ export default function Hero() {
                 marginTop: 24,
               }}
             >
-              Hi, I'm Abhishekh. A Full-Stack MERN Engineer focused on writing clean code, building robust APIs, and delivering high-performance user interfaces.
+              Building production-oriented full-stack applications with React, Node.js, and MongoDB. Passionate about writing clean code, building robust APIs, and delivering high-performance scalable systems.
             </motion.p>
 
             {/* Trust Metrics Grid */}
@@ -128,8 +128,6 @@ export default function Hero() {
               }}
             >
               {[
-                { label: "PRs Merged", value: "100+", icon: GitMerge },
-                { label: "Contributor", value: "GSSoC '26", icon: Award },
                 { label: "Full-Stack Apps", value: "5+", icon: Layers },
               ].map((metric, i) => (
                 <div key={i} style={{
@@ -181,6 +179,7 @@ export default function Hero() {
               </button>
             </motion.div>
           </div>
+          
 
           {/* ── Right: Interactive Code Editor ─────────────────────────────────── */}
           <motion.div
