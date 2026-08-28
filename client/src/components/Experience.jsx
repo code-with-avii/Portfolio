@@ -17,18 +17,6 @@ const fallbackExperiences = [
     hash: "a7f9d2e",
   },
   {
-    role: "Open Source Contributor",
-    company: "GitHub / GSSoC 2026",
-    duration: "2025 – Present",
-    type: "Open Source",
-    technologies: ["Tailwind CSS", "Framer Motion", "Git", "React"],
-    achievements: [
-      "Merged 100+ pull requests addressing performance bottlenecks and custom utility hook exports.",
-      "Built templates adopted by 500+ student developers across the GSSoC ecosystem.",
-    ],
-    hash: "4b1c9f8",
-  },
-  {
     role: "Undergraduate Engineer",
     company: "B.Tech — Computer Science",
     duration: "2024 – Present",

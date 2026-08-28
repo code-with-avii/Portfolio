@@ -4,7 +4,7 @@ import { Mail, Send, CheckCircle2, AlertCircle, Copy, Check } from "lucide-react
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import confetti from "canvas-confetti";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3500/api";
 
 /* ── Shared input style ──────────────────────────────────────────────────── */
 const inputStyle = {

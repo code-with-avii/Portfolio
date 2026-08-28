@@ -15,7 +15,7 @@ import {
 import { FaGithub } from "react-icons/fa6";
 import { initialProjectsData } from "../data/initialProjectsData.js";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3500/api";
 
 export default function ProjectDetail() {
   const { id } = useParams();

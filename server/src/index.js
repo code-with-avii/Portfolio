@@ -1,13 +1,10 @@
+import "dotenv/config";
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import path from "path";
 import { fileURLToPath } from "url";
-
-// Load environment variables
-dotenv.config();
 
 import { connectDB } from "./config/db.js";
 import authRouter from "./routes/auth.js";

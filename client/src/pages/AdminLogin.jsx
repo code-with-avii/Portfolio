@@ -9,7 +9,7 @@ import {
 } from "../store/slices/authSlice.js";
 import { ShieldAlert, KeyRound, User, ArrowLeft, Lock } from "lucide-react";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3500/api";
 
 export default function AdminLogin() {
   const [username, setUsername] = useState("");
