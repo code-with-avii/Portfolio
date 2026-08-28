@@ -85,7 +85,7 @@ export default function Certifications() {
           {combined.map((cert, i) => {
             const isGFG = cert.issuer.toLowerCase().includes("geeks");
             const accentColor = isGFG ? "#22c55e" : "var(--accent)";
-            
+
             return (
               <motion.div
                 key={cert._id || i}

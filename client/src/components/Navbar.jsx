@@ -127,7 +127,7 @@ export default function Navbar() {
                 fontFamily: "var(--font-mono)",
                 fontWeight: 700,
                 fontSize: "0.9rem",
-                color: "#22c55e",
+                color: "var(--accent)",
               }}
             >
               ~
@@ -199,7 +199,7 @@ export default function Navbar() {
                 >
                   <span
                     style={{
-                      color: isActive ? "#22c55e" : "transparent",
+                      color: isActive ? "var(--accent)" : "transparent",
                       marginRight: 4,
                       transition: "color 0.15s",
                     }}
@@ -211,7 +211,7 @@ export default function Navbar() {
               );
             })}
             <a
-              href="/Abhishekh_Kumar_Resume.pdf"
+              href="/Abhishekh_Mondal_Resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -219,7 +219,7 @@ export default function Navbar() {
                 fontSize: "0.8rem",
                 fontWeight: 600,
                 color: "#000",
-                background: "#22c55e",
+                background: "var(--accent)",
                 textDecoration: "none",
                 padding: "6px 16px",
                 marginLeft: "16px",
@@ -298,7 +298,7 @@ export default function Navbar() {
           style={{
             fontFamily: "var(--font-mono)",
             fontSize: "0.75rem",
-            color: "#22c55e",
+            color: "var(--accent)",
             marginBottom: 32,
             paddingBottom: 16,
             borderBottom: "1px dashed #1a1a1a",
@@ -327,13 +327,13 @@ export default function Navbar() {
             }}
           >
             <span
-              style={{ color: "#22c55e", fontSize: "0.85rem" }}
+              style={{ color: "var(--accent)", fontSize: "0.85rem" }}
             >{`0${i + 1}`}</span>
             <span>{link.name}</span>
           </a>
         ))}
         <a
-          href="/Abhishekh_Kumar_Resume.pdf"
+          href="/Abhishekh_Mondal_Resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
           style={{
@@ -347,7 +347,7 @@ export default function Navbar() {
             fontSize: "1.1rem",
             fontWeight: 600,
             color: "#000",
-            background: "#22c55e",
+            background: "var(--accent)",
             textDecoration: "none",
             borderRadius: "6px",
             transition: "opacity 0.15s",
@@ -370,7 +370,7 @@ export default function Navbar() {
               color: "var(--muted)",
             }}
           >
-            <span style={{ color: "#22c55e" }}>abhishekh@portfolio:~$</span>{" "}
+            <span style={{ color: "var(--accent)" }}>abhishekh@portfolio:~$</span>{" "}
             exit
           </div>
         </div>

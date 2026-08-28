@@ -66,11 +66,11 @@ function StatCard({ value, suffix = "+", label }) {
 }
 
 const CATEGORY_ACCENT = {
-  "Open Source":       "#A78BFA",
-  "Hackathons":        "#F59E0B",
-  "Certifications":    "#60A5FA",
+  "Open Source": "#A78BFA",
+  "Hackathons": "#F59E0B",
+  "Certifications": "#60A5FA",
   "GitHub Milestones": "#34D399",
-  "Coding Profile":    "#F472B6",
+  "Coding Profile": "#F472B6",
 };
 
 /* ── Main component ──────────────────────────────────────────────────────── */
@@ -114,10 +114,10 @@ export default function Achievements() {
             marginBottom: 40,
           }}
         >
-          <StatCard value={10}   suffix="+" label="Projects Built"       />
-          <StatCard value={500}  suffix="+" label="GitHub Contributions"  />
-          <StatCard value={100}  suffix="+" label="Merged PRs"            />
-          <StatCard value={1500} suffix="+" label="Coding Hours"          />
+          <StatCard value={10} suffix="+" label="Projects Built" />
+          <StatCard value={500} suffix="+" label="GitHub Contributions" />
+          <StatCard value={100} suffix="+" label="Merged PRs" />
+          <StatCard value={1500} suffix="+" label="Coding Hours" />
         </motion.div>
 
         {/* Achievement cards */}

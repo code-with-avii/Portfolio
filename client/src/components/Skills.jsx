@@ -77,7 +77,7 @@ export default function Skills() {
             padding: "clamp(12px, 4vw, 24px)", fontFamily: "var(--font-mono)", fontSize: "clamp(0.72rem, 2vw, 0.85rem)",
             color: "var(--ink)", lineHeight: 1.6, overflowX: "auto"
           }} className="no-scrollbar">
-            
+
             {/* Command */}
             <div style={{ marginBottom: 16, display: "flex", gap: 8, flexWrap: "wrap" }}>
               <span style={{ color: "#22c55e", fontWeight: 700 }}>abhishekh@portfolio:~$</span>
@@ -89,7 +89,7 @@ export default function Skills() {
               <div style={{ color: "var(--muted)", marginBottom: 8, wordBreak: "break-all" }}>
                 abhishekh-portfolio@1.0.0
               </div>
-              
+
               {CATEGORIES.map((cat, ci) => {
                 const isLastCat = ci === CATEGORIES.length - 1;
                 return (
@@ -98,7 +98,7 @@ export default function Skills() {
                       <span style={{ color: "var(--muted)" }}>{isLastCat ? "└──" : "├──"}</span>
                       <span style={{ color: "#60a5fa", fontWeight: 600 }}>{cat.label}</span>
                     </div>
-                    
+
                     {cat.skills.map((skill, si) => {
                       const isLastSkill = si === cat.skills.length - 1;
                       return (
@@ -115,7 +115,7 @@ export default function Skills() {
                 );
               })}
             </div>
-            
+
             {/* Blinking Prompt */}
             <div style={{ marginTop: 24, display: "flex", gap: 8 }}>
               <span style={{ color: "#22c55e", fontWeight: 700 }}>abhishekh@portfolio:~$</span>

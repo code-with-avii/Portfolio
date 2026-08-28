@@ -45,10 +45,10 @@ export default function About() {
               margin: "0 0 24px 0",
               letterSpacing: "-0.03em"
             }}>
-              Driven by a passion for <span style={{ color: "var(--accent)" }}>clean code</span> and scalable architecture.
+              Driven by a passion for <span style={{ color: "var(--accent)" }}>functional logic</span> and scalable system design.
             </h3>
             <p style={{ fontFamily: "var(--font-body)", fontSize: "1rem", color: "var(--muted)", lineHeight: 1.6, margin: 0 }}>
-              I believe that great software is built at the intersection of robust backend engineering and seamless user experiences.
+              I enjoy solving logic puzzles on LeetCode and translating complex database schemas into efficient, production-ready server architectures.
             </p>
           </motion.div>
 
@@ -70,7 +70,7 @@ export default function About() {
             {/* CTA Buttons */}
             <div style={{ display: "flex", gap: 14, flexWrap: "wrap", marginTop: 4 }}>
               <a
-                href="/Abhishekh_Kumar_Resume.pdf"
+                href="/Abhishekh_Mondal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-primary"

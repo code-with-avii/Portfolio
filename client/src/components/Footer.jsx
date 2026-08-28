@@ -3,16 +3,15 @@ import { ArrowUp, TerminalSquare } from "lucide-react";
 import { FaGithub, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 
 const LINKS = [
-  { label: "About",        href: "#about"        },
-  { label: "Projects",     href: "#projects"      },
-  { label: "Experience",   href: "#experience"    },
-  { label: "Contact",      href: "#contact"       },
+  { label: "About", href: "#about" },
+  { label: "Projects", href: "#projects" },
+  { label: "Contact", href: "#contact" },
 ];
 
 const SOCIALS = [
-  { label: "GitHub",   href: "https://github.com/code-with-avii",           icon: FaGithub   },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhishekh07/",     icon: FaLinkedin },
-  { label: "Twitter",  href: "https://x.com/MondalAvii94420",                icon: FaXTwitter },
+  { label: "GitHub", href: "https://github.com/code-with-avii", icon: FaGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhishekh07/", icon: FaLinkedin },
+  { label: "Twitter", href: "https://x.com/MondalAvii94420", icon: FaXTwitter },
 ];
 
 export default function Footer() {
@@ -45,7 +44,7 @@ export default function Footer() {
               <TerminalSquare size={18} />
               ABHISHEKH // SYS
             </div>
-            
+
             <div style={{
               fontFamily: "var(--font-mono)", fontSize: "0.75rem",
               color: "#8b949e", lineHeight: 1.65, margin: 0,
@@ -147,7 +146,7 @@ export default function Footer() {
             style={{
               display: "flex", alignItems: "center", gap: 7,
               fontFamily: "var(--font-mono)", fontSize: "0.7rem",
-              textTransform: "uppercase", color: "#8b949e", 
+              textTransform: "uppercase", color: "#8b949e",
               background: "transparent", border: "1px solid #30363d",
               borderRadius: "4px", padding: "6px 12px", cursor: "pointer",
               transition: "color 0.15s, border-color 0.15s",

@@ -49,56 +49,56 @@ export default function Hero() {
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%" }}>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12 lg:gap-20 items-center">
-          
+
           {/* ── Left: Information Architecture ───────────────────────────────────── */}
           <div>
             {/* Status Pill */}
             <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: 8,
-              fontFamily: "var(--font-mono)", fontSize: "0.8rem",
-              color: "var(--ink)", marginBottom: 24,
-              border: "1px solid var(--border)",
-              padding: "8px 16px", borderRadius: 6,
-              textTransform: "uppercase", letterSpacing: "0.05em"
-            }}
-          >
-            <span style={{ width: 8, height: 8, background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
-            Open for Software Engineering opportunities
-          </motion.div>
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: 8,
+                fontFamily: "var(--font-mono)", fontSize: "0.8rem",
+                color: "var(--ink)", marginBottom: 24,
+                border: "1px solid var(--border)",
+                padding: "8px 16px", borderRadius: 6,
+                textTransform: "uppercase", letterSpacing: "0.05em"
+              }}
+            >
+              <span style={{ width: 8, height: 8, background: "#22c55e", borderRadius: "50%", display: "inline-block" }} />
+              Open for Software Engineering opportunities
+            </motion.div>
 
             {/* Headline */}
-             <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.08 }}
-          >
-            <h1 style={{
-              fontFamily: "var(--font-display)",
-              fontWeight: 800,
-              fontSize: "clamp(2.5rem, 6vw, 4.2rem)",
-              letterSpacing: "-0.04em",
-              lineHeight: 1.1,
-              color: "var(--ink)",
-              margin: "0 0 16px 0",
-            }}>
-              Abhishekh Kumar
-            </h1>
-            <h2 style={{
-              fontFamily: "var(--font-body)",
-              fontWeight: 600,
-              fontSize: "clamp(1.5rem, 3vw, 2rem)",
-              color: "#22c55e",
-              margin: "0 0 24px 0",
-            }}>
-              Software Engineer | Full-Stack Developer
-            </h2>
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.55, delay: 0.08 }}
+            >
+              <h1 style={{
+                fontFamily: "var(--font-display)",
+                fontWeight: 800,
+                fontSize: "clamp(2.5rem, 6vw, 4.2rem)",
+                letterSpacing: "-0.04em",
+                lineHeight: 1.1,
+                color: "var(--ink)",
+                margin: "0 0 16px 0",
+              }}>
+                Abhishekh Kumar
+              </h1>
+              <h2 style={{
+                fontFamily: "var(--font-body)",
+                fontWeight: 600,
+                fontSize: "clamp(1.5rem, 3vw, 2rem)",
+                color: "var(--accent)",
+                margin: "0 0 24px 0",
+              }}>
+                Software Engineer | Full-Stack Developer
+              </h2>
+            </motion.div>
 
             {/* Sub-headline */}
             <motion.p
@@ -114,7 +114,7 @@ export default function Hero() {
                 marginTop: 24,
               }}
             >
-              Building production-oriented full-stack applications with React, Node.js, and MongoDB. Passionate about writing clean code, building robust APIs, and delivering high-performance scalable systems.
+              I'm a full-stack engineer focused on building robust backend systems, scaling web applications, and resolving complex data flows. Welcome to my command center where I showcase my projects and technical experiments.
             </motion.p>
 
             {/* Trust Metrics Grid */}
@@ -153,8 +153,8 @@ export default function Hero() {
               style={{ display: "flex", gap: 16, marginTop: 40 }}
               className="flex-col sm:flex-row"
             >
-              <button 
-                onClick={() => scrollTo("projects")} 
+              <button
+                onClick={() => scrollTo("projects")}
                 style={{
                   background: "var(--ink)", color: "#000000",
                   fontFamily: "var(--font-body)", fontSize: "0.95rem", fontWeight: 600,
@@ -165,8 +165,8 @@ export default function Hero() {
               >
                 View Projects <ArrowRight size={16} />
               </button>
-              <button 
-                onClick={() => scrollTo("contact")} 
+              <button
+                onClick={() => scrollTo("contact")}
                 style={{
                   background: "transparent", color: "var(--ink)",
                   fontFamily: "var(--font-body)", fontSize: "0.95rem", fontWeight: 600,
@@ -179,7 +179,7 @@ export default function Hero() {
               </button>
             </motion.div>
           </div>
-          
+
 
           {/* ── Right: Interactive Code Editor ─────────────────────────────────── */}
           <motion.div
@@ -188,8 +188,8 @@ export default function Hero() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="w-full"
           >
-            <div 
-              style={{ 
+            <div
+              style={{
                 background: "#0a0a0a", border: "1px solid var(--border-strong)",
                 borderRadius: 12, overflow: "hidden",
                 boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
@@ -213,11 +213,11 @@ export default function Hero() {
               {/* Editor Body */}
               <div style={{ padding: "24px", fontFamily: "var(--font-mono)", fontSize: "0.85rem", lineHeight: 1.6, overflowX: "auto" }}>
                 {CODE_LINES.map((line, i) => (
-                  <div 
-                    key={i} 
-                    style={{ 
-                      display: "flex", opacity: i < lineIdx ? 1 : 0, 
-                      transition: "opacity 0.2s" 
+                  <div
+                    key={i}
+                    style={{
+                      display: "flex", opacity: i < lineIdx ? 1 : 0,
+                      transition: "opacity 0.2s"
                     }}
                   >
                     <div style={{ width: 24, color: "#333", textAlign: "right", marginRight: 16, userSelect: "none" }}>
@@ -228,7 +228,7 @@ export default function Hero() {
                     </div>
                   </div>
                 ))}
-                
+
                 {/* Blinking Cursor at active line */}
                 {lineIdx < CODE_LINES.length && (
                   <div style={{ display: "flex" }}>

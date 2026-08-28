@@ -75,7 +75,7 @@ export default function Experience() {
 
         {/* Git History Timeline */}
         <div style={{ display: "flex", flexDirection: "column", gap: 0, paddingLeft: 8 }}>
-          
+
           <div style={{ display: "flex", alignItems: "center", gap: 12, color: "var(--muted)", marginBottom: 16, fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
             <GitBranch size={16} />
             <span>branch: <strong>main</strong></span>

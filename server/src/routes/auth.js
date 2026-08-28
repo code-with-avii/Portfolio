@@ -5,8 +5,12 @@ import { Admin } from "../models/Admin.js";
 import { isDbConnected, memoryStore } from "../config/db.js";
 
 const router = Router();
-const JWT_SECRET =
-  process.env.JWT_SECRET || "supersecretportfoliojsonwebtokenkey12345";
+
+if (!process.env.JWT_SECRET) {
+  console.error("FATAL CONFIG ERROR: JWT_SECRET environment variable is not defined!");
+  process.exit(1);
+}
+const JWT_SECRET = process.env.JWT_SECRET;
 
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;

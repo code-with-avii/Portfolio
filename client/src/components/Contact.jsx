@@ -32,17 +32,17 @@ const labelStyle = {
 };
 
 const SOCIALS = [
-  { label: "GitHub",   href: "https://github.com/code-with-avii",            icon: FaGithub   },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhishekh07/",      icon: FaLinkedin },
-  { label: "Twitter",  href: "https://x.com/MondalAvii94420",                 icon: FaXTwitter },
+  { label: "GitHub", href: "https://github.com/code-with-avii", icon: FaGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/abhishekh07/", icon: FaLinkedin },
+  { label: "Twitter", href: "https://x.com/MondalAvii94420", icon: FaXTwitter },
 ];
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
-  const [loading, setLoading]   = useState(false);
-  const [status, setStatus]     = useState("idle"); // idle | success | error
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState("idle"); // idle | success | error
   const [errorMsg, setErrorMsg] = useState("");
-  const [copied, setCopied]     = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText("aviimondal689@gmail.com");
@@ -68,7 +68,7 @@ export default function Contact() {
     setErrorMsg("");
 
     try {
-      const res  = await fetch(`${API_URL}/messages`, {
+      const res = await fetch(`${API_URL}/messages`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

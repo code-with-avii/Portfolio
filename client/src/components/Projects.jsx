@@ -88,35 +88,39 @@ export default function Projects() {
         </motion.div>
 
         {/* Filter pills */}
-        <div 
-          className="no-scrollbar"
-          style={{ 
-            display: "flex", flexWrap: "nowrap", overflowX: "auto", 
-            gap: 8, marginBottom: 36, paddingBottom: 4 
-          }}
-        >
-          {ALL_TAGS.map(tag => (
-            <button
-              key={tag}
-              onClick={() => setFilter(tag)}
-              style={{
-                fontFamily: "var(--font-mono)", fontSize: "0.78rem", fontWeight: 500,
-                padding: "4px 12px", borderRadius: "2em", cursor: "pointer",
-                background: filter === tag ? "#21262d" : "transparent",
-                color: filter === tag ? "#c9d1d9" : "#8b949e",
-                border: `1px solid ${filter === tag ? "#f0f6fc1a" : "transparent"}`,
-                transition: "all 0.15s ease",
-              }}
-              onMouseEnter={e => {
-                if (filter !== tag) e.currentTarget.style.background = "#161b22";
-              }}
-              onMouseLeave={e => {
-                if (filter !== tag) e.currentTarget.style.background = "transparent";
-              }}
-            >
-              {tag}
-            </button>
-          ))}
+        <div style={{ position: "relative", marginBottom: 36 }}>
+          <div 
+            className="no-scrollbar"
+            style={{ 
+              display: "flex", flexWrap: "nowrap", overflowX: "auto", 
+              gap: 8, paddingBottom: 4,
+              maskImage: "linear-gradient(to right, white 85%, transparent 100%)",
+              WebkitMaskImage: "linear-gradient(to right, white 85%, transparent 100%)"
+            }}
+          >
+            {ALL_TAGS.map(tag => (
+              <button
+                key={tag}
+                onClick={() => setFilter(tag)}
+                style={{
+                  fontFamily: "var(--font-mono)", fontSize: "0.78rem", fontWeight: 500,
+                  padding: "4px 12px", borderRadius: "2em", cursor: "pointer",
+                  background: filter === tag ? "var(--surface2)" : "transparent",
+                  color: filter === tag ? "var(--ink)" : "var(--muted)",
+                  border: `1px solid ${filter === tag ? "var(--border-strong)" : "transparent"}`,
+                  transition: "all 0.15s ease",
+                }}
+                onMouseEnter={e => {
+                  if (filter !== tag) e.currentTarget.style.background = "var(--surface)";
+                }}
+                onMouseLeave={e => {
+                  if (filter !== tag) e.currentTarget.style.background = "transparent";
+                }}
+              >
+                {tag}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Project list — GitHub Repo Style */}
@@ -135,23 +139,33 @@ export default function Projects() {
                 exit={{ opacity: 0, y: 8 }}
                 transition={{ duration: 0.35, delay: i * 0.04 }}
                 style={{
-                  background: "#0d1117",
-                  border: "1px solid #30363d",
-                  borderRadius: 6,
+                  background: "var(--surface)",
+                  border: "1px solid var(--border)",
+                  borderRadius: 8,
                   padding: "16px",
                   display: "flex",
                   flexDirection: "column",
                   cursor: "pointer",
-                  transition: "border-color 0.2s ease"
+                  transition: "border-color 0.2s ease",
+                  outline: "none"
                 }}
-                onMouseEnter={e => e.currentTarget.style.borderColor = "#8b949e"}
-                onMouseLeave={e => e.currentTarget.style.borderColor = "#30363d"}
+                tabIndex={0}
+                role="button"
+                aria-label={`View details for ${p.title}`}
+                onMouseEnter={e => e.currentTarget.style.borderColor = "var(--border-strong)"}
+                onMouseLeave={e => e.currentTarget.style.borderColor = "var(--border)"}
                 onClick={() => navigate(`/project/${p._id}`)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    navigate(`/project/${p._id}`);
+                  }
+                }}
               >
                 {/* Header Row */}
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <BookMarked size={16} color="#8b949e" />
+                    <BookMarked size={16} color="var(--muted)" />
                     <span style={{ 
                       fontFamily: "var(--font-body)", fontWeight: 600, fontSize: "1rem", 
                       color: "var(--ink)", wordBreak: "break-all"
@@ -161,7 +175,7 @@ export default function Projects() {
                   </div>
                   <span style={{
                     fontFamily: "var(--font-body)", fontSize: "0.75rem", fontWeight: 500,
-                    color: "#8b949e", border: "1px solid #30363d", borderRadius: "2em",
+                    color: "var(--muted)", border: "1px solid var(--border-strong)", borderRadius: "2em",
                     padding: "1px 7px"
                   }}>
                     Public
@@ -170,7 +184,7 @@ export default function Projects() {
 
                 {/* Description */}
                 <p style={{
-                  fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "#8b949e",
+                  fontFamily: "var(--font-body)", fontSize: "0.85rem", color: "var(--muted)",
                   lineHeight: 1.6, marginBottom: 16, flexGrow: 1, whiteSpace: "pre-wrap"
                 }}>
                   {p.description}

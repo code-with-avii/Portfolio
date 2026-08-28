@@ -39,6 +39,13 @@ memoryStore.achievements.forEach((a, idx) => {
 });
 
 export const connectDB = async () => {
+  const adminUser = process.env.ADMIN_USERNAME;
+  const adminPass = process.env.ADMIN_PASSWORD;
+  if (!adminUser || !adminPass) {
+    console.error("FATAL CONFIG ERROR: ADMIN_USERNAME and ADMIN_PASSWORD environment variables must be defined!");
+    process.exit(1);
+  }
+
   const mongoUri =
     process.env.MONGO_URI || "mongodb://127.0.0.1:27017/portfolio";
   try {
@@ -49,14 +56,12 @@ export const connectDB = async () => {
     console.log("MongoDB Connected Successfully.");
 
     // Seed database if empty
-    await seedDatabase();
+    await seedDatabase(adminUser, adminPass);
   } catch (error) {
     console.error(`MongoDB Connection Failed: ${error.message}`);
     console.log("API will run in in-memory fallback mode.");
 
     // Seed in-memory admin
-    const adminUser = process.env.ADMIN_USERNAME || "admin";
-    const adminPass = process.env.ADMIN_PASSWORD || "adminpassword123";
     const salt = await bcrypt.genSalt(10);
     const passwordHash = await bcrypt.hash(adminPass, salt);
     memoryStore.admins.push({
@@ -69,12 +74,10 @@ export const connectDB = async () => {
   }
 };
 
-const seedDatabase = async () => {
+const seedDatabase = async (adminUser, adminPass) => {
   try {
     // 1. Seed Admin
     const adminCount = await Admin.countDocuments();
-    const adminUser = process.env.ADMIN_USERNAME || "admin";
-    const adminPass = process.env.ADMIN_PASSWORD || "adminpassword123";
 
     if (adminCount === 0) {
       const salt = await bcrypt.genSalt(10);
