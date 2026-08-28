@@ -16,6 +16,7 @@ import messagesRouter from "./routes/messages.js";
 import uploadRouter from "./routes/upload.js";
 
 const app = express();
+app.set("trust proxy", 1); // Trust Render's reverse proxy for rate-limiting IP resolution
 const port = process.env.PORT || 3000;
 
 // Resolve ES Modules dirname
