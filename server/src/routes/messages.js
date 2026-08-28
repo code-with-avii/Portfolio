@@ -4,6 +4,7 @@ import { body, validationResult } from "express-validator";
 import { Message } from "../models/Message.js";
 import { authenticateToken } from "../middleware/auth.js";
 import { isDbConnected, memoryStore } from "../config/db.js";
+import fs from "fs";
 
 const router = Router();
 
@@ -72,8 +73,18 @@ router.post(
         transporter.sendMail(mailOptions, (error, info) => {
           if (error) {
             console.error("SMTP Email Notification failed:", error.message);
+            try {
+              fs.writeFileSync("smtp_error.log", `[${new Date().toISOString()}] SMTP Error: ${error.message}\nStack: ${error.stack}\n`);
+            } catch (err) {
+              console.error("Failed to write to smtp_error.log:", err.message);
+            }
           } else {
             console.log("Notification email sent: " + info.response);
+            try {
+              if (fs.existsSync("smtp_error.log")) {
+                fs.unlinkSync("smtp_error.log");
+              }
+            } catch (err) {}
           }
         });
       } else {

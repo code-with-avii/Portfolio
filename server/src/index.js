@@ -35,8 +35,9 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-       "https://www.avii.in",
-       "https://avii.in",
+      "http://localhost:5174",
+      "https://www.avii.in",
+      "https://avii.in",
     ],
     credentials: true,
   })
