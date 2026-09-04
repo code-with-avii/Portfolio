@@ -267,7 +267,7 @@ export default function Contact() {
                   <input
                     type="text" id="contact-name" name="name"
                     value={formData.name} onChange={handleChange}
-                    required placeholder="Jack Reacher"
+                    required placeholder="Your name"
                     disabled={loading || status === "success"}
                     style={inputStyle}
                     onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}
@@ -279,7 +279,7 @@ export default function Contact() {
                   <input
                     type="email" id="contact-email" name="email"
                     value={formData.email} onChange={handleChange}
-                    required placeholder="reacher@example.com"
+                    required placeholder="your.email@example.com"
                     disabled={loading || status === "success"}
                     style={inputStyle}
                     onFocus={e => e.target.style.borderColor = "rgba(255,255,255,0.2)"}

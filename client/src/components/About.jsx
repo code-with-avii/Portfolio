@@ -63,7 +63,7 @@ export default function About() {
             {/* Paragraphs */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20, fontFamily: "var(--font-body)", fontSize: "1.05rem", color: "var(--ink)", lineHeight: 1.7 }}>
               <p style={{ margin: 0, fontWeight: 400 }}>
-                I'm a <strong>Software Engineer</strong> specializing in <strong>Full-Stack Development</strong> with the <strong>MERN Stack</strong>. I am passionate about system design, building scalable backend architectures, and continuously honing my DSA skills. My current focus is on securing a challenging Software Engineering role where I can build impactful, production-ready applications.
+                I'm a <strong>Software Engineer</strong> specializing in <strong>Full-Stack Development</strong> with the <strong>MERN Stack</strong>. I am passionate about system design, building scalable backend architectures, and continuously honing my DSA skills.I'm focused on building production-ready applications with clean architecture, secure authentication, efficient APIs, and scalable database systems.
               </p>
             </div>
 

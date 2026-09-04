@@ -96,7 +96,7 @@ export default function Hero() {
                 color: "var(--accent)",
                 margin: "0 0 24px 0",
               }}>
-                Software Engineer | Full-Stack Developer
+                Full-Stack Developer | Software Engineering
               </h2>
             </motion.div>
 
@@ -114,7 +114,7 @@ export default function Hero() {
                 marginTop: 24,
               }}
             >
-              I'm a full-stack engineer focused on building robust backend systems, scaling web applications, and resolving complex data flows. Welcome to my command center where I showcase my projects and technical experiments.
+             Full-Stack Developer focused on building production-ready web applications, secure backend systems, and scalable APIs using React, Node.js, and modern databases.
             </motion.p>
 
             {/* Trust Metrics Grid */}

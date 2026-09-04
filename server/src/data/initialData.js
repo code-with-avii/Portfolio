@@ -152,89 +152,6 @@ export const initialSkills = [
     icon: "Gemini",
     currentlyLearning: false,
   },
-//   {
-//     name: "LangChain",
-//     category: "AI",
-//     icon: "Langchain",
-//     currentlyLearning: false,
-//   },
-
-  // Currently Learning
-//   {
-//     name: "GraphQL",
-//     category: "Backend",
-//     icon: "Graphql",
-//     currentlyLearning: true,
-//   },
-//   {
-//     name: "Kubernetes",
-//     category: "DevOps",
-//     icon: "Kubernetes",
-//     currentlyLearning: true,
-//   },
-//   { name: "Rust", category: "Backend", icon: "Rust", currentlyLearning: true },
-];
-
-export const initialExperiences = [
-  {
-    role: "Full Stack Engineer",
-    company: "Freelance & Open Source",
-    duration: "2025 - Present",
-    type: "Freelance Work",
-    technologies: [
-      "React",
-    //   "Next.js",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-    //   "Docker",
-      "OpenAI API",
-    ],
-    achievements: [
-      "Architected and delivered custom E-commerce APIs and automated dashboard integrations for global clients.",
-      "Developed AI-assisted workflows resulting in a 40% reduction in client customer support ticket response times.",
-      "Contributed core enhancements to prominent animation libraries and icon packs on GitHub.",
-    ],
-  },
-  {
-    role: "Project Developer",
-    company: "College Hackathons & Open Source",
-    duration: "2024 - Present",
-    type: "Team Projects",
-    technologies: [
-      "React",
-      "Tailwind CSS",
-      "Express.js",
-      "MongoDB",
-      "Socket.io",
-    ],
-    achievements: [
-      "Participated in SIH (Smart India Hackathon) 2025 for building a real-time disaster resource dispatcher.",
-      "Led a team of 4 developers, planned project milestones, delegated tasks, conducted code reviews, managed Git workflows, and ensured successful delivery of scalable full-stack features",
-      "Implemented full authentication flows using httpOnly secure cookies and JSON Web Tokens.",
-    ],
-  },
-  {
-    role: "Open Source Contributor",
-    company: "GitHub Ecosystem",
-    duration: "2026 - Present",
-    type: "Open Source Contributions",
-    technologies: ["React", "Tailwind CSS", "Framer Motion", "Git"],
-    achievements: [
-      "Merged 100+ pull requests addressing performance bottlenecks and custom utility hook exports in component design files.",
-    ],
-  },
-  {
-    role: "Undergraduate ",
-    company: "University Technical Club",
-    duration: "2024 - present",
-    type: "College Projects",
-    technologies: ["JavaScript", "HTML5", "CSS3", "Node.js", "PostgreSQL"],
-    achievements: [
-      "Developed and deployed Hostel Help, a full-stack hostel management platform streamlining room allocation, complaints, notices, and student-hostel administration for 1,500+ students..",
-      "Designed highly responsive layouts supporting desktop, mobile, and display panels, with 100% lighthouse compliance.",
-    ],
-  },
 ];
 
 export const initialAchievements = [
@@ -255,15 +172,7 @@ export const initialAchievements = [
     link : "https://www.udemy.com/certificate/UC-a4bcf47e-a450-4599-8dad-7b893f53d316/",
     date : "2026"
   },
-//   {
-//     title: "LeetCode Knight Badge",
-//     category: "Coding Profile",
-//     value: "1950+ Rating",
-//     description:
-//       "Solved over 1000+ problems across arrays, graphs, dynamic programming, and systems design topics.",
-//     link: "https://leetcode.com",
-//     date: "2025",
-//   },
+
   {
     title: "100+ Merged Pull Requests",
     category: "Open Source",
@@ -273,33 +182,6 @@ export const initialAchievements = [
     link: "https://github.com",
     date: "2024 - Present",
   },
-//   {
-//     title: "AWS Certified Developer",
-//     category: "Certifications",
-//     value: "Associate Level",
-//     description:
-//       "Validated expert competency in deploying, scaling, and managing containerised Node applications on AWS Cloud.",
-//     link: "https://aws.amazon.com",
-//     date: "2025",
-//   },
-//   {
-//     title: "MongoDB Certified Developer",
-//     category: "Certifications",
-//     value: "Associate Developer",
-//     description:
-//       "Demonstrated extensive knowledge of aggregation pipelines, schema designs, indexes, and database optimizations.",
-//     link: "https://mongodb.com",
-//     date: "2025",
-//   },
-//   {
-//     title: "Codeforces Expert",
-//     category: "Coding Profile",
-//     value: "1650+ Max Rating",
-//     description:
-//       "Ranked in the top percentiles of international algorithms and data structures competitive contests.",
-//     link: "https://codeforces.com",
-//     date: "2025",
-//   },
 ];
 
 export const initialProjects = [
@@ -450,45 +332,6 @@ export const initialProjects = [
     featured: false,
     role: "Full Stack Developer",
     duration: "2 Months",
-  },
-  {
-    title: "Weather Dashboard",
-    subtitle: "Dynamic weather portal with statistics & charts",
-    description:
-      "An aesthetic dashboard plotting historical and current weather parameters across global locations, with interactive hourly chart logs.",
-    longDescription:
-      "This frontend-driven dashboard connects to OpenWeather APIs, aggregates meteorological stats, saves search logs within local storage, and plots wind/humidity patterns using ChartJS.",
-    image:
-      "https://images.unsplash.com/photo-1592210454359-9043f067919b?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Tailwind CSS", "ChartJS", "OpenWeather API"],
-    features: [
-      "12+ reusable UI graphing and meteorological metric panels",
-      "Geocoding locator tracking global coordinates in real time",
-      "In-browser localStorage cache reducing API calls by 50%",
-      "Interactive Chart.js visualizations plotting historical climate shifts",
-    ],
-    architectureDiagram:
-      "Vite React UI -> LocalStorage (Cache) -> OpenWeather Maps API Proxy",
-    apiFlow: [
-      "GET /api/weather/search?city=NAME - Direct search using weather coordinates maps",
-      "GET /api/weather/forecast - 5-day forecast aggregates mapping hourly blocks",
-    ],
-    databaseDesign:
-      "Client-side LocalStorage cache mapping city search strings to JSON data packages with 30-minute expiry timestamps.",
-    challengesSolved:
-      "Mitigated API key exposure risks by configuring custom backend serverless proxy routes, shielding keys from network logs.",
-    performanceOptimizations:
-      "Used responsive Tailwind classes for perfect styling. Bundle sizes are optimized via lazy loading of heavy graph elements.",
-    futureImprovements: [
-      "Add extreme weather alerts push alerts",
-      "Radar map visualisations overlay",
-      "Add comparative weather layout widgets",
-    ],
-    githubUrl: "https://github.com/code-with-avii/Weather_app",
-    liveUrl: "https://weather-app-theta-two-15.vercel.app/",
-    featured: false,
-    role: "Full Stack Developer",
-    duration: "1.5 Months",
   },
   {
     title: "Hostel Help",
