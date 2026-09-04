@@ -101,6 +101,14 @@ const seedDatabase = async (adminUser, adminPass) => {
     if (projectCount === 0) {
       await Project.insertMany(initialProjects);
       console.log("Default projects seeded.");
+    } else {
+      const betterAuthData = initialProjects.find((p) => p.title === "Better Auth");
+      if (betterAuthData) {
+        await Project.updateMany(
+          { title: "Secure Authentication Suite" },
+          { $set: betterAuthData }
+        );
+      }
     }
 
     // 4. Seed Experiences
