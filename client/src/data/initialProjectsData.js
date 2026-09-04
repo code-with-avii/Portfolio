@@ -10,15 +10,9 @@ export const initialProjectsData = [
 • Optimized state management with Redux Toolkit, decreasing redundant component re-renders by 35%`,
     longDescription:
       "SmartTech is a feature-rich e-commerce platform developed using the MERN stack. It allows users to browse products, manage shopping carts, place secure orders, and make online payments through Razorpay. The platform includes robust user authentication with JWT and Google OAuth, and a secure admin dashboard for managing products, categories, users, and orders.",
-    image: "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
-    tags: [
-      "React",
-      "Node.js",
-      "Express.js",
-      "MongoDB",
-      "Redux",
-      "Razorpay"
-    ],
+    image:
+      "https://images.unsplash.com/photo-1468436139062-f60a71c5c892?q=80&w=800&auto=format&fit=crop",
+    tags: ["React", "Node.js", "Express.js", "MongoDB", "Redux", "Razorpay"],
     features: [
       "JWT Cookie Authentication & Google OAuth login flow",
       "Razorpay Payment Gateway with custom billing pipelines",
@@ -62,7 +56,8 @@ export const initialProjectsData = [
 • Reduced issue processing delays by 40% through unified role-based administrative consoles`,
     longDescription:
       "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records.",
-    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
     tags: ["MERN", "JWT", "MongoDB", "Express.js", "React", "Node.js"],
     features: [
       "JWT cookie authentication & secure database route guards",
@@ -93,5 +88,5 @@ export const initialProjectsData = [
     featured: true,
     role: "Full Stack Developer",
     duration: "2 Months",
-  }
+  },
 ];

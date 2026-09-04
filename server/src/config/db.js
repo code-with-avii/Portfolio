@@ -97,6 +97,8 @@ const seedDatabase = async (adminUser, adminPass) => {
     }
 
     // 3. Seed Projects
+    await Project.deleteMany({ title: { $regex: /weather/i } });
+
     const projectCount = await Project.countDocuments();
     if (projectCount === 0) {
       await Project.insertMany(initialProjects);

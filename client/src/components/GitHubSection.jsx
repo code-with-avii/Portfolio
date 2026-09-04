@@ -11,16 +11,16 @@ const PINNED_REPOS = [
     link: "https://github.com/code-with-avii/SmartTech",
   },
   {
-    name: "Auth Suite",
-    description: "JWT + MFA microservice with HTTPOnly cookies, RBAC, CSRF/XSS protection, and Google Authenticator TOTP support.",
-    language: "JavaScript",
-    link: "https://github.com/code-with-avii/Authentication",
+    name: "Better Auth",
+    description: "Modern authentication application with Next.js 16, TypeScript, Better Auth, Prisma, PostgreSQL, and Resend.",
+    language: "TypeScript",
+    link: "https://github.com/code-with-avii/Better_auth",
   },
   {
-    name: "Weather Dashboard",
-    description: "OpenWeather API integration with Chart.js visualizations, geocoding, and localStorage caching (50% fewer API calls).",
+    name: "Hostel Help",
+    description: "Smart hostel management platform enabling complaint tracking, issue ticketing, and student-admin communication.",
     language: "JavaScript",
-    link: "https://github.com/code-with-avii/Weather_app",
+    link: "https://github.com/code-with-avii/Hostel-Help",
   },
 ];
 

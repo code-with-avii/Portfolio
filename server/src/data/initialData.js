@@ -184,6 +184,30 @@ export const initialAchievements = [
   },
 ];
 
+export const initialExperiences = [
+  {
+    role: "Full Stack Developer",
+    company: "Freelance & Open Source",
+    duration: "2025 – Present",
+    type: "Freelance Work",
+    technologies: ["React", "Next.js", "Node.js", "MongoDB", "OpenAI API"],
+    achievements: [
+      "Architected custom e-commerce APIs and automated dashboard integrations.",
+      "Developed AI-assisted workflows reducing client support response times by 40%.",
+    ],
+  },
+  {
+    role: "Undergraduate Engineer",
+    company: "B.Tech — Computer Science",
+    duration: "2024 – Present",
+    type: "College Projects",
+    technologies: ["JavaScript", "HTML5", "CSS3", "Node.js", "PostgreSQL"],
+    achievements: [
+      "Developed and deployed a hostel management portal that automated administrative tasks and improved operational efficiency.",
+    ],
+  },
+];
+
 export const initialProjects = [
   {
     title: "SmartTech",
