@@ -34,6 +34,20 @@ const FALLBACK = [
     liveUrl: "https://hostel-help-pi.vercel.app/",
     featured: true,
   },
+  {
+    _id: "mem-project-6",
+    title: "Portfolio",
+    subtitle: "Modern Full-Stack Developer Portfolio & Admin CMS",
+    description: `• Dynamic project & skill management via REST API
+• JWT Authentication & Admin CMS dashboard
+• Redux Toolkit RTK Query state management
+• Responsive dark minimalist design system
+• Express & MongoDB backend architecture`,
+    tags: ["React", "Node.js", "Express.js", "MongoDB", "Redux", "Tailwind CSS"],
+    githubUrl: "https://github.com/code-with-avii/Portfolio",
+    liveUrl: "https://portfolio-abhishekh.vercel.app",
+    featured: true,
+  },
 ];
 
 const ALL_TAGS = [

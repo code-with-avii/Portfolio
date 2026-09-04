@@ -111,6 +111,16 @@ const seedDatabase = async (adminUser, adminPass) => {
           { $set: betterAuthData }
         );
       }
+      const portfolioData = initialProjects.find((p) => p.title === "Portfolio");
+      if (portfolioData) {
+        const existingPortfolio = await Project.findOne({ title: "Portfolio" });
+        if (!existingPortfolio) {
+          await Project.create(portfolioData);
+          console.log("Portfolio project seeded.");
+        } else {
+          await Project.updateOne({ title: "Portfolio" }, { $set: portfolioData });
+        }
+      }
     }
 
     // 4. Seed Experiences

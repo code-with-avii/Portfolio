@@ -401,4 +401,55 @@ export const initialProjects = [
     role: "Full Stack Developer",
     duration: "2 Months",
   },
+  {
+    title: "Portfolio",
+    subtitle: "Modern Full-Stack Developer Portfolio & Admin CMS",
+    description:
+      "A production-ready, premium full-stack developer portfolio and content management system built with React, Node.js, Express, and MongoDB.",
+    longDescription:
+      "Portfolio is a feature-rich personal developer portfolio and content management system built using the MERN stack with Redux Toolkit, Tailwind CSS, and Framer Motion. It features dynamic project showcases with case studies, an interactive skills matrix, experience timeline, contact form with backend integration, and a secure Admin Dashboard for managing projects, skills, and messages without code changes.",
+    image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop",
+    tags: [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Redux Toolkit",
+      "Tailwind CSS",
+      "JWT",
+      "Framer Motion",
+    ],
+    features: [
+      "JWT-authenticated Admin Panel for full CRUD operations on projects & skills",
+      "Redux Toolkit RTK Query API slice with optimistic state management",
+      "Interactive Projects gallery with filter pills & detailed case study pages",
+      "Contact form linked to MongoDB storage and email notifications",
+      "Responsive dark aesthetic with Framer Motion animations and interactive code editor",
+    ],
+    architectureDiagram:
+      "React Client + Vite → Redux Toolkit RTK Query → Express REST API → JWT & Security Middleware → MongoDB Database",
+    apiFlow: [
+      "GET /api/projects - Retrieve all portfolio projects",
+      "GET /api/skills - Fetch categorized skill items",
+      "POST /api/messages - Store contact form submissions",
+      "POST /api/auth/login - Authenticate admin & issue JWT token",
+      "POST /api/projects - Admin route to create new projects",
+    ],
+    databaseDesign:
+      "Collections: Projects, Skills, Experiences, Achievements, Admins, Messages. MongoDB Mongoose models with strict schema definitions.",
+    challengesSolved:
+      "Implemented seamless in-memory fallback store ensuring 100% uptime even if MongoDB is disconnected. Optimized bundle assets and created smooth page transition animations.",
+    performanceOptimizations:
+      "RTK Query cached API responses, Vite asset code-splitting, WebP image optimization, rate-limiting on sensitive backend routes, and minimal runtime CSS variable design system.",
+    futureImprovements: [
+      "Analytics Dashboard for Visitor Metrics",
+      "Blog & Technical Article Publishing",
+      "Custom Theme Color Switcher",
+    ],
+    githubUrl: "https://github.com/code-with-avii/Portfolio",
+    liveUrl: "https://portfolio-abhishekh.vercel.app",
+    featured: true,
+    role: "Full Stack Developer",
+    duration: "1 Month",
+  },
 ];

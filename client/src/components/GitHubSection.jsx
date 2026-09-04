@@ -5,6 +5,12 @@ import { ExternalLink } from "lucide-react";
 
 const PINNED_REPOS = [
   {
+    name: "Portfolio",
+    description: "Production-ready, premium full-stack developer portfolio and CMS with React, Express, MongoDB, and Redux Toolkit.",
+    language: "JavaScript",
+    link: "https://github.com/code-with-avii/Portfolio",
+  },
+  {
     name: "SmartTech",
     description: "Full-stack MERN e-commerce platform with secure auth, Razorpay payments, admin dashboard, and 25+ reusable React components.",
     language: "JavaScript",
