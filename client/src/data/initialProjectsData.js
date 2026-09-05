@@ -1,6 +1,6 @@
 export const initialProjectsData = [
   {
-    _id: "mem-project-5",
+    _id: "mem-project-1",
     title: "SmartTech",
     subtitle: "Full-Stack E-Commerce Platform",
     description: `• Architected high-performance e-commerce client handling 15+ secure REST API routes
@@ -90,7 +90,7 @@ export const initialProjectsData = [
     duration: "2 Months",
   },
   {
-    _id: "mem-project-6",
+    _id: "mem-project-3",
     title: "Portfolio",
     subtitle: "Modern Full-Stack Developer Portfolio & Admin CMS",
     description: `• Architected full-stack developer portfolio with sleek dark mode aesthetic
@@ -131,9 +131,52 @@ export const initialProjectsData = [
       "Custom Theme Color Switcher",
     ],
     githubUrl: "https://github.com/code-with-avii/Portfolio",
-    liveUrl: "https://portfolio-abhishekh.vercel.app",
+    liveUrl: "https://avii.in",
     featured: true,
     role: "Full Stack Developer",
     duration: "1 Month",
+  },
+  {
+    _id: "mem-project-3",
+    title: "Better Auth",
+    subtitle: "Modern Authentication System with Next.js, Better Auth & Prisma",
+    description:
+      "A modern authentication application built with Next.js, TypeScript, Better Auth, Prisma, PostgreSQL, and Resend, supporting social OAuth and email verification.",
+    longDescription:
+      "Better Auth is a comprehensive authentication solution built with Next.js 16, TypeScript, Tailwind CSS, shadcn/ui, Better Auth, Prisma, and PostgreSQL. The project provides a complete authentication flow featuring email/password login, email verification after signup via Resend, forgot and reset password flows, Google and GitHub OAuth sign-ins, social account linking, protected dashboard access, session management, and a clean responsive UI.",
+    image:
+      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop",
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
+    features: [
+      "Email & password authentication with post-signup verification via Resend",
+      "Forgot password and secure reset password workflow",
+      "Google OAuth and GitHub OAuth social login with account linking",
+      "Protected dashboard and session expiration management",
+      "PostgreSQL database integration powered by Prisma ORM",
+    ],
+    architectureDiagram:
+      "Next.js 16 App → Better Auth Client & Route Handlers → Prisma ORM → PostgreSQL Database → Resend Email Service",
+    apiFlow: [
+      "POST /api/auth/sign-in - Authenticate credentials and establish user session",
+      "POST /api/auth/sign-up - Register user and send verification email via Resend",
+      "GET /api/auth/callback/google - Handle Google OAuth callback & issue session token",
+      "POST /api/auth/forgot-password - Trigger password reset email flow",
+    ],
+    databaseDesign:
+      "Models: User (id, email, name, emailVerified, image), Session (id, userId, token, expiresAt, ipAddress), Account (id, userId, providerId, accountId), Verification (id, identifier, value, expiresAt).",
+    challengesSolved:
+      "Integrated Better Auth framework with Next.js 16 App Router and Prisma ORM, seamlessly managing multi-provider OAuth account linking, CSRF security, and automated transactional emails with Resend.",
+    performanceOptimizations:
+      "Leveraged server-side auth checking in Next.js middleware, optimized session token database queries with Prisma indexing, and utilized Tailwind CSS with shadcn/ui for zero-runtime styling overhead.",
+    futureImprovements: [
+      "Two-Factor Authentication (2FA) with TOTP and Passkeys",
+      "Multi-tenant organization & team workspace support",
+      "Role-Based Access Control (RBAC) authorization policies",
+    ],
+    githubUrl: "https://github.com/code-with-avii/Better_auth",
+    liveUrl: "https://github.com/code-with-avii/Better_auth",
+    featured: false,
+    role: "Full Stack Developer",
+    duration: "5 Days",
   },
 ];

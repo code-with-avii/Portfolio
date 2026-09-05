@@ -267,54 +267,6 @@ export const initialProjects = [
     role: "Full Stack Developer",
     duration: "3 Months",
   },
-  // {
-  //   title: "AI Prompt Marketplace",
-  //   subtitle: "SaaS Marketplace for custom AI fine-tunes & prompt models",
-  //   description:
-  //     "A premium marketplace platform supporting custom AI engineering, prompt auctions, model sharing, and credit transactions.",
-  //   longDescription:
-  //     "The AI Prompt Marketplace is a comprehensive SaaS portal designed for prompt engineers to publish, monetize, and execute fine-tuned models. It integrates OpenAI and Gemini models to preview runs directly, handles transactions via mock gateways, and lists curated listings under strict categories.",
-  //   image:
-  //     "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=800&auto=format&fit=crop",
-  //   tags: [
-  //     "Next.js",
-  //     "Tailwind CSS",
-  //     "Redux",
-  //     "Express",
-  //     "MongoDB",
-  //     "OpenAI API",
-  //   ],
-  //   features: [
-  //     "30+ Reusable React & Next.js layout modules",
-  //     "OpenAI & Gemini API integrations with sandbox playground",
-  //     "Wallet credit deduction system and transaction logs",
-  //     "10+ secure REST API routes for model uploads & audits",
-  //     "Framer Motion layout transitions & custom animations",
-  //   ],
-  //   architectureDiagram:
-  //     "Client React Web -> CORS API Gateway -> JWT Authentication -> Express Controllers -> MongoDB Atlas / OpenAI API Wrapper",
-  //   apiFlow: [
-  //     "GET /api/prompts - Fetch public catalog listings with filters",
-  //     "POST /api/prompts/checkout - Deduct user balance and purchase prompt accesses",
-  //     "POST /api/prompts/test - Trigger immediate sandboxed API run and capture response metrics",
-  //   ],
-  //   databaseDesign:
-  //     "User Schema (credits, purchase history), Prompt Schema (title, model, systemPrompt, pricing, authorId), Review Schema (rating, comment, promptId)",
-  //   challengesSolved:
-  //     "Implemented request caching for popular API executions which cut OpenAI usage overheads by 30%. Resolved visual stuttering under high-load filtering by writing customized debouncers and memoizing heavy UI card nodes.",
-  //   performanceOptimizations:
-  //     "Assets are compressed via webp, API responses utilize Gzip/Brotli, and state selectors are fine-tuned with Reselect to prevent redundant renders.",
-  //   futureImprovements: [
-  //     "Incorporate live WebSocket auction bids",
-  //     "Support LangChain template exports",
-  //     "Local model evaluation sandbox",
-  //   ],
-  //   githubUrl: "https://github.com/abhishekh-developer/ai-marketplace",
-  //   liveUrl: "https://ai-marketplace-abhishekh.vercel.app",
-  //   featured: false,
-  //   role: "Developer",
-  //   duration: "3 Months",
-  // },
   {
     title: "Better Auth",
     subtitle: "Modern Authentication System with Next.js, Better Auth & Prisma",
