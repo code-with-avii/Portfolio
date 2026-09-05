@@ -8,9 +8,8 @@ const staticCertificates = [
     _id: "cert-gfg-dsa",
     title: "DSA Training Program",
     issuer: "GeeksforGeeks",
-    value: "Grade B",
     description:
-      "Successfully completed the course on DSA Training Program with Grade B, showing good understanding of data structures, algorithms, and problem-solving concepts.",
+      "Successfully completed the course on DSA Training Program, showing good understanding of data structures, algorithms, and problem-solving concepts.",
     link: "https://media.geeksforgeeks.org/certificates/1769154376/3a079dee0e65a2af4935a7c41870259f.pdf",
     date: "2026",
   },
@@ -42,7 +41,6 @@ export default function Certifications() {
         _id: dbCert._id,
         title: dbCert.title,
         issuer: dbCert.value.includes("Udemy") ? "Udemy" : "Certification",
-        value: dbCert.value,
         description: dbCert.description || "Professional development certificate.",
         link: dbCert.link,
         date: dbCert.date,
@@ -157,22 +155,6 @@ export default function Certifications() {
                   >
                     {cert.title}
                   </h3>
-
-                  {/* Credential ID / Value */}
-                  <div
-                    style={{
-                      fontFamily: "var(--font-mono)",
-                      fontSize: "0.75rem",
-                      color: "var(--muted)",
-                      marginBottom: 12,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 6,
-                    }}
-                  >
-                    <ShieldCheck size={13} style={{ color: accentColor }} />
-                    <span>{cert.value}</span>
-                  </div>
 
                   {/* Description */}
                   <p

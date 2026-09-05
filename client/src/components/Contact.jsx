@@ -152,7 +152,7 @@ export default function Contact() {
                 fontFamily: "var(--font-body)", fontSize: "0.85rem",
                 color: "var(--ink-muted)", lineHeight: 1.65, margin: 0,
               }}>
-                Currently looking for SDE Intern or Junior Software Engineer roles. Feel free to shoot me a message or connect via LinkedIn!
+                Currently looking for MERN Stack / Software Engineering Internship opportunities.
               </p>
 
               {/* Email copy */}

@@ -119,7 +119,7 @@ export default function About() {
                 onMouseLeave={e => e.currentTarget.style.transform = "none"}
               >
                 <Send size={16} />
-                Hire Me
+                Let's Connect
               </a>
             </div>
 
