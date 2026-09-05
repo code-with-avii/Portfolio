@@ -53,9 +53,7 @@ const FALLBACK = [
 const ALL_TAGS = [
   "All",
   "React",
-  "Node.js",
   "MongoDB",
-  "Express",
   "TypeScript",
 ];
 

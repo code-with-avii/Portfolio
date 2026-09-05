@@ -16,7 +16,7 @@ const CATEGORIES = [
   },
   {
     label: "Database",
-    skills: ["MongoDB", "Mongoose"],
+    skills: ["MongoDB", "SQL", "postgreSQL",],
   },
   {
     label: "Tools & Platforms",
