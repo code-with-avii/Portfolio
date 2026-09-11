@@ -31,7 +31,7 @@ const FALLBACK = [
 • Protected routes & session expiration management`,
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
     githubUrl: "https://github.com/code-with-avii/Better_auth",
-    liveUrl: "https://github.com/code-with-avii/Better_auth",
+    liveUrl: "https://better-auth-pi-wine.vercel.app/",
     featured: true,
   },
   {

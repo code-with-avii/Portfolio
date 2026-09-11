@@ -305,7 +305,7 @@ export const initialProjects = [
       "Role-Based Access Control (RBAC) authorization policies",
     ],
     githubUrl: "https://github.com/code-with-avii/Better_auth",
-    liveUrl: "https://github.com/code-with-avii/Better_auth",
+    liveUrl: "https://better-auth-pi-wine.vercel.app/",
     featured: false,
     role: "Full Stack Developer",
     duration: "2 Months",
