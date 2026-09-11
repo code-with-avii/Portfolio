@@ -400,7 +400,7 @@ export const initialProjects = [
       "Custom Theme Color Switcher",
     ],
     githubUrl: "https://github.com/code-with-avii/Portfolio",
-    liveUrl: "https://portfolio-abhishekh.vercel.app",
+    liveUrl: "https://avii.in",
     featured: true,
     role: "Full Stack Developer",
     duration: "1 Month",
