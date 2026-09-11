@@ -190,7 +190,8 @@ export default function GitHubSection() {
                 <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 4 }}>
                   <span style={{
                     width: 8, height: 8, borderRadius: "50%",
-                    background: "#e34c26", display: "inline-block", // HTML-like JS color
+                    background: repo.language === "TypeScript" ? "#3178c6" : repo.language === "JavaScript" ? "#f1e05a" : "#8b949e",
+                    display: "inline-block",
                   }} />
                   <span style={{
                     fontFamily: "var(--font-body)", fontSize: "0.72rem",

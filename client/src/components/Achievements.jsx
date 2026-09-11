@@ -6,14 +6,14 @@ import { ExternalLink } from "lucide-react";
 /* ── Fallback data ────────────────────────────────────────────────────────── */
 const fallbackAchievements = [
   {
-    _id: "mem-ach-2",
-    title: "100+ Merged Pull Requests",
-    category: "Open Source",
-    value: "Active Contributor",
+    _id: "mem-ach-1",
+    title: "Smart India Hackathon Participant",
+    category: "Hackathons",
+    value: "National Level",
     description:
-      "Contributed performance patches, accessibility audits, and custom utility features to popular repositories across GSSoC 2026.",
-    link: "https://github.com/code-with-avii",
-    date: "2024 – Present",
+      "National level hackathon participant presenting an innovative emergency medical dispatch solution using geo-routing.",
+    link: "https://sih.gov.in",
+    date: "2025",
   },
 ];
 
@@ -109,15 +109,14 @@ export default function Achievements() {
           transition={{ duration: 0.5, delay: 0.08 }}
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))",
-            gap: 12,
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: 16,
             marginBottom: 40,
           }}
         >
           <StatCard value={10} suffix="+" label="Projects Built" />
           <StatCard value={500} suffix="+" label="GitHub Contributions" />
-          <StatCard value={100} suffix="+" label="Merged PRs" />
-          <StatCard value={1500} suffix="+" label="Coding Hours" />
+          <StatCard value={15} suffix="+" label="REST Endpoints Built" />
         </motion.div>
 
         {/* Achievement cards */}

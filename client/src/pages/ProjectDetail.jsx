@@ -66,7 +66,7 @@ export default function ProjectDetail() {
       </Helmet>
 
       <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
-        
+
         {/* Back Link */}
         <button
           onClick={() => navigate("/")}
@@ -97,7 +97,7 @@ export default function ProjectDetail() {
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, var(--canvas) 0%, transparent 100%)" }} />
-          
+
           <div style={{ position: "absolute", bottom: 40, left: 40, right: 40 }}>
             <span className="tag" style={{ marginBottom: 16 }}>Case Study</span>
             <h1 style={{
@@ -140,7 +140,7 @@ export default function ProjectDetail() {
 
         {/* Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          
+
           {/* Left: Overview */}
           <div className="lg:col-span-8 flex flex-col gap-12">
             <section>

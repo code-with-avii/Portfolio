@@ -174,13 +174,12 @@ export const initialAchievements = [
   },
 
   {
-    title: "100+ Merged Pull Requests",
-    category: "Open Source",
-    value: "Active Contributor",
-    description:
-      "Contributed performance patches, accessibility audits, and custom utility features to popular repositories.",
-    link: "https://github.com",
-    date: "2024 - Present",
+    title: "Full Stack Web Development Certification",
+    category: "Certifications",
+    value: "Professional Level",
+    description: "Completed comprehensive full-stack engineering certification covering React, Node.js, Express, MongoDB, and REST API design.",
+    link: "https://www.udemy.com/certificate/UC-a4bcf47e-a450-4599-8dad-7b893f53d316/",
+    date: "2026",
   },
 ];
 
@@ -193,17 +192,19 @@ export const initialExperiences = [
     technologies: ["React", "Next.js", "Node.js", "MongoDB", "OpenAI API"],
     achievements: [
       "Architected custom e-commerce APIs and automated dashboard integrations.",
-      "Developed AI-assisted workflows reducing client support response times by 40%.",
+      "Optimized API response latency by 40% using MongoDB compound indexing, Redis caching, and lean JSON payloads.",
     ],
   },
   {
     role: "Undergraduate Engineer",
-    company: "B.Tech — Computer Science",
-    duration: "2024 – Present",
+    company: "B.E. Information Technology",
+    duration: "2024 – May 2028",
     type: "College Projects",
     technologies: ["JavaScript", "HTML5", "CSS3", "Node.js", "PostgreSQL"],
     achievements: [
-      "Developed and deployed a hostel management portal that automated administrative tasks and improved operational efficiency.",
+      "Engineered a full-stack Hostel Management portal automating student complaints and administrative workflows.",
+      "Implemented JWT cookie authentication with Express middleware route guards and role-based access control.",
+      "Integrated MongoDB compound database indexes on ticket queries to accelerate query performance.",
     ],
   },
 ];

@@ -45,7 +45,7 @@ const FALLBACK = [
 • Express & MongoDB backend architecture`,
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Redux", "Tailwind CSS"],
     githubUrl: "https://github.com/code-with-avii/Portfolio",
-    liveUrl: "https://portfolio-abhishekh.vercel.app",
+    liveUrl: "https://avii.in",
     featured: true,
   },
   {

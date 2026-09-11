@@ -125,8 +125,9 @@ export default function About() {
               }}>
                 <GraduationCap size={20} color="var(--accent)" />
                 <div>
-                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--ink)", fontSize: "1.1rem" }}>Education</div>
-                  <div style={{ fontFamily: "var(--font-body)", color: "var(--muted)", fontSize: "0.9rem", marginTop: 4 }}>B.E. Information Technology</div>
+                  <div style={{ fontFamily: "var(--font-display)", fontWeight: 700, color: "var(--ink)", fontSize: "1.1rem" }}>Education & Batch</div>
+                  <div style={{ fontFamily: "var(--font-body)", color: "var(--ink)", fontSize: "0.95rem", fontWeight: 600, marginTop: 4 }}>B.E. Information Technology</div>
+                  <div style={{ fontFamily: "var(--font-mono)", color: "var(--accent)", fontSize: "0.82rem", marginTop: 4 }}>Graduating May 2028</div>
                 </div>
               </div>
 

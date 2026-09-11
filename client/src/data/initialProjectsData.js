@@ -53,7 +53,7 @@ export const initialProjectsData = [
 • Secure cookie-based authentication with JWT and express-validator API route guards
 • Integrated scalable MongoDB database schema with optimized relational object maps
 • Designed automated dashboard interface tracking 100+ weekly student assistance requests
-• Reduced issue processing delays by 40% through unified role-based administrative consoles`,
+• Reduced issue processing delays by 40% using MongoDB compound indexing and Redis caching`,
     longDescription:
       "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records.",
     image:
