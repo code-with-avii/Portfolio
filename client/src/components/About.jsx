@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, GraduationCap, Code2, Globe, FileDown, Send } from "lucide-react";
+import { ArrowUpRight, GraduationCap, Code2, Globe, FileDown, Send, Mail } from "lucide-react";
 
 export default function About() {
   return (
@@ -73,6 +73,7 @@ export default function About() {
                 href="/Abhishekh_Mondal_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
+                title="Open Resume PDF"
                 className="btn-primary"
                 style={{
                   display: "inline-flex",
@@ -93,16 +94,9 @@ export default function About() {
                 Resume
               </a>
               <a
-                href="#contact"
-                onClick={(e) => {
-                  e.preventDefault();
-                  const el = document.getElementById("contact");
-                  if (el) {
-                    const top = el.getBoundingClientRect().top + window.scrollY - 80;
-                    window.scrollTo({ top, behavior: "smooth" });
-                  }
-                }}
+                href="mailto:aviimondal689@gmail.com"
                 className="btn-secondary"
+                title="Send direct email to Abhishekh"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -118,8 +112,8 @@ export default function About() {
                 onMouseEnter={e => e.currentTarget.style.transform = "translateY(-2px)"}
                 onMouseLeave={e => e.currentTarget.style.transform = "none"}
               >
-                <Send size={16} />
-                Let's Connect
+                <Mail size={16} color="var(--accent)" />
+                Email
               </a>
             </div>
 
