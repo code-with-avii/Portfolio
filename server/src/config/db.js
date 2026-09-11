@@ -98,30 +98,16 @@ const seedDatabase = async (adminUser, adminPass) => {
 
     // 3. Seed Projects
     await Project.deleteMany({ title: { $regex: /weather/i } });
+    await Project.deleteMany({ title: { $regex: /secure authentication/i } });
 
-    const projectCount = await Project.countDocuments();
-    if (projectCount === 0) {
-      await Project.insertMany(initialProjects);
-      console.log("Default projects seeded.");
-    } else {
-      const betterAuthData = initialProjects.find((p) => p.title === "Better Auth");
-      if (betterAuthData) {
-        await Project.updateMany(
-          { title: "Secure Authentication Suite" },
-          { $set: betterAuthData }
-        );
-      }
-      const portfolioData = initialProjects.find((p) => p.title === "Portfolio");
-      if (portfolioData) {
-        const existingPortfolio = await Project.findOne({ title: "Portfolio" });
-        if (!existingPortfolio) {
-          await Project.create(portfolioData);
-          console.log("Portfolio project seeded.");
-        } else {
-          await Project.updateOne({ title: "Portfolio" }, { $set: portfolioData });
-        }
-      }
+    for (const projectData of initialProjects) {
+      await Project.updateOne(
+        { title: projectData.title },
+        { $set: projectData },
+        { upsert: true }
+      );
     }
+    console.log("Default & updated projects synchronized in database.");
 
     // 4. Seed Experiences
     const expCount = await Experience.countDocuments();

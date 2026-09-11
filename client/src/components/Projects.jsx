@@ -48,6 +48,20 @@ const FALLBACK = [
     liveUrl: "https://portfolio-abhishekh.vercel.app",
     featured: true,
   },
+  {
+    _id: "mem-project-7",
+    title: "Better Auth",
+    subtitle: "Modern Authentication System with Next.js, Better Auth & Prisma",
+    description: `• Next.js 16 App Router & Better Auth integration
+• Email verification via Resend & password reset workflows
+• Google & GitHub OAuth sign-ins with account linking
+• Prisma ORM with PostgreSQL database schema
+• Protected routes & session expiration management`,
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
+    githubUrl: "https://github.com/code-with-avii/Better_auth",
+    liveUrl: "https://github.com/code-with-avii/Better_auth",
+    featured: true,
+  },
 ];
 
 const ALL_TAGS = [
