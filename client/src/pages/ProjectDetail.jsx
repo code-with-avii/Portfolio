@@ -17,6 +17,45 @@ import { initialProjectsData } from "../data/initialProjectsData.js";
 
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3500/api";
 
+const findLocalProject = (targetId) => {
+  if (!targetId) return null;
+  const cleanId = String(targetId).toLowerCase().trim();
+
+  // 1. Exact _id match
+  let match = initialProjectsData.find(
+    (p) => p._id === targetId || (p._id && p._id.toLowerCase() === cleanId)
+  );
+  if (match) return match;
+
+  // 2. Slug or Title match
+  match = initialProjectsData.find((p) => {
+    const slug = p.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+    return (
+      slug === cleanId ||
+      cleanId.includes(slug) ||
+      slug.includes(cleanId) ||
+      p.title.toLowerCase() === cleanId
+    );
+  });
+  if (match) return match;
+
+  // 3. Known ID aliases (mem-project-0 through 7)
+  if (cleanId.includes("portfolio") || cleanId === "mem-project-3" || cleanId === "mem-project-6") {
+    return initialProjectsData.find((p) => p.title.toLowerCase().includes("portfolio"));
+  }
+  if (cleanId.includes("smart") || cleanId === "mem-project-0" || cleanId === "mem-project-1" || cleanId === "mem-project-5") {
+    return initialProjectsData.find((p) => p.title.toLowerCase().includes("smarttech"));
+  }
+  if (cleanId.includes("hostel") || cleanId === "mem-project-2" || cleanId === "mem-project-4") {
+    return initialProjectsData.find((p) => p.title.toLowerCase().includes("hostel"));
+  }
+  if (cleanId.includes("auth") || cleanId === "mem-project-1" || cleanId === "mem-project-7") {
+    return initialProjectsData.find((p) => p.title.toLowerCase().includes("auth"));
+  }
+
+  return null;
+};
+
 export default function ProjectDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -30,9 +69,13 @@ export default function ProjectDetail() {
         const res = await fetch(`${API_URL}/projects/${id}`);
         if (!res.ok) throw new Error("API failed");
         const data = await res.json();
-        setProject(data);
+        if (data && (data._id || data.title)) {
+          setProject(data);
+          return;
+        }
+        throw new Error("Invalid project payload");
       } catch (err) {
-        const localProject = initialProjectsData.find((p) => p._id === id);
+        const localProject = findLocalProject(id);
         if (localProject) setProject(localProject);
       } finally {
         setLoading(false);

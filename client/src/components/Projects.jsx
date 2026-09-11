@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 /* ── Fallback data ────────────────────────────────────────────────────────── */
 const FALLBACK = [
   {
-    _id: "mem-project-5",
+    _id: "mem-project-0",
     title: "SmartTech",
     subtitle: "Full-Stack E-Commerce Platform",
     description: `• Product browsing & Cart management
@@ -21,7 +21,21 @@ const FALLBACK = [
     featured: true,
   },
   {
-    _id: "mem-project-4",
+    _id: "mem-project-1",
+    title: "Better Auth",
+    subtitle: "Modern Authentication System with Next.js, Better Auth & Prisma",
+    description: `• Next.js 16 App Router & Better Auth integration
+• Email verification via Resend & password reset workflows
+• Google & GitHub OAuth sign-ins with account linking
+• Prisma ORM with PostgreSQL database schema
+• Protected routes & session expiration management`,
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
+    githubUrl: "https://github.com/code-with-avii/Better_auth",
+    liveUrl: "https://github.com/code-with-avii/Better_auth",
+    featured: true,
+  },
+  {
+    _id: "mem-project-2",
     title: "Hostel Help",
     subtitle: "Smart Hostel Management & Student Assistance Platform",
     description: `• Complaint management system
@@ -35,7 +49,7 @@ const FALLBACK = [
     featured: true,
   },
   {
-    _id: "mem-project-6",
+    _id: "mem-project-3",
     title: "Portfolio",
     subtitle: "Modern Full-Stack Developer Portfolio & Admin CMS",
     description: `• Dynamic project & skill management via REST API
@@ -46,20 +60,6 @@ const FALLBACK = [
     tags: ["React", "Node.js", "Express.js", "MongoDB", "Redux", "Tailwind CSS"],
     githubUrl: "https://github.com/code-with-avii/Portfolio",
     liveUrl: "https://avii.in",
-    featured: true,
-  },
-  {
-    _id: "mem-project-7",
-    title: "Better Auth",
-    subtitle: "Modern Authentication System with Next.js, Better Auth & Prisma",
-    description: `• Next.js 16 App Router & Better Auth integration
-• Email verification via Resend & password reset workflows
-• Google & GitHub OAuth sign-ins with account linking
-• Prisma ORM with PostgreSQL database schema
-• Protected routes & session expiration management`,
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
-    githubUrl: "https://github.com/code-with-avii/Better_auth",
-    liveUrl: "https://github.com/code-with-avii/Better_auth",
     featured: true,
   },
 ];
