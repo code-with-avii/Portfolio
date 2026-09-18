@@ -17,6 +17,12 @@ const PINNED_REPOS = [
     link: "https://github.com/code-with-avii/SmartTech",
   },
   {
+    name: "Application Tracker",
+    description: "Full-stack job application tracking platform with Next.js, Better Auth, Prisma, PostgreSQL, and Resend.",
+    language: "TypeScript",
+    link: "https://github.com/code-with-avii/Application-Tracker",
+  },
+  {
     name: "Better Auth",
     description: "Modern authentication application with Next.js 16, TypeScript, Better Auth, Prisma, PostgreSQL, and Resend.",
     language: "TypeScript",

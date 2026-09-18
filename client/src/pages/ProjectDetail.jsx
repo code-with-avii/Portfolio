@@ -46,7 +46,10 @@ const findLocalProject = (targetId) => {
   if (cleanId.includes("smart") || cleanId === "mem-project-0" || cleanId === "mem-project-1" || cleanId === "mem-project-5") {
     return initialProjectsData.find((p) => p.title.toLowerCase().includes("smarttech"));
   }
-  if (cleanId.includes("hostel") || cleanId === "mem-project-2" || cleanId === "mem-project-4") {
+  if (cleanId.includes("application") || cleanId.includes("tracker") || cleanId === "mem-project-4") {
+    return initialProjectsData.find((p) => p.title.toLowerCase().includes("application") || p.title.toLowerCase().includes("tracker"));
+  }
+  if (cleanId.includes("hostel") || cleanId === "mem-project-2") {
     return initialProjectsData.find((p) => p.title.toLowerCase().includes("hostel"));
   }
   if (cleanId.includes("auth") || cleanId === "mem-project-1" || cleanId === "mem-project-7") {
@@ -258,10 +261,14 @@ export default function ProjectDetail() {
               <a href={project.githubUrl} target="_blank" rel="noreferrer" className="btn-secondary" style={{ width: "100%", justifyContent: "center" }}>
                 <FaGithub /> GitHub Source
               </a>
-              {project.liveUrl && (
+              {project.liveUrl ? (
                 <a href={project.liveUrl} target="_blank" rel="noreferrer" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
                   <ExternalLink size={16} /> Launch Live App
                 </a>
+              ) : (
+                <button disabled className="btn-secondary" style={{ width: "100%", justifyContent: "center", opacity: 0.5, cursor: "not-allowed" }} title="Live Demo Coming Soon">
+                  <ExternalLink size={16} /> Live Demo (Coming Soon)
+                </button>
               )}
             </div>
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useGetProjectsQuery } from "../store/apiSlice.js";
 import { BookMarked, ExternalLink } from "lucide-react";
+import { FaGithub } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 
 /* ── Fallback data ────────────────────────────────────────────────────────── */
@@ -32,6 +33,31 @@ const FALLBACK = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Better Auth", "Prisma", "PostgreSQL"],
     githubUrl: "https://github.com/code-with-avii/Better_auth",
     liveUrl: "https://better-auth-pi-wine.vercel.app/",
+    featured: true,
+  },
+  {
+    _id: "mem-project-4",
+    title: "Application Tracker",
+    subtitle: "Full-Stack Job Application Tracking & Management Platform",
+    description: `• Dynamic job application tracking platform with Kanban-style dashboard
+• Multi-provider OAuth (Google & GitHub) and email authentication via Better Auth
+• Full CRUD management for tracking status, roles, company details, and notes
+• Transactional email notifications and deadline reminders powered by Resend
+• Relational PostgreSQL database schema managed with Prisma ORM`,
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "PostgreSQL",
+      "Prisma",
+      "Better Auth",
+      "Resend",
+      "Vercel",
+    ],
+    githubUrl: "https://github.com/code-with-avii/Application-Tracker",
+    liveUrl: "",
     featured: true,
   },
   {
@@ -67,8 +93,10 @@ const FALLBACK = [
 const ALL_TAGS = [
   "All",
   "React",
-  "MongoDB",
+  "Next.js",
   "TypeScript",
+  "MongoDB",
+  "PostgreSQL",
 ];
 
 /* ── Helper for GitHub Language Colors ────────────────────────────────────── */
@@ -81,6 +109,10 @@ const getLangColor = (tag) => {
     TypeScript: "#3178c6",
     JavaScript: "#f1e05a",
     "Tailwind CSS": "#38bdf8",
+    "Next.js": "#000000",
+    PostgreSQL: "#4169e1",
+    Prisma: "#2d3748",
+    "shadcn/ui": "#e2e8f0",
   };
   return colors[tag] || "#8b949e";
 };
@@ -323,30 +355,79 @@ export default function Projects() {
                     <span>{p.tags[0] || "JavaScript"}</span>
                   </div>
 
-                  {p.liveUrl && (
-                    <a
-                      href={p.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 4,
-                        color: "var(--muted)",
-                        textDecoration: "none",
-                        marginLeft: "auto",
-                      }}
-                      onMouseEnter={(e) =>
-                        (e.currentTarget.style.color = "var(--ink)")
-                      }
-                      onMouseLeave={(e) =>
-                        (e.currentTarget.style.color = "var(--muted)")
-                      }
-                    >
-                      <ExternalLink size={14} /> Live
-                    </a>
-                  )}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      marginLeft: "auto",
+                    }}
+                  >
+                    {p.githubUrl && (
+                      <a
+                        href={p.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4,
+                          color: "var(--muted)",
+                          textDecoration: "none",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "var(--ink)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "var(--muted)")
+                        }
+                        title="View GitHub Repository"
+                      >
+                        <FaGithub size={14} /> Code
+                      </a>
+                    )}
+
+                    {p.liveUrl ? (
+                      <a
+                        href={p.liveUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4,
+                          color: "var(--muted)",
+                          textDecoration: "none",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color = "var(--ink)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "var(--muted)")
+                        }
+                        title="Launch Live Demo"
+                      >
+                        <ExternalLink size={14} /> Live
+                      </a>
+                    ) : (
+                      <span
+                        onClick={(e) => e.stopPropagation()}
+                        title="Live Demo coming soon"
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 4,
+                          color: "var(--muted)",
+                          opacity: 0.5,
+                          cursor: "not-allowed",
+                        }}
+                      >
+                        <ExternalLink size={14} /> Live
+                      </span>
+                    )}
+                  </div>
                 </div>
               </motion.article>
             ))}

@@ -179,4 +179,64 @@ export const initialProjectsData = [
     role: "Full Stack Developer",
     duration: "1 Month",
   },
+  {
+    _id: "mem-project-4",
+    title: "Application Tracker",
+    subtitle: "Full-Stack Job Application Tracking & Management Platform",
+    description: `• Dynamic job application tracking platform with Kanban-style dashboard
+• Multi-provider OAuth (Google & GitHub) and email authentication via Better Auth
+• Full CRUD management for tracking status, roles, company details, and notes
+• Transactional email notifications and deadline reminders powered by Resend
+• Relational PostgreSQL database schema managed with Prisma ORM`,
+    longDescription:
+      "Application Tracker is a full-stack job application tracking platform built with Next.js, TypeScript, React, Tailwind CSS, shadcn/ui, PostgreSQL, Prisma ORM, Better Auth, and Resend. It enables job seekers to organize, manage, and monitor their application pipelines through a clean dashboard and Kanban-style interface. Features include user authentication with protected routes, email verification, Google and GitHub social logins, customizable application status tracking, notes, deadlines, and automated email reminders.",
+    image:
+      "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?q=80&w=800&auto=format&fit=crop",
+    tags: [
+      "Next.js",
+      "TypeScript",
+      "React",
+      "Tailwind CSS",
+      "shadcn/ui",
+      "PostgreSQL",
+      "Prisma",
+      "Better Auth",
+      "Resend",
+      "Vercel",
+    ],
+    features: [
+      "User authentication and protected routes with email verification",
+      "Google and GitHub social authentication via Better Auth",
+      "Create, edit, delete, and manage job applications",
+      "Track application status with dashboard & Kanban-style interface",
+      "Add notes, relevant job details, and application information",
+      "Application reminders and email notifications powered by Resend",
+      "PostgreSQL database integration powered by Prisma ORM",
+    ],
+    architectureDiagram:
+      "Next.js App Router → Better Auth Route Handlers → Prisma ORM → PostgreSQL Database → Resend Email Service",
+    apiFlow: [
+      "User Authentication & Social OAuth via Better Auth",
+      "Email Verification & Transactional Notifications via Resend",
+      "Job Application CRUD APIs with Prisma ORM",
+      "Status & Stage Updates for Dashboard/Kanban View",
+      "Deadline & Reminder Alert Processing",
+    ],
+    databaseDesign:
+      "Models: User (id, email, name, emailVerified, image), Session, Account, Verification, Application (id, userId, company, position, status, location, salary, jobUrl, notes, deadline, createdAt, updatedAt).",
+    challengesSolved:
+      "Architected dynamic Kanban dashboard with stateful status transitions, integrated multi-provider OAuth account linking with Better Auth, established type-safe PostgreSQL queries with Prisma ORM, and automated transactional emails with Resend.",
+    performanceOptimizations:
+      "Leveraged Next.js App Router server component rendering, optimized session token queries with Prisma database indexing, zero-runtime CSS with Tailwind CSS and shadcn/ui, and asset deployment on Vercel.",
+    futureImprovements: [
+      "AI-Powered Resume Matcher & Insights",
+      "Browser Extension for Instant Job Bookmarking",
+      "Interview Calendar Integration",
+    ],
+    githubUrl: "https://github.com/code-with-avii/Application-Tracker",
+    liveUrl: "",
+    featured: true,
+    role: "Full Stack Developer",
+    duration: "1 Month",
+  },
 ];
