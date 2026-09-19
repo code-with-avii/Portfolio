@@ -99,6 +99,7 @@ const seedDatabase = async (adminUser, adminPass) => {
     // 3. Seed Projects
     await Project.deleteMany({ title: { $regex: /weather/i } });
     await Project.deleteMany({ title: { $regex: /secure authentication/i } });
+    await Project.deleteMany({ title: { $regex: /hostel help/i } });
 
     for (const projectData of initialProjects) {
       await Project.updateOne(

@@ -310,50 +310,7 @@ export const initialProjects = [
     role: "Full Stack Developer",
     duration: "2 Months",
   },
-  {
-    title: "Hostel Help",
-    subtitle: "Smart Hostel Management & Student Assistance Platform",
-    description:
-      "A full-stack MERN application that simplifies hostel management, complaint tracking, and communication between students and administrators.",
-    longDescription:
-      "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with hostel administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records. The application focuses on security, responsive design, and scalable backend architecture.",
-    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
-    tags: ["React", "Node.js", "Express", "MongoDB", "JWT", "Tailwind CSS"],
-    features: [
-      "18+ reusable React layout components & navigation paths",
-      "JWT cookie authentication & secure database route guards",
-      "Role-based Student complaint registers & Admin dashboard profiles",
-      "12+ MERN-linked REST API endpoints handling CRUD logs",
-      "Real-time issue ticketing & maintenance lifecycle tracking",
-    ],
-    architectureDiagram:
-      "Client React App → Express API → JWT Authentication → MongoDB Database",
-    apiFlow: [
-      "User Login",
-      "JWT Authentication",
-      "Protected Routes",
-      "Complaint CRUD Operations",
-      "Response to Client",
-    ],
-    databaseDesign:
-      "Collections: Users, Complaints, Admins, Hostels, Rooms. Relationships maintained using ObjectId references.",
-    challengesSolved:
-      "Implemented secure authentication, complaint lifecycle management, protected APIs, and efficient MongoDB schema design.",
-    performanceOptimizations:
-      "Optimized database queries, lazy-loaded React components, minimized API calls, and optimized images.",
-    futureImprovements: [
-      "Socket.io Real-time Notifications",
-      "Room Allocation",
-      "Mess Management",
-      "Visitor Management",
-      "Online Fee Payment",
-    ],
-    githubUrl: "https://github.com/code-with-avii/Hostel-Help",
-    liveUrl: "https://hostel-help-pi.vercel.app/",
-    featured: true,
-    role: "Full Stack Developer",
-    duration: "2 Months",
-  },
+
   {
     title: "Portfolio",
     subtitle: "Modern Full-Stack Developer Portfolio & Admin CMS",

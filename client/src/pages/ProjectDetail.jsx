@@ -49,9 +49,7 @@ const findLocalProject = (targetId) => {
   if (cleanId.includes("application") || cleanId.includes("tracker") || cleanId === "mem-project-4") {
     return initialProjectsData.find((p) => p.title.toLowerCase().includes("application") || p.title.toLowerCase().includes("tracker"));
   }
-  if (cleanId.includes("hostel") || cleanId === "mem-project-2") {
-    return initialProjectsData.find((p) => p.title.toLowerCase().includes("hostel"));
-  }
+
   if (cleanId.includes("auth") || cleanId === "mem-project-1" || cleanId === "mem-project-7") {
     return initialProjectsData.find((p) => p.title.toLowerCase().includes("auth"));
   }

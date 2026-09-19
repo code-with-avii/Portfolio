@@ -88,50 +88,7 @@ export const initialProjectsData = [
     role: "Full Stack Developer",
     duration: "5 Days",
   },
-  {
-    _id: "mem-project-2",
-    title: "Hostel Help",
-    subtitle: "Smart Hostel Management & Student Assistance Platform",
-    description: `• Engineered real-time ticket complaint lifecycle system for student-admin communication
-• Secure cookie-based authentication with JWT and express-validator API route guards
-• Integrated scalable MongoDB database schema with optimized relational object maps
-• Designed automated dashboard interface tracking 100+ weekly student assistance requests
-• Reduced issue processing delays by 40% using MongoDB compound indexing and Redis caching`,
-    longDescription:
-      "Hostel Help is a hostel management platform built using the MERN stack. It enables students to register, log in securely, submit maintenance complaints, track request status, and communicate with administrators. The admin dashboard provides tools to manage complaints, monitor hostel operations, and maintain student records.",
-    image:
-      "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?q=80&w=800&auto=format&fit=crop",
-    tags: ["MERN", "JWT", "MongoDB", "Express.js", "React", "Node.js"],
-    features: [
-      "JWT cookie authentication & secure database route guards",
-      "Role-based Student complaint registers & Admin dashboard profiles",
-      "Real-time issue ticketing & maintenance lifecycle tracking",
-      "REST API endpoints handling CRUD logs",
-    ],
-    architectureDiagram:
-      "Client React App → Express API → JWT Authentication → MongoDB Database",
-    apiFlow: [
-      "User Login & JWT Authentication",
-      "Protected Routes & Authorization",
-      "Complaint CRUD Operations",
-    ],
-    databaseDesign:
-      "Collections: Users, Complaints, Admins, Hostels, Rooms. Relationships maintained using ObjectId references.",
-    challengesSolved:
-      "Implemented secure authentication, complaint lifecycle management, protected APIs, and efficient MongoDB schema design.",
-    performanceOptimizations:
-      "Optimized database queries, lazy-loaded React components, minimized API calls, and optimized images.",
-    futureImprovements: [
-      "Socket.io Real-time Notifications",
-      "Room Allocation",
-      "Online Fee Payment",
-    ],
-    githubUrl: "https://github.com/code-with-avii/Hostel-Help",
-    liveUrl: "https://hostel-help-pi.vercel.app/",
-    featured: true,
-    role: "Full Stack Developer",
-    duration: "2 Months",
-  },
+
   {
     _id: "mem-project-3",
     title: "Portfolio",

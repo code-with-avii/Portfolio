@@ -28,12 +28,7 @@ const PINNED_REPOS = [
     language: "TypeScript",
     link: "https://github.com/code-with-avii/Better_auth",
   },
-  {
-    name: "Hostel Help",
-    description: "Smart hostel management platform enabling complaint tracking, issue ticketing, and student-admin communication.",
-    language: "JavaScript",
-    link: "https://github.com/code-with-avii/Hostel-Help",
-  },
+
 ];
 
 /* ── Deterministic contribution grid (siddz grayscale style) ────────────── */

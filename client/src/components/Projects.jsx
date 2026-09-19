@@ -60,20 +60,7 @@ const FALLBACK = [
     liveUrl: "",
     featured: true,
   },
-  {
-    _id: "mem-project-2",
-    title: "Hostel Help",
-    subtitle: "Smart Hostel Management & Student Assistance Platform",
-    description: `• Complaint management system
-• JWT Authentication
-• Role-based access control (Student/Admin)
-• REST Backend APIs
-• MongoDB Database integration`,
-    tags: ["MERN", "JWT", "MongoDB", "Express.js", "React", "Node.js"],
-    githubUrl: "https://github.com/code-with-avii/Hostel-Help",
-    liveUrl: "https://hostel-help-pi.vercel.app/",
-    featured: true,
-  },
+
   {
     _id: "mem-project-3",
     title: "Portfolio",
