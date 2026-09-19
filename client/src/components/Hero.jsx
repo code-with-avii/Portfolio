@@ -128,7 +128,7 @@ export default function Hero() {
               }}
             >
               {[
-                { label: "Full-Stack Apps", value: "5+", icon: Layers },
+                { label: "Full-Stack WebApps", value: "7+", icon: Layers },
               ].map((metric, i) => (
                 <div key={i} style={{
                   border: "1px solid var(--border)", background: "var(--surface)",

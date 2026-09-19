@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const CATEGORIES = [
   {
     label: "Languages",
-    skills: ["C++", "JavaScript", "TypeScript"],
+    skills: ["C++", "JavaScript", "TypeScript","Python"],
   },
   {
     label: "Frontend",
