@@ -114,7 +114,7 @@ export default function Hero() {
                 marginTop: 24,
               }}
             >
-             Full-Stack Developer focused on building production-ready web applications, secure backend systems, and scalable APIs using React, Node.js, and modern databases.
+             I build scalable web applications with Next.js, TypeScript, PostgreSQL and modern web technologies.
             </motion.p>
 
             {/* Trust Metrics Grid */}
